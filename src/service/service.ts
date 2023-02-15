@@ -6,6 +6,9 @@ const zpRequest = new ZPRequest({
   timeout: TIME_OUT, //默认请求时间
   interceptors: {
     requestInterceptor: (config) => {
+      const token = localStorage.getItem('token')
+      if(token) config.headers!.Authorization = `Bearer ${token}`
+      
       return config;
     },
     requestInterceptorCatch: (err) => {
