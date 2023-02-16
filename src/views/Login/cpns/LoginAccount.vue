@@ -8,20 +8,20 @@
         :rules="rules"
       >
         <el-form-item class="bounce-in-up" prop="name">
-          <el-input class="w-50" v-model="account.name" size="large" placeholder="账号" :prefix-icon="UserFilled"/>
+          <el-input class="w-50" v-model="account.name" clearable size="large" placeholder="账号" :prefix-icon="UserFilled" />
         </el-form-item>
         <el-form-item class="bounce-in-up" prop="password">
-          <el-input v-model="account.password" size="large" placeholder="密码" :prefix-icon="Lock"/>
+          <el-input v-model="account.password" show-password type="password" size="large" placeholder="密码" :prefix-icon="Lock"/>
         </el-form-item>
       </el-form>
     </div>
     <!-- 记住密码/登录 -->
     <div class="rem-login-box mb-2 bounce-in-up">
       <div class="password-box">
-        <el-checkbox v-model="pswChecked" label="记住密码" size="large" />
+        <el-checkbox v-model="isKeepPwd" label="记住密码" size="large" />
         <el-link :underline="false" type="primary">忘记密码？</el-link>
       </div>
-      <el-button class="w-full my-2" color="#4285f4" @click="submitForm(ruleFormRef)">
+      <el-button class="w-full my-2" color="#4285f4" @click="submitForm(ruleFormRef, account, isKeepPwd)">
         登录
       </el-button>
     </div>
@@ -46,6 +46,7 @@
 </template>
 
 <script lang="ts" setup>
+import localCache from '@/utils/cache'
 import { reactive, ref } from "vue";
 import { UserFilled, Lock } from "@element-plus/icons-vue";
 import { submitForm, loginTypeClick } from "@/hooks/loginHook";
@@ -53,7 +54,7 @@ import type { buttonType } from '../LoginViewType';
 import type { FormInstance, FormRules } from "element-plus";
 
 const ruleFormRef = ref<FormInstance>();
-const pswChecked = ref(false)
+const isKeepPwd = ref<boolean>(localCache.getItem('isKeepPwd') ?? false)
 const nonpartyIcon = reactive([
   {
     name: 'Wechat',
@@ -72,7 +73,7 @@ const nonpartyIcon = reactive([
     icon: 'SwitchFilled'
   }
 ])
-const account = reactive({
+const account = reactive(localCache.getItem('account') ?? {
   name: "",
   password: "",
 });
@@ -85,7 +86,6 @@ const rules = reactive<FormRules>({
   name: [{ required: true, message: "请输入用户名", trigger: "blur" }],
   password: [{ required: true, message: "请输入密码", trigger: "blur" }],
 });
-
 </script>
 
 <style lang="scss" scoped>

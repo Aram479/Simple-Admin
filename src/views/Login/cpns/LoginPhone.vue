@@ -18,7 +18,7 @@
         </el-form-item>
       </el-form>
     </div>
-    <div class="bounce-in-up"><el-button class="w-full" color="#4285f4" @click="submitForm(ruleFormRef)">登录</el-button></div>
+    <div class="bounce-in-up"><el-button class="w-full" color="#4285f4" @click="submitForm(ruleFormRef, phoneInfo)">登录</el-button></div>
     <div class="bounce-in-up"><el-button class="w-full mt-4" @click="loginTypeClick('account')">返回</el-button></div>
   </div>
 </template>
@@ -33,9 +33,22 @@ const phoneInfo = reactive({
   phone: '',
   code: '',
 })
+/* 手机校验规则 */
+const validatePhone = (rule: any, value: any, callback: any) => {
+  const reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/
+  if(value == '') {
+    return callback(new Error('请输入手机号'))
+  } else if (!reg.test(value)) {
+    return callback(new Error('手机号码格式不正确'))
+  }
+  callback()
+}
 const rules = reactive<FormRules>({
-  phone: [{ required: true, message: "请输入手机号", trigger: "blur" }],
-  code: [{ required: true, message: "请输入验证码", trigger: "blur" }],
+  phone: [{ required: true, validator: validatePhone, trigger: "blur" }],
+  code: [
+    { min: 4, max: 4, message: '输入4位数字验证码', trigger: 'blur' },
+    { required: true, message: '请输入验证码', trigger: "blur" }
+  ],
 });
 </script>
 

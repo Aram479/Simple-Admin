@@ -1,5 +1,4 @@
 export interface loginState {
-  token: string,
-  num: number,
-  loginType: string,
+  token?: string,
+  loginType?: string,
 }

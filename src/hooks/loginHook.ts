@@ -1,15 +1,23 @@
 import { useLoginStore } from "@/stores/modules/loginStore";
 import type { FormInstance } from "element-plus";
-
+import localCache from '@/utils/cache'
+import { storeToRefs } from 'pinia';
 
 /* 表单登录校验 */
-export const submitForm = async (formEl: FormInstance | undefined) => {
+export const submitForm = async (formEl?: FormInstance, userLogin?: object, isKeepPwd?: Boolean) => {
+  const loginStore = useLoginStore()
+  const { loginType } = storeToRefs(loginStore)
   if (!formEl) return;
   await formEl.validate((valid, fields) => {
     if (valid) {
-      console.log("submit!");
-    } else {
-      console.log("error submit!", fields);
+      if(isKeepPwd) {
+        localCache.setItem('account', userLogin)
+        localCache.setItem('isKeepPwd', isKeepPwd)
+      } else {
+        localCache.removeItem('account')
+        localCache.removeItem('isKeepPwd')
+      }
+      if(loginType?.value === 'account') loginStore.accountLogin(userLogin)
     }
   });
 };
