@@ -1,0 +1,28 @@
+@mixin flex($items: center, $justify: center, $direction: row) {
+  display: flex;
+  align-items: $items;
+  justify-content: $justify;
+  flex-direction: $direction;
+}
+
+/* 登录页组件动画 */
+@for $i from 1 through 10 {
+	.bounce-in-up:nth-of-type(#{$i}) {
+		animation-name: bounce-in-up;
+    animation: bounce-in-up calc(($i + 4) / 10)+s; //$i+s
+  }
+}
+
+@keyframes bounce-in-up {
+  0% {
+    transform: translateY(200%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-10%);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
