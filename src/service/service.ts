@@ -1,4 +1,5 @@
 import ZPRequest from "./request/https";
+import localCache from '@/utils/cache'
 import { BASE_URL, TIME_OUT } from "./request/config";
 //创建接口实例
 const zpRequest = new ZPRequest({
@@ -6,9 +7,11 @@ const zpRequest = new ZPRequest({
   timeout: TIME_OUT, //默认请求时间
   interceptors: {
     requestInterceptor: (config) => {
-      const token = localStorage.getItem('token')
-      if(token) config.headers!.Authorization = `Bearer ${token}`
-      
+      // 携带token的拦截
+      const token = localCache.getItem('token')
+      if (token && config.headers) {
+        config.headers.Authorization = `Bearer ${token}`
+      }
       return config;
     },
     requestInterceptorCatch: (err) => {

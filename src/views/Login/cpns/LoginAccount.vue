@@ -50,7 +50,7 @@ import localCache from '@/utils/cache'
 import { reactive, ref } from "vue";
 import { UserFilled, Lock } from "@element-plus/icons-vue";
 import { submitForm, loginTypeClick } from "@/hooks/loginHook";
-import type { buttonType } from '../LoginViewType';
+import type { IAccount, buttonType } from '../LoginViewType';
 import type { FormInstance, FormRules } from "element-plus";
 
 const ruleFormRef = ref<FormInstance>();
@@ -73,7 +73,7 @@ const nonpartyIcon = reactive([
     icon: 'SwitchFilled'
   }
 ])
-const account = reactive(localCache.getItem('account') ?? {
+const account = reactive<IAccount>(localCache.getItem('account') ?? {
   name: "",
   password: "",
 });

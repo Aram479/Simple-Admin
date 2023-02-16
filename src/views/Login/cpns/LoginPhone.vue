@@ -24,12 +24,13 @@
 </template>
 
 <script lang='ts' setup>
-import type { FormInstance, FormRules } from "element-plus";
-import { Iphone, Aim } from "@element-plus/icons-vue";
 import { reactive, ref } from 'vue'
+import { Iphone, Aim } from "@element-plus/icons-vue";
 import { submitForm, loginTypeClick } from "@/hooks/loginHook";
+import type { FormInstance, FormRules } from "element-plus";
+import type { IPhone } from "../LoginViewType";
 const ruleFormRef = ref<FormInstance>();
-const phoneInfo = reactive({
+const phoneInfo = reactive<IPhone>({
   phone: '',
   code: '',
 })

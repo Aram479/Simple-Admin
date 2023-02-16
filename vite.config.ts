@@ -31,5 +31,16 @@ export default defineConfig({
         additionalData: '@import "@/assets/css/mixin.scss";'
       }
     }
-  }
+  },
+  server: {
+    hmr: true,
+    proxy: {
+      '/api': {
+        target: 'http://152.136.185.210:5000',
+        changeOrigin: true, //开启代理
+        ws: true, //启用websockets
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
+  },
 })
