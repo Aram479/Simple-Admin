@@ -20,9 +20,9 @@ const zpRequest = new ZPRequest({
     responseInterceptor: (res) => {
       return res;
     },
-    responseInterceptorCatch: (err) => {
-      return err;
-    },
+    // responseInterceptorCatch: (err) => {
+    //   return err;
+    // },
   },
 });
 export default zpRequest;

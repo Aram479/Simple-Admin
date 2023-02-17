@@ -19,7 +19,6 @@ export function userLogin(user: IAccount) {
 export function resUserInfoById(id: number) {
   return zpRequest.get<ILoginResult>({
     url: loginAPI.LoginUserInfo + id,
-    isLoading: false
   })
 }
 
@@ -27,6 +26,11 @@ export function resUserInfoById(id: number) {
 export function resUserMenusByRoleId(id: number) {
   return zpRequest.get<ILoginResult>({
     url: loginAPI.UserMenus + id + '/menu',
-    isLoading: false
+  })
+}
+
+export function resUserDataAll(id:number) {
+  return zpRequest.all<ILoginResult>([resUserInfoById(id), resUserMenusByRoleId(id)], {
+    isLoading: true
   })
 }

@@ -74,8 +74,8 @@ const nonpartyIcon = reactive([
   }
 ])
 const account = reactive<IAccount>(localCache.getItem('account') ?? {
-  name: "",
-  password: "",
+  name: "coderwhy",
+  password: "123456",
 });
 const buttonType = reactive<buttonType[]>([
   { type: "phone", name: "手机登录" },

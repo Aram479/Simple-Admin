@@ -45,7 +45,7 @@ class ZPRequest {
         //当响应成功时停止loading组件
         hideLoading();
         //拦截错误信息
-        if (data.returnCode === "-1001") {
+        if (!data || data.returnCode === "-1001") {
           console.log("请求失败,错误信息");
         } else {
           return data;
@@ -53,10 +53,10 @@ class ZPRequest {
       },
       (err) => {
         //拦截错误类型，输出对应错误信息
-        if (err.response.status === 404) {
-          console.log("404,请求错误");
+        if ([404, 400].indexOf(err.response.status)) {
+          console.log("请求错误");
         }
-        return err;
+        return err.response;
       }
     );
   }
@@ -65,6 +65,7 @@ class ZPRequest {
   request<T = any>(config: ZPRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       //若config.isLoading为false，则表示不启用loading组件
+      
       if (config.isLoading === true) {
         this.isLoading = config.isLoading;
       }
@@ -106,6 +107,18 @@ class ZPRequest {
 
   patch<T = any>(config: ZPRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: "PATCH" });
+  }
+  /* 链式调用 */
+  all<T = any>(funcArr: Promise<T>[], config?: ZPRequestConfig<T>): Promise<T[]> {
+    if(config?.isLoading){
+      showLoading()
+    }
+    return axios.all<T>(funcArr).then((...res)=>{
+      hideLoading()
+      /* 调用完毕时允许loading */
+      this.isLoading = DEAFULT_LOADING
+      return res[0]
+    })
   }
 }
 export default ZPRequest;
