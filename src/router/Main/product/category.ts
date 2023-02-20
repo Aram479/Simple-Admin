@@ -1,7 +1,8 @@
 const category = () => import('@/views/Main/product/category/category.vue')
 export default {
-  path: '/main/product/category',
+  path: '/product/category',
   name: 'category',
   component: category,
-  children: []
+  children: [],
+  meta: { name: '商品类别', icon: 'SuccessFilled' },
 }

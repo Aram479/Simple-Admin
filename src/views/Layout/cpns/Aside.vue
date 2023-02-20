@@ -12,7 +12,7 @@
       unique-opened 
       :default-active="routeActive"
     >
-      <SubMenu :menu="userMenus" :routeActive="routeActive" />
+      <SubMenu :menu="sidebarMenu" :routeActive="routeActive" />
     </el-menu>
   </div>
 </template>
@@ -23,16 +23,13 @@ import { ref, watchEffect } from 'vue';
 import { useLoginStore } from '@/stores/modules/loginStore';
 import { storeToRefs } from 'pinia';
 import { RouteRecordName, RouteRecordRaw, useRoute } from 'vue-router';
-import { mapMenusToRoutes } from '../../../utils/map-menus';
 const route = useRoute()
 const loginStore = useLoginStore()
-const { userMenus } = storeToRefs(loginStore)
+const { sidebarMenu } = storeToRefs(loginStore)
 let routeActive = ref<RouteRecordName>()
 watchEffect(()=>{
-  console.log(route.name)
   if(route.name) routeActive.value = route.name
 })
-userMenus?.value && mapMenusToRoutes(userMenus!.value)
 </script>
 
 <style lang="scss" scoped>
@@ -45,15 +42,5 @@ userMenus?.value && mapMenusToRoutes(userMenus!.value)
 }
 .el-menu {
   border-right: none;
-}
-.el-menu-item {
-  background-color: var(--el-meun-item-bg-color);
-  &:hover {
-    color: var(--el-menu-hover-text-color);
-    background-color: var(--el-meun-item-bg-color);
-  }
-}
-.itemActive {
-  background-color: var(--el-menu-item-active-bg-color) !important;
 }
 </style>

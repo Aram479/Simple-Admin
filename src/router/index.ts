@@ -1,5 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import localCache from '@/utils/cache';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Login from '@/views/Login/Login.vue'
 import Layout from '@/views/Layout/Layout.vue';
 import Main from '@/views/Main/Main.vue'
@@ -14,17 +13,6 @@ const router = createRouter({
       component: Login
     },
     {
-      path: '',
-      name: 'layout',
-      component: Layout,
-      redirect: 'main',
-      children:[{
-        path: '/main',
-        name: 'Main',
-        component: Main
-      }]
-    },
-    {
       path: "/403",
       component: Forbidden,
     },
@@ -34,15 +22,20 @@ const router = createRouter({
     },
   ]
 })
+export const DynamicRoutes: RouteRecordRaw[] = [
+  {
+    path: '',
+    name: 'layout',
+    component: Layout,
+    redirect: 'main',
+    children:[{
+      path: '/main',
+      name: 'Main',
+      component: Main,
+      meta:{name: '首页', icon: 'SuccessFilled'}
+    }]
+  },
+];
 
-router.beforeEach((to,form)=>{
-  const token = localCache.getItem('token')
-  if(to.path !== '/login') {
-    if(!token) {
-      return '/login'
-    }
-  } else if(to.path === '/login' && token) {
-    return form.fullPath
-  }
-})
+
 export default router

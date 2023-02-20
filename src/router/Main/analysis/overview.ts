@@ -1,7 +1,8 @@
 const overview = () => import('@/views/Main/analysis/overview/overview.vue')
 export default {
-  path: '/main/analysis/overview',
+  path: '/analysis/overview',
   name: 'overview',
   component: overview,
-  children: []
+  children: [],
+  meta: { name: '商品统计', icon: 'SuccessFilled' },
 }

@@ -1,7 +1,8 @@
 const role = () => import('@/views/Main/system/role/role.vue')
 export default {
-  path: '/main/system/role',
+  path: '/system/role',
   name: 'role',
   component: role,
-  children: []
+  children: [],
+  meta: { name: '角色管理', icon: 'SuccessFilled' },
 }

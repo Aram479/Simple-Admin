@@ -1,7 +1,8 @@
 const dashboard = () => import('@/views/Main/analysis/dashboard/dashboard.vue')
 export default {
-  path: '/main/analysis/dashboard',
+  path: '/analysis/dashboard',
   name: 'dashboard',
   component: dashboard,
-  children: []
+  children: [],
+  meta: { name: '核心技术', icon: 'SuccessFilled' },
 }

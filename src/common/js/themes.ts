@@ -40,7 +40,7 @@ export default {
   --el-menu-item-active-bg-color: #e0ebf6;
   --el-meun-item-bg-color: #fff;
   
-  --el-menu-hover-text-color: black;
+  --el-menu-hover-text-color: #4ea5fe;
   --el-menu-hover-bg-color: #fff;
   `,
   

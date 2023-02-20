@@ -1,7 +1,7 @@
 <template>
   <div class="Layout h-full" :style="themeStyle">
     <el-container class="h-full">
-      <el-aside width="210px"><Menu /></el-aside>
+      <el-aside width="210px"><Aside /></el-aside>
       <el-container>
         <el-header><Header /></el-header>
         <el-main><RouterView></RouterView></el-main>
@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import Menu from './cpns/Menu.vue';
+import Aside from './cpns/Aside.vue';
 import Header from './cpns/Header.vue';
 import { useThemesStore } from "@/stores/modules/themes";
 import { storeToRefs } from "pinia";

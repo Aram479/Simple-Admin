@@ -4,7 +4,7 @@ import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import { setupStore } from './stores/store';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-
+import '@/router/routeGuard'
 import '@/assets/css/tailwindcss/tailwindcss.css'
 import '@/assets/css/index.scss'
 import 'element-plus/dist/index.css'

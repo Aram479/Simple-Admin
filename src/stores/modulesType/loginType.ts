@@ -1,8 +1,12 @@
+import { RouteRecordRaw } from "vue-router"
+
 export interface loginState {
-  token?: string,
-  loginType?: string,
-  userInfo?: any
-  userMenus?: menuType[]
+  token: string,
+  loginType: string,
+  userInfo: any
+  userMenus: menuType[],
+  sidebarMenu?: RouteRecordRaw[],
+  permissionList?: RouteRecordRaw[]
 }
 
 export interface menuType {
@@ -12,5 +16,5 @@ export interface menuType {
   name?: string,
   sort?: number,
   type?: number,
-  url?: string
+  url: string
 }

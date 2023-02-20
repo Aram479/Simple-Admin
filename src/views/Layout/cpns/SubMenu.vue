@@ -2,21 +2,23 @@
   <div>
     <template v-for="firItem in menu">
       <!-- 有child -->
-      <el-sub-menu :index="firItem.url" v-if="firItem.type === 1">
+      <el-sub-menu :index="firItem.name" v-if="firItem.children?.length">
         <template #title>
           <el-icon color="black">
-            <component :is="firItem.icon"></component>
+            <component :is="firItem.meta?.icon"></component>
           </el-icon>
-          <span>{{ firItem.name }}</span>
+          <span>{{ firItem.meta?.name }}</span>
         </template>
         <SubMenu :menu="firItem.children" :routeActive="routeActive"></SubMenu>
       </el-sub-menu>
       <!-- 无child -->
-      <el-menu-item v-else :class="routeActive === firItem.name ? 'itemActive': ''" :route="firItem" :index="firItem.url">
-        <el-icon color="black">
-          <component :is="firItem.icon"></component>
-        </el-icon>
-        <span>{{ firItem.name }}</span>
+      <el-menu-item v-else  :route="firItem" :index="firItem.name">
+        <div :class="['menuItem-box',routeActive === firItem.name ? 'itemActive': '']">
+          <el-icon color="black">
+            <component :is="firItem.meta?.icon"></component>
+          </el-icon>
+          <span>{{ firItem.meta?.name }}</span>
+        </div>
       </el-menu-item>
     </template>
   </div>
@@ -26,23 +28,30 @@
 import SubMenu from "./SubMenu.vue";
 import { ref, computed, watchEffect, nextTick  } from 'vue';
 import type { RouteRecordRaw, RouteRecordName } from 'vue-router';
-import type { menuType } from "@/stores/modulesType/loginType";
 
 const props = withDefaults(defineProps<{
-  menu: menuType[],
+  menu: RouteRecordRaw[],
   routeActive?: RouteRecordName
 }>(),{
   menu: () => ([])
 })
-
 </script>
 
 <style lang="scss" scoped>
 .el-menu-item {
+  --el-menu-sub-item-height: 45px;
+  font-size: 13px !important;
+  padding: 5px 10px !important;
   background-color: var(--el-meun-item-bg-color);
   &:hover {
     color: var(--el-menu-hover-text-color);
     background-color: var(--el-meun-item-bg-color);
+  }
+  .menuItem-box {
+    width: 100%;
+    margin: 5px 0px;
+    padding-left: 20px;
+    border-radius: 5px;
   }
 }
 .itemActive {

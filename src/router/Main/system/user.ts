@@ -1,7 +1,8 @@
 const user = () => import('@/views/Main/system/user/user.vue')
 export default {
-  path: '/main/system/user',
+  path: '/system/user',
   name: 'user',
   component: user,
-  children: []
+  children: [],
+  meta: { name: '用户管理', icon: 'SuccessFilled' },
 }

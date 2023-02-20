@@ -1,7 +1,8 @@
 const menu = () => import('@/views/Main/system/menu/menu.vue')
 export default {
-  path: '/main/system/menu',
+  path: '/system/menu',
   name: 'menu',
   component: menu,
-  children: []
+  children: [],
+  meta: { name: '菜单管理', icon: 'SuccessFilled' },
 }

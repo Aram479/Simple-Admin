@@ -1,18 +1,12 @@
 <template>
-  <div class="menu">
-    <h2>menu</h2>
-  </div>
+  <div class='menu'>menu</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang='ts' setup>
+import { reactive, ref } from 'vue'
 
-export default defineComponent({
-  name: 'menu',
-  setup() {
-    return {}
-  }
-})
 </script>
 
-<style scoped></style>
+<style lang='scss' scoped>
+</style>
+
