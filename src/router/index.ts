@@ -1,11 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import localCache from '@/utils/cache';
 import Login from '@/views/Login/Login.vue'
 import Layout from '@/views/Layout/Layout.vue';
 import Main from '@/views/Main/Main.vue'
-import localCache from '@/utils/cache';
+import Forbidden from '@/views/ErrorPage/403.vue'
+import NotFound from '@/views/ErrorPage/404.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
     {
       path: '',
       name: 'layout',
@@ -18,11 +25,13 @@ const router = createRouter({
       }]
     },
     {
-      path: '/login',
-      name: 'Login',
-      component: Login
+      path: "/403",
+      component: Forbidden,
     },
-    
+    {
+      path: "/:pathMatch(.*)*",
+      component: NotFound,
+    },
   ]
 })
 
@@ -33,7 +42,7 @@ router.beforeEach((to,form)=>{
       return '/login'
     }
   } else if(to.path === '/login' && token) {
-    return form.path
+    return form.fullPath
   }
 })
 export default router

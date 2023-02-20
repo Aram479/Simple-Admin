@@ -8,6 +8,7 @@
       "@/*": ["./src/*"]
     },
     "preserveValueImports": false,
+    "importsNotUsedAsValues": "preserve",
     "types": ["node"],
   },
 

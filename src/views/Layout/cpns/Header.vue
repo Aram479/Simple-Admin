@@ -68,10 +68,11 @@
 </template>
 
 <script lang='ts' setup>
-import { reactive, ref, computed } from 'vue';
+import { reactive, ref, computed, onMounted } from 'vue';
 import { useThemesStore } from '@/stores/modules/themes';
 import type { themesType } from '@/views/Layout/LayoutViewType';
 import { useRoute } from 'vue-router';
+import localCache from '@/utils/cache';
 
 const route = useRoute()
 const themesStore = useThemesStore()
@@ -82,7 +83,7 @@ const themeColors = reactive<themesType[]>([
   {id: 'whiteTheme', color: '#fff'},
   {id: 'purpleTheme', color: '#722ed1'}
 ])
-const colorActive = ref(localStorage.getItem('theme') || 'darkBlue')
+const colorActive = ref(localCache.getItem('themeName') || 'darkBlue')
 const breadcrumbList = computed(()=> route.matched)
 const langActive = ref(0)
 const iconSize = ref(18)
@@ -98,6 +99,10 @@ const colorClick = (item: themesType, index: number)=> {
   colorActive.value = item.id
   themesStore.setTheme(item.id)
 }
+
+onMounted(()=>{
+  themesStore.setTheme(localCache.getItem('themeName'))
+})
 </script>
 
 <style lang='scss' scoped>

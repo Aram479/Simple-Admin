@@ -1,5 +1,5 @@
-import type { themeType } from '@/stores/modulesType/themesType';
+import type { themeName } from '@/stores/modulesType/themesType';
 export interface themesType {
-  id: themeType,
+  id: themeName,
   color?: string,
 }

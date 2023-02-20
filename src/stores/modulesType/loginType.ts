@@ -2,11 +2,11 @@ export interface loginState {
   token?: string,
   loginType?: string,
   userInfo?: any
-  userMenus?: meunType[]
+  userMenus?: menuType[]
 }
 
-export interface meunType {
-  children?: meunType[]
+export interface menuType {
+  children?: menuType[]
   icon?: string,
   id?: number,
   name?: string,

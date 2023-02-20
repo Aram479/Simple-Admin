@@ -1,8 +1,10 @@
-export interface themesState {
+export type themeName = keyof themeType
+export interface themesState extends themeType{
   themeColor?: string,
+  themeName?: themeName,
+}
+export interface themeType {
   darkBlue?: string,
   whiteTheme?: string,
-  purpleTheme?: string
+  purpleTheme?: string,
 }
-
-export type themeType = 'darkBlue' | 'whiteTheme' |  'purpleTheme'

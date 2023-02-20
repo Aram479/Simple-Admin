@@ -1,16 +1,7 @@
 <template>
-  <div class="Main">
-    666
-  </div>
+  <div class="Main">Main</div>
 </template>
 
-<script lang="ts" setup>
-import { useLoginStore } from '@/stores/modules/loginStore';
-import { storeToRefs } from 'pinia';
-const loginStore = useLoginStore()
-const { userMenus } = storeToRefs(loginStore)
-</script>
+<script lang="ts" setup></script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

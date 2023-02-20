@@ -6,23 +6,31 @@
       <span>MyAdmin</span>
     </div>
     <!-- 菜单 -->
-    <el-menu>
-      <el-sub-menu index="1">
-        <template #title>
-          <el-icon><location /></el-icon>
-          <span>Navigator One</span>
-        </template>
-        <el-menu-item index="1-2">item one</el-menu-item>
-      </el-sub-menu>
+    <el-menu 
+      class="border-none" 
+      router 
+      unique-opened 
+      :default-active="routeActive"
+    >
+      <SubMenu :menu="userMenus" :routeActive="routeActive" />
     </el-menu>
   </div>
 </template>
 
 <script lang="ts" setup>
+import SubMenu from "./SubMenu.vue"
+import { ref, watchEffect } from 'vue';
 import { useLoginStore } from '@/stores/modules/loginStore';
 import { storeToRefs } from 'pinia';
+import { RouteRecordName, RouteRecordRaw, useRoute } from 'vue-router';
+const route = useRoute()
 const loginStore = useLoginStore()
 const { userMenus } = storeToRefs(loginStore)
+let routeActive = ref<RouteRecordName>()
+watchEffect(()=>{
+  console.log(route.name)
+  if(route.name) routeActive.value = route.name
+})
 </script>
 
 <style lang="scss" scoped>
