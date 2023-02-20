@@ -23,6 +23,7 @@ import { ref, watchEffect } from 'vue';
 import { useLoginStore } from '@/stores/modules/loginStore';
 import { storeToRefs } from 'pinia';
 import { RouteRecordName, RouteRecordRaw, useRoute } from 'vue-router';
+import { mapMenusToRoutes } from '../../../utils/map-menus';
 const route = useRoute()
 const loginStore = useLoginStore()
 const { userMenus } = storeToRefs(loginStore)
@@ -31,6 +32,7 @@ watchEffect(()=>{
   console.log(route.name)
   if(route.name) routeActive.value = route.name
 })
+userMenus?.value && mapMenusToRoutes(userMenus!.value)
 </script>
 
 <style lang="scss" scoped>
