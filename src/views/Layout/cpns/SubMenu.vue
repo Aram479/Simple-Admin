@@ -15,7 +15,7 @@
       <el-menu-item v-else  :route="firItem" :index="firItem.name">
         <div :class="['menuItem-box',routeActive === firItem.name ? 'itemActive': '']">
           <el-icon color="black">
-            <component :is="firItem.meta?.icon"></component>
+            <component v-if="firItem.meta?.icon" :is="firItem.meta?.icon"></component>
           </el-icon>
           <span>{{ firItem.meta?.name }}</span>
         </div>
@@ -49,8 +49,7 @@ const props = withDefaults(defineProps<{
   }
   .menuItem-box {
     width: 100%;
-    margin: 5px 0px;
-    padding-left: 20px;
+    padding-left: 10px;
     border-radius: 5px;
   }
 }

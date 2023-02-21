@@ -27,12 +27,13 @@ export const DynamicRoutes: RouteRecordRaw[] = [
     path: '',
     name: 'layout',
     component: Layout,
-    redirect: 'main',
+    redirect: '/main',
+    meta: {name: '首页'},
     children:[{
       path: '/main',
       name: 'Main',
       component: Main,
-      meta:{name: '首页', icon: 'SuccessFilled'}
+      meta:{name: '首页', icon: 'HomeFilled'}
     }]
   },
 ];

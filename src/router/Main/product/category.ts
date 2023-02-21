@@ -4,5 +4,5 @@ export default {
   name: 'category',
   component: category,
   children: [],
-  meta: { name: '商品类别', icon: 'SuccessFilled' },
+  meta: { name: '商品类别', icon: '' },
 }

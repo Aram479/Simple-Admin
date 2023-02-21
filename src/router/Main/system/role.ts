@@ -4,5 +4,5 @@ export default {
   name: 'role',
   component: role,
   children: [],
-  meta: { name: '角色管理', icon: 'SuccessFilled' },
+  meta: { name: '角色管理', icon: '' },
 }

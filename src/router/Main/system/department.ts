@@ -4,5 +4,5 @@ export default {
   name: 'department',
   component: department,
   children: [],
-  meta: { name: '部门管理', icon: 'SuccessFilled' },
+  meta: { name: '部门管理', icon: '' },
 }

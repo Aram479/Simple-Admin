@@ -6,5 +6,5 @@ export default {
   children: getImportMetaRoute(
     import.meta.glob("./product/*.ts", { eager: true, import: "default" })
   ),
-  meta: { name: '商品中心', icon: 'SuccessFilled' },
+  meta: { name: '商品中心', icon: 'ShoppingBag' },
 };

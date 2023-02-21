@@ -5,8 +5,8 @@ export let firstMenu: any = null
 /* 根据用户筛选路由 */
 export function mapMenusToRoutes(userMenus: menuType[], allRoutes: RouteRecordRaw[]): RouteRecordRaw[] {
   const routes: RouteRecordRaw[] = [];
-  allRoutes.forEach((all, i) => {
-    userMenus.forEach((user, i) => {
+  userMenus.forEach((user, i) => {
+    allRoutes.forEach((all, i) => {
       // 如果用户路由、子路由、孙路由匹配上所有路由则添加到新数组中
       if (user.name === all?.meta?.name) {
         // 且用户路由有子路由

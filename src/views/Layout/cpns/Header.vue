@@ -3,9 +3,9 @@
     <div class="header-box h-full">
       <div class="header-left h-full flex items-center justify-between float-left">
         <!-- 面包屑 -->
-        <!-- <el-breadcrumb separator-icon="ArrowRight">
+        <el-breadcrumb separator="/">
           <el-breadcrumb-item v-for="breadItem in breadcrumbList" :to="{ path: breadItem.path || breadItem.redirect }">{{breadItem.meta.name}}</el-breadcrumb-item>
-        </el-breadcrumb> -->
+        </el-breadcrumb>
       </div>
       <div class="header-right flex items-center justify-evenly h-full float-right">
         <!-- 搜索 -->
@@ -84,7 +84,7 @@ const themeColors = reactive<themesType[]>([
   {id: 'purpleTheme', color: '#722ed1'}
 ])
 const colorActive = ref(localCache.getItem('themeName') || 'darkBlue')
-const breadcrumbList = computed(()=> route.matched)
+const breadcrumbList = computed(()=> route.matched.slice(1))
 const langActive = ref(0)
 const iconSize = ref(18)
 const drawerValue = ref(false)

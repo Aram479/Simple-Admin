@@ -5,5 +5,5 @@ export default {
   children: getImportMetaRoute(
     import.meta.glob("./analysis/*.ts", { import: "default", eager: true })
   ),
-  meta: { name: '系统总览', icon: 'SuccessFilled' },
+  meta: { name: '系统总览', icon: 'Monitor' },
 };

@@ -20,8 +20,10 @@ const { themeStyle } = storeToRefs(themesStore);
 </script>
 
 <style lang="scss" scoped>
+.el-main, .el-header {
+  min-width: 600px;
+}
 .el-main {
-  --el-main-padding: 0px;
   background-color: #f0f2f5;
 }
 .el-header {

@@ -4,5 +4,5 @@ export default {
   name: 'list',
   component: list,
   children: [],
-  meta: { name: '故事列表', icon: 'SuccessFilled' },
+  meta: { name: '故事列表', icon: '' },
 }
