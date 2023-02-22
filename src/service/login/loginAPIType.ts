@@ -1,8 +1,4 @@
-export interface ILoginResult<T = any> {
-  code: number;
-  data: T;
-}
-export interface IDataType {
+export interface ILoginDataType {
   id: number;
   name: string;
   token: string;

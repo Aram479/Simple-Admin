@@ -4,9 +4,17 @@ export interface ISearchFormConfig {
   labelWidth?: string;
   colSpan?: IColSpan;
 }
+export interface Iform {
+  userName?: string,
+  password?: string,
+  id?: string,
+  open?: string,
+  createDate?: any
+}
 export type ISearchForm = Record<string, any>;
 export interface ISearchItem {
-  field?: string;
+  // 必传项，使用搜索 必须要有model值
+  field: keyof Iform;
   type?: string;
   label?: string;
   prop?: string;
