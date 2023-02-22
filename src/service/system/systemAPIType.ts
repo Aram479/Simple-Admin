@@ -4,13 +4,13 @@ export interface ISystemDataType {
 }
 
 export interface ISystemListData {
-  cellphone: number;
-  createAt: string;
-  departmentId: number;
-  enable: number;
-  id: number;
-  name: string;
-  realname: string;
-  roleId: number;
-  updateAt: string;
+  cellphone?: number;
+  createAt?: string;
+  departmentId?: number;
+  enable?: number;
+  id?: number;
+  name?: string;
+  realname?: string;
+  roleId?: number;
+  updateAt?: string;
 }

@@ -34,13 +34,13 @@ export default {
   --bg-color: #fff;
 
   --el-menu-text-color: #7a80b4;
-  --el-menu-active-color: #4ea5fe;
+  --el-menu-active-color: #fff;
   --el-menu-bg-color: #fff;
 
-  --el-menu-item-active-bg-color: #e0ebf6;
+  --el-menu-item-active-bg-color: #409eff;
   --el-meun-item-bg-color: #fff;
   
-  --el-menu-hover-text-color: #4ea5fe;
+  --el-menu-hover-text-color: #000;
   --el-menu-hover-bg-color: #fff;
   `,
   

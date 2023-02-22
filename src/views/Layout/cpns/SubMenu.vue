@@ -12,8 +12,8 @@
         <SubMenu :menu="firItem.children" :routeActive="routeActive"></SubMenu>
       </el-sub-menu>
       <!-- 无child -->
-      <el-menu-item v-else  :route="firItem" :index="firItem.name">
-        <div :class="['menuItem-box',routeActive === firItem.name ? 'itemActive': '']">
+      <el-menu-item v-else :route="firItem" :index="firItem.name">
+        <div :class="['menuItem-box', routeActive === firItem.name ? 'itemActive' : '']">
           <el-icon color="black">
             <component v-if="firItem.meta?.icon" :is="firItem.meta?.icon"></component>
           </el-icon>
@@ -26,13 +26,13 @@
 
 <script lang="ts" setup>
 import SubMenu from "./SubMenu.vue";
-import { ref, computed, watchEffect, nextTick  } from 'vue';
+import { ref, computed, watchEffect, nextTick } from 'vue';
 import type { RouteRecordRaw, RouteRecordName } from 'vue-router';
 
 const props = withDefaults(defineProps<{
   menu: RouteRecordRaw[],
   routeActive?: RouteRecordName
-}>(),{
+}>(), {
   menu: () => ([])
 })
 </script>
@@ -43,17 +43,30 @@ const props = withDefaults(defineProps<{
   font-size: 13px !important;
   padding: 5px 10px !important;
   background-color: var(--el-meun-item-bg-color);
+
   &:hover {
-    color: var(--el-menu-hover-text-color);
     background-color: var(--el-meun-item-bg-color);
   }
+
   .menuItem-box {
     width: 100%;
     padding-left: 10px;
     border-radius: 5px;
+    color: var(--el-menu-text-color);
+
+    &:hover {
+      transition: color .5s;
+      color: var(--el-menu-hover-text-color);
+    }
   }
 }
+
 .itemActive {
   background-color: var(--el-menu-item-active-bg-color) !important;
-}
-</style>
+  color: var(--el-menu-active-color) !important;
+
+  &:hover {
+    transition: color 0s !important;
+    color: var(--el-menu-active-color) !important;
+  }
+}</style>

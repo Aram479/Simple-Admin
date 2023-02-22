@@ -1,3 +1,4 @@
+import type { ISystemListData } from "@/service/system/systemAPIType";
 export interface systemState {
-  userList?: any[],
+  userTableData?: ISystemListData[];
 }
