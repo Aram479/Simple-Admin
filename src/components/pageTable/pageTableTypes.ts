@@ -5,8 +5,15 @@ export interface ITableConfig {
 }
 
 export interface ITableHeader {
+  id?: number;
   prop: string;
   label: string;
   minWidth?: string;
   slotName?: string;
+}
+
+export interface ITreeData {
+  id: number;
+  label?: string;
+  children?: ITableHeader[];
 }

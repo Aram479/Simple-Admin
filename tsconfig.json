@@ -8,6 +8,7 @@
       "@/*": ["./src/*"]
     },
     "preserveValueImports": false,
+    "experimentalDecorators": true,
     "importsNotUsedAsValues": "preserve",
     "types": ["node"],
   },
