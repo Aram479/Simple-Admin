@@ -1,9 +1,9 @@
 <template>
   <div class="tableOperate mb-4">
-    <div class="title-box">用户管理</div>
+    <div class="title-box">{{ tableName }}管理</div>
     <div class="operate-box">
       <div class="button-box mr-4">
-        <el-button type="primary" icon="CirclePlusFilled">新建用户</el-button>
+        <el-button type="primary" icon="CirclePlusFilled">新建{{ tableName }}</el-button>
       </div>
       <div class="icon-box">
         <!-- 刷新 -->
@@ -65,7 +65,7 @@ const emit = defineEmits<{
   (e: "handleTreeChange", tree: any[]): void;
 }>();
 const route = useRoute()
-const aaa = ref<string>((route as RouteRecordRaw[]).meta.name.replace('管理', ''))
+const tableName = ref<string>(route.meta.name.replace('管理', ''))
 const { toRefreshTable } = useEventbus();
 const dropdownActive = ref<string>('default')
 const defaultProps = {

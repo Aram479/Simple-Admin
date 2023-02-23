@@ -1,9 +1,9 @@
 <template>
   <div class="pageTable">
     <TableOperate @handleRowDensity="handleRowDensity" @handleTreeChange="handleTreeChecks" :headerData="headerData" />
-    <el-table :header-row-class-name="rowDensity" :cell-class-name="rowDensity" v-loading="tableLoading" :data="tableData" table-layout="auto"  border>
+    <el-table :header-row-class-name="rowDensity" :cell-class-name="rowDensity" v-loading="tableLoading" :data="tableData"  border>
       <template v-for="item in headerData" :key="item.prop" >
-        <el-table-column v-if="checksCol.indexOf(item.prop) !== -1"  align="center" :prop="item.prop" :label="item.label">
+        <el-table-column v-if="checksCol.indexOf(item.prop) !== -1"  align="center" :prop="item.prop" :label="item.label" :min-width="item.minWidth">
           <template #default="scoped">
             <!-- 动态插槽 -->
             <slot :name="item.slotName" :row="scoped.row">
@@ -31,6 +31,16 @@
         </el-table-column>
       </template>
     </el-table>
+    <el-pagination
+      v-model:current-page="pageInfo.offset"
+      v-model:page-size="pageInfo.size"
+      :page-sizes="[5, 10, 20, 30]"
+      :background="true"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="totalCount"
+      @current-change="handleCurrentChange"
+      @size-change="handleSizeChange"
+    />
   </div>
 </template>
 
@@ -39,15 +49,21 @@ import TableOperate from './tableOperate.vue'
 import { ref } from 'vue';
 import { useSystemStore } from "@/stores/modules/system";
 import { storeToRefs } from 'pinia';
-import type { ITableHeader } from '@/components/pageTable/pageTableTypes'
+import type { ITableHeader } from './pageTableTypes'
 import type { ISystemListData } from "@/service/system/systemAPIType";
+import { IQueryInfo } from '@/views/Main/system/user/userViewType';
 const props = withDefaults(defineProps<{
-  headerData: ITableHeader[],
-  tableData: ISystemListData[],
+  headerData?: ITableHeader[],
+  tableData?: ISystemListData[],
+  pageInfo: IQueryInfo,
+  totalCount?: number
 }>(), {
   headerData: ()=> ([]),
   tableData: ()=> ([])
 })
+const emit = defineEmits<{
+  (e: "currentChange", pageInfo: IQueryInfo): void;
+}>();
 const systemStore = useSystemStore();
 const { tableLoading } = storeToRefs(systemStore);
 // 默认显示的列
@@ -61,6 +77,12 @@ const handleRowDensity = (density: string)=>{
 // 列隐藏事件
 const handleTreeChecks = (checks: string[]) => {
   checksCol.value = checks
+}
+const handleCurrentChange = ()=>{
+  emit('currentChange', props.pageInfo)
+}
+const handleSizeChange = () => {
+  
 }
 </script>
 

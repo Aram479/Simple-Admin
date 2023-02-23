@@ -6,13 +6,16 @@ import * as _ from 'lodash';
 export const useSystemStore = defineStore("system", {
   state: (): systemState => ({
     userTableData: [],
-    tableLoading: true
+    tableLoading: true,
+    totalCount: 0,
   }),
   actions: {
     async getPageListActions(payload: IUserResType) {
       this.tableLoading = true
       const { data } = await getPageListData(payload.pageUrl, payload.queryInfo);
+      console.log(data)
       this.userTableData = data.list;
+      this.totalCount = data.totalCount
       setTimeout(()=>{
         this.tableLoading = false
       }, 500)
