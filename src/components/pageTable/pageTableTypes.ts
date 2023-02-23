@@ -17,3 +17,8 @@ export interface ITreeData {
   label?: string;
   children?: ITableHeader[];
 }
+
+export interface IPageInfo {
+  currentPage: number;
+  pageSize: number;
+}

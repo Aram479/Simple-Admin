@@ -32,8 +32,8 @@
       </template>
     </el-table>
     <el-pagination
-      v-model:current-page="pageInfo.offset"
-      v-model:page-size="pageInfo.size"
+      v-model:current-page="pageInfo.currentPage"
+      v-model:page-size="pageInfo.pageSize"
       :page-sizes="[5, 10, 20, 30]"
       :background="true"
       layout="total, sizes, prev, pager, next, jumper"
@@ -46,26 +46,33 @@
 
 <script lang="ts" setup>
 import TableOperate from './tableOperate.vue'
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useSystemStore } from "@/stores/modules/system";
 import { storeToRefs } from 'pinia';
-import type { ITableHeader } from './pageTableTypes'
+import type { ITableHeader, IPageInfo } from './pageTableTypes'
 import type { ISystemListData } from "@/service/system/systemAPIType";
 import { IQueryInfo } from '@/views/Main/system/user/userViewType';
 const props = withDefaults(defineProps<{
   headerData?: ITableHeader[],
   tableData?: ISystemListData[],
-  pageInfo: IQueryInfo,
   totalCount?: number
 }>(), {
   headerData: ()=> ([]),
   tableData: ()=> ([])
 })
 const emit = defineEmits<{
-  (e: "currentChange", pageInfo: IQueryInfo): void;
+  (e: "currentChange", queryInfo: IQueryInfo): void;
 }>();
 const systemStore = useSystemStore();
 const { tableLoading } = storeToRefs(systemStore);
+const pageInfo = ref<IPageInfo>({
+  currentPage: 1,
+  pageSize: 5
+})
+const queryInfo = computed(()=> ({
+  offset: (pageInfo.value.currentPage - 1) * pageInfo.value.pageSize,
+  size: pageInfo.value.pageSize
+}))
 // 默认显示的列
 const checksCol = ref<string[]>(props.headerData.map(item=> item.prop))
 // 行密度
@@ -79,10 +86,10 @@ const handleTreeChecks = (checks: string[]) => {
   checksCol.value = checks
 }
 const handleCurrentChange = ()=>{
-  emit('currentChange', props.pageInfo)
+  emit('currentChange', queryInfo.value)
 }
 const handleSizeChange = () => {
-  
+  emit('currentChange', queryInfo.value)
 }
 </script>
 
