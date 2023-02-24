@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw, RouterOptions } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Login from '@/views/Login/Login.vue'
 import Layout from '@/views/Layout/Layout.vue';
 import Main from '@/views/Main/Main.vue'
@@ -20,7 +20,7 @@ const router = createRouter({
       path: "/:pathMatch(.*)*",
       component: NotFound,
     },
-  ] as RouteRecordRaw[]
+  ]
 })
 export const DynamicRoutes: RouteRecordRaw[] = [
   {
@@ -28,7 +28,7 @@ export const DynamicRoutes: RouteRecordRaw[] = [
     name: 'layout',
     component: Layout,
     redirect: '/main',
-    meta: {name: '首页'},
+    meta: {name: ''},
     children:[{
       path: '/main',
       name: 'Main',

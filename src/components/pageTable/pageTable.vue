@@ -1,10 +1,11 @@
 <template>
   <div class="pageTable">
     <TableOperate @handleRowDensity="handleRowDensity" @handleTreeChange="handleTreeChecks" :headerData="headerData" />
-    <el-table :header-row-class-name="rowDensity" :cell-class-name="rowDensity" v-loading="tableLoading" :data="tableData"  border>
-      <template v-for="item in headerData" :key="item.prop" >
-        <el-table-column v-if="checksCol.indexOf(item.prop) !== -1"  align="center" :prop="item.prop" :label="item.label" :min-width="item.minWidth">
-          <template #default="scoped">
+    <el-table v-if="checksCol.length" :header-row-class-name="rowDensity" :cell-class-name="rowDensity" v-loading="tableLoading" :data="tableData" border>
+      <template v-for="(item, index) in headerData" :key="item.prop" >
+        <el-table-column v-if="checksCol.indexOf(item.prop) !== -1" align="center" :type="item.type" :prop="item.prop" :label="item.label" :min-width="item.minWidth">
+          <!-- 不能在多选插槽赋值 多选的样式是用element的 -->
+          <template #default="scoped" v-if="item.type !== 'selection'">
             <!-- 动态插槽 -->
             <slot :name="item.slotName" :row="scoped.row">
               <!-- 操作列按钮 -->
@@ -24,6 +25,8 @@
                   </template>
                 </el-dropdown>
               </div>
+              <!-- 序号列 -->
+              <div v-else-if="item.prop === 'index'">{{ (totalCount + 1) - scoped.row.id > 0 ? (totalCount + 1) - scoped.row.id : index }}</div>
               <!-- 其他列数据 -->
               <span v-else>{{ scoped.row[item.prop]}}</span>
             </slot>
@@ -32,21 +35,21 @@
       </template>
     </el-table>
     <el-pagination
+      class="justify-end py-5"
+      layout="total, sizes, prev, pager, next, jumper"
       v-model:current-page="pageInfo.currentPage"
       v-model:page-size="pageInfo.pageSize"
       :page-sizes="[5, 10, 20, 30]"
       :background="true"
-      layout="total, sizes, prev, pager, next, jumper"
       :total="totalCount"
-      @current-change="handleCurrentChange"
-      @size-change="handleSizeChange"
+      small
     />
   </div>
 </template>
 
 <script lang="ts" setup>
 import TableOperate from './tableOperate.vue'
-import { ref, computed } from 'vue';
+import { ref, computed, watch, watchEffect } from 'vue';
 import { useSystemStore } from "@/stores/modules/system";
 import { storeToRefs } from 'pinia';
 import type { ITableHeader, IPageInfo } from './pageTableTypes'
@@ -58,23 +61,26 @@ const props = withDefaults(defineProps<{
   totalCount?: number
 }>(), {
   headerData: ()=> ([]),
-  tableData: ()=> ([])
+  tableData: ()=> ([]),
+  totalCount: 0
 })
 const emit = defineEmits<{
   (e: "currentChange", queryInfo: IQueryInfo): void;
 }>();
 const systemStore = useSystemStore();
 const { tableLoading } = storeToRefs(systemStore);
+// 分页数据
 const pageInfo = ref<IPageInfo>({
   currentPage: 1,
   pageSize: 5
 })
+// 分页请求数据
 const queryInfo = computed(()=> ({
   offset: (pageInfo.value.currentPage - 1) * pageInfo.value.pageSize,
   size: pageInfo.value.pageSize
 }))
-// 默认显示的列
-const checksCol = ref<string[]>(props.headerData.map(item=> item.prop))
+// 默认显示的列(不包含多选和序号)
+const checksCol = ref<string[]>(props.headerData.filter(item=> !item.type).map(item=> item.prop))
 // 行密度
 const rowDensity = ref<string>("el-table--default")
 /* 行密度改变事件 */
@@ -85,11 +91,15 @@ const handleRowDensity = (density: string)=>{
 const handleTreeChecks = (checks: string[]) => {
   checksCol.value = checks
 }
+/* 分页数据改变 发出queryInfo */
+watch(queryInfo, (newV)=> {
+  emit('currentChange', newV)
+})
 const handleCurrentChange = ()=>{
-  emit('currentChange', queryInfo.value)
+  // emit('currentChange', queryInfo.value)
 }
 const handleSizeChange = () => {
-  emit('currentChange', queryInfo.value)
+  // emit('currentChange', queryInfo.value)
 }
 </script>
 

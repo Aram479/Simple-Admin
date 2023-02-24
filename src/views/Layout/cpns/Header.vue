@@ -41,7 +41,7 @@
                 <span>用户信息</span>
               </el-dropdown-item>
               <!-- style="--el-dropdown-menuItem-hover-color: red; --el-dropdown-menuItem-hover-fill: green" -->
-              <el-dropdown-item divided style="--el-dropdown-menuItem-hover-color: white; --el-dropdown-menuItem-hover-fill: #f87171">
+              <el-dropdown-item divided style="--el-dropdown-menuItem-hover-color: white; --el-dropdown-menuItem-hover-fill: #f87171" @click="logoutClick">
                 <el-icon :size="iconSize"><SwitchButton /></el-icon>
                 <span>退出系统</span>
               </el-dropdown-item>
@@ -71,10 +71,11 @@
 import { reactive, ref, computed, onMounted } from 'vue';
 import { useThemesStore } from '@/stores/modules/themes';
 import type { themesType } from '@/views/Layout/LayoutViewType';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import localCache from '@/utils/cache';
 
 const route = useRoute()
+const router = useRouter()
 const themesStore = useThemesStore()
 
 const languages = reactive([{name: '简体中文'},{name: 'English'}])
@@ -99,7 +100,10 @@ const colorClick = (item: themesType, index: number)=> {
   colorActive.value = item.id
   themesStore.setTheme(item.id)
 }
-
+const logoutClick = ()=> {
+  localCache.clearCache()
+  router.replace('/login')
+}
 onMounted(()=>{
   themesStore.setTheme(localCache.getItem('themeName'))
 })

@@ -5,6 +5,7 @@ export interface ITableConfig {
 }
 
 export interface ITableHeader {
+  type?: string,
   id?: number;
   prop: string;
   label: string;

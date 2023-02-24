@@ -11,7 +11,7 @@
         <el-divider direction="vertical" />
         <!-- 密度 -->
         <el-dropdown trigger="click">
-          <el-icon :size="20"><DCaret /></el-icon>
+          <i class="iconfont icon-a-unfoldvertical-line font-bold text-lg"></i>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item
@@ -34,7 +34,7 @@
                 class="p-4 py-2"
                 node-key="id"
                 :data="treeArr"
-                :default-checked-keys="[1]"
+                :default-checked-keys="defaultCheck"
                 :props="defaultProps"
                 default-expand-all
                 show-checkbox
@@ -50,11 +50,10 @@
 
 <script lang="ts" setup>
 import { useEventbus } from "@/utils/mitt";
-import { ref, reactive } from "vue";
+import { ref, reactive, computed } from 'vue';
 import { ITableHeader, ITreeData } from './pageTableTypes';
 import { CheckedInfo } from "element-plus/es/components/tree-v2/src/types";
-import { useRoute, RouteRecordRaw } from 'vue-router';
-import { MetaProperty } from "@babel/types";
+import { useRoute, RouteMeta } from 'vue-router';
 const props = withDefaults(defineProps<{
   headerData: ITableHeader[],
 }>(), {
@@ -65,9 +64,17 @@ const emit = defineEmits<{
   (e: "handleTreeChange", tree: any[]): void;
 }>();
 const route = useRoute()
-const tableName = ref<string>(route.meta.name.replace('管理', ''))
+// 刷新表格
 const { toRefreshTable } = useEventbus();
+// 当前页标题
+const tableName = computed(()=>{
+  let name = ref(route.meta.name)
+  return name.value?.replace('管理', '')
+})
+// 选择的行密度
 const dropdownActive = ref<string>('default')
+// 默认树形选择节点
+const defaultCheck = ref<any[]>([1])
 const defaultProps = {
   children: 'children',
   label: 'label',
@@ -94,6 +101,7 @@ const treeArr = ref<ITreeData[]>([
   },
 ])
 treeArr.value[0].children = props.headerData.map((item, index)=> (item.id = treeArr.value[0].id + (index + 1)) ? item : ({} as ITableHeader ))
+defaultCheck.value = treeArr.value[0].children.filter(item => !item.type).map(item=> item.id)
 
 /* 刷新表格事件 */
 const handleReTable = () => {
@@ -107,8 +115,8 @@ const handleRowDensity = (density: string) => {
 /* 树形选择复选改变事件 */
 const handleTreeChange = (currentData: any, tree: CheckedInfo) => {
   const checked = tree.checkedNodes.map(item=> item.prop)
-  // const activeColArr = tree
   emit('handleTreeChange', checked)
+  // const activeColArr = tree
 }
 </script>
 
@@ -120,7 +128,7 @@ const handleTreeChange = (currentData: any, tree: CheckedInfo) => {
     .icon-box {
       @include flex(center, center);
     }
-    .el-icon {
+    .el-icon, i {
       cursor: pointer;
       transition: color 0.2s;
       &:hover {
