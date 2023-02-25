@@ -1,7 +1,7 @@
 <template>
   <div class="pageTable">
     <TableOperate @handleRowDensity="handleRowDensity" @handleTreeChange="handleTreeChecks" :headerData="headerData" />
-    <el-table v-if="checksCol.length" :header-row-class-name="rowDensity" :cell-class-name="rowDensity" v-loading="tableLoading" :data="tableData" border>
+    <el-table ref="tableRef" v-if="checksCol.length" :header-row-class-name="rowDensity" :cell-class-name="rowDensity" v-loading="tableLoading" :data="tableData" border @select="handleSelectChange" @select-all="handleSelectChange">
       <template v-for="(item, index) in headerData" :key="item.prop" >
         <el-table-column v-if="checksCol.indexOf(item.prop) !== -1" align="center" :type="item.type" :prop="item.prop" :label="item.label" :min-width="item.minWidth">
           <!-- 不能在多选插槽赋值 多选的样式是用element的 -->
@@ -49,12 +49,14 @@
 
 <script lang="ts" setup>
 import TableOperate from './tableOperate.vue'
-import { ref, computed, watch, watchEffect } from 'vue';
+import { ref, computed, watch, nextTick } from 'vue';
 import { useSystemStore } from "@/stores/modules/system";
 import { storeToRefs } from 'pinia';
+import { ElTable } from 'element-plus';
+import { IQueryInfo } from '@/views/Main/system/user/userViewType';
 import type { ITableHeader, IPageInfo } from './pageTableTypes'
 import type { ISystemListData } from "@/service/system/systemAPIType";
-import { IQueryInfo } from '@/views/Main/system/user/userViewType';
+
 const props = withDefaults(defineProps<{
   headerData?: ITableHeader[],
   tableData?: ISystemListData[],
@@ -69,6 +71,9 @@ const emit = defineEmits<{
 }>();
 const systemStore = useSystemStore();
 const { tableLoading } = storeToRefs(systemStore);
+const tableRef = ref<InstanceType<typeof ElTable>>();
+// 多选时选择的行
+const selectRow = ref<ITableHeader[]>([])
 // 分页数据
 const pageInfo = ref<IPageInfo>({
   currentPage: 1,
@@ -87,14 +92,60 @@ const rowDensity = ref<string>("el-table--default")
 const handleRowDensity = (density: string)=>{
   rowDensity.value = `el-table--${density}`
 }
-// 列隐藏事件
+/* 列隐藏事件 */
 const handleTreeChecks = (checks: string[]) => {
   checksCol.value = checks
+}
+const set = new Set()
+/* 行选择事件 */
+const handleSelectChange = (selectArr: ITableHeader[], row?: ITableHeader)=>{
+  if(!row) {
+    selectArr.forEach(item=> {
+      if(!set.has(item.id)) {
+        set.add(item.id)
+        selectRow.value.push(item)
+      }
+    })
+    if(selectArr.length === 0) {
+      props.tableData.forEach(item=>{
+        set.delete(item.id)
+      })
+      selectRow.value = selectRow.value.filter((select)=> {
+        if(!props.tableData.find(item=> select.id == item.id)) {
+          return true
+        }
+      })
+    }
+    
+  } else {
+    if(!set.has(row.id)) {
+      set.add(row.id)
+      selectRow.value.push(row)
+    } else {
+      set.delete(row.id)
+      selectRow.value.splice(selectRow.value.findIndex(item=> item.id === row.id), 1)
+    }
+  }
+}
+/* 行选择事件 */
+const toggleSelection = () => {
+  props.tableData.forEach((row) => {
+    if(selectRow.value.find(select=> select.id === row.id)){
+      tableRef.value!.toggleRowSelection(row, true)
+    }
+  })
 }
 /* 分页数据改变 发出queryInfo */
 watch(queryInfo, (newV)=> {
   emit('currentChange', newV)
 })
+/* tableData数据改变，记录选中的行 */
+watch(()=> props.tableData, ()=>{
+  nextTick(()=>{
+    toggleSelection()
+  })
+})
+
 const handleCurrentChange = ()=>{
   // emit('currentChange', queryInfo.value)
 }

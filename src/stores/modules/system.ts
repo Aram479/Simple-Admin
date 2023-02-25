@@ -13,7 +13,6 @@ export const useSystemStore = defineStore("system", {
     async getPageListActions(payload: IUserResType) {
       this.tableLoading = true
       const { data } = await getPageListData(payload.pageUrl, payload.queryInfo);
-      console.log(data)
       this.userTableData = data.list;
       this.totalCount = data.totalCount
       setTimeout(()=>{
