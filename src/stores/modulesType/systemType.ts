@@ -1,6 +1,12 @@
 import type { ISystemListData } from "@/service/system/systemAPIType";
 export interface systemState {
-  userTableData?: ISystemListData[];
-  tableLoading?: boolean
-  totalCount?: number
+  usersList: ISystemListData[];
+  usersCount: number,
+  roleList: any[],
+  roleCount: number,
+  goodsList: any[],
+  goodsCount: number,
+  menuList: any[],
+  menuCount: number,
+  tableLoading: boolean
 }

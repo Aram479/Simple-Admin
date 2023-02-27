@@ -1,18 +1,16 @@
 <template>
   <div class="role">
-    <h2>role</h2>
+    <PageTable v-bind="tableConfig" pageName="role" :tableData="roleList" ></PageTable>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'role',
-  setup() {
-    return {}
-  }
-})
+<script lang="ts" setup>
+import PageTable from "@/components/pageTable/pageTable.vue";
+import { tableConfig } from './config/tableConfig';
+import { useSystemStore } from "@/stores/modules/system";
+import { storeToRefs } from "pinia";
+const systemStore = useSystemStore();
+const { roleList } = storeToRefs(systemStore);
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped></style>

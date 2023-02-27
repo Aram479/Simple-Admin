@@ -27,6 +27,8 @@
               </div>
               <!-- 序号列 -->
               <div v-else-if="item.prop === 'index'">{{ (totalCount + 1) - scoped.row.id > 0 ? (totalCount + 1) - scoped.row.id : index }}</div>
+              <!-- 时间列 -->
+              <span v-else-if="~['createAt', 'updateAt'].indexOf(item.prop)" v-format-time>{{ scoped.row[item.prop]}}</span>
               <!-- 其他列数据 -->
               <span v-else>{{ scoped.row[item.prop]}}</span>
             </slot>
@@ -42,6 +44,7 @@
       :page-sizes="[5, 10, 20, 30]"
       :background="true"
       :total="totalCount"
+      @size-change="handleSizeChange"
       small
     />
   </div>
@@ -49,28 +52,37 @@
 
 <script lang="ts" setup>
 import TableOperate from './tableOperate.vue'
-import { ref, computed, watch, nextTick } from 'vue';
+import { ref, computed, watch, watchEffect, nextTick, onMounted } from 'vue';
 import { useSystemStore } from "@/stores/modules/system";
 import { storeToRefs } from 'pinia';
 import { ElTable } from 'element-plus';
-import { IQueryInfo } from '@/views/Main/system/user/userViewType';
+import { IUserResType, IQueryInfo } from '@/views/Main/system/user/userViewType';
+import { useEventbus } from '@/utils/mitt';
 import type { ITableHeader, IPageInfo } from './pageTableTypes'
 import type { ISystemListData } from "@/service/system/systemAPIType";
 
 const props = withDefaults(defineProps<{
   headerData?: ITableHeader[],
   tableData?: ISystemListData[],
-  totalCount?: number
+  pageName: string,
 }>(), {
   headerData: ()=> ([]),
   tableData: ()=> ([]),
-  totalCount: 0
 })
 const emit = defineEmits<{
   (e: "currentChange", queryInfo: IQueryInfo): void;
 }>();
 const systemStore = useSystemStore();
 const { tableLoading } = storeToRefs(systemStore);
+const { refreshTable } = useEventbus()
+// 分页请求数据
+const resPageData = ref<IUserResType>({
+  pageName: props.pageName,
+  queryInfo: {
+    offset: 0,
+    size: 5,
+  },
+});
 const tableRef = ref<InstanceType<typeof ElTable>>();
 // 多选时选择的行
 const selectRow = ref<ITableHeader[]>([])
@@ -84,10 +96,17 @@ const queryInfo = computed(()=> ({
   offset: (pageInfo.value.currentPage - 1) * pageInfo.value.pageSize,
   size: pageInfo.value.pageSize
 }))
+// 数据总条数
+const totalCount = computed<any>(()=> systemStore[`${props.pageName}Count` as keyof typeof systemStore])
 // 默认显示的列(不包含多选和序号)
 const checksCol = ref<string[]>(props.headerData.filter(item=> !item.type).map(item=> item.prop))
 // 行密度
 const rowDensity = ref<string>("el-table--default")
+
+// 请求页面数据
+const getTableList = () => {
+  systemStore.getPageListActions(resPageData.value);
+}
 /* 行密度改变事件 */
 const handleRowDensity = (density: string)=>{
   rowDensity.value = `el-table--${density}`
@@ -135,10 +154,7 @@ const toggleSelection = () => {
     }
   })
 }
-/* 分页数据改变 发出queryInfo */
-watch(queryInfo, (newV)=> {
-  emit('currentChange', newV)
-})
+
 /* tableData数据改变，记录选中的行 */
 watch(()=> props.tableData, ()=>{
   nextTick(()=>{
@@ -146,11 +162,24 @@ watch(()=> props.tableData, ()=>{
   })
 })
 
+/* 分页数据改变请求数据 */
+watchEffect(()=>{
+  resPageData.value.queryInfo = queryInfo.value
+  getTableList()
+})
+
+/* 刷新列表 */
+onMounted(() => {
+  refreshTable(()=>{
+    getTableList()
+  })
+})
+
 const handleCurrentChange = ()=>{
   // emit('currentChange', queryInfo.value)
 }
 const handleSizeChange = () => {
-  // emit('currentChange', queryInfo.value)
+  pageInfo.value.currentPage = 1
 }
 </script>
 

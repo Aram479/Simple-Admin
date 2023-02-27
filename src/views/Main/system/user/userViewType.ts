@@ -1,5 +1,5 @@
 export interface IUserResType {
-  pageUrl: string;
+  pageName: string;
   queryInfo: IQueryInfo;
 }
 export interface IQueryInfo {
