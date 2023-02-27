@@ -25,6 +25,7 @@ import { useEventbus } from '@/utils/mitt';
 import { formConfig } from "./config/searchConfig";
 import { tableConfig } from './config/tableConfig';
 import type { IUserResType, IQueryInfo } from "./userViewType";
+
 const { refreshTable } = useEventbus()
 const systemStore = useSystemStore();
 const { userTableData, totalCount } = storeToRefs(systemStore);

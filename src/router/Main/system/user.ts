@@ -4,5 +4,5 @@ export default {
   name: 'user',
   component: user,
   children: [],
-  meta: { name: '用户管理', icon: '' },
+  meta: { name: '用户管理', icon: '', isNProgress: true },
 }

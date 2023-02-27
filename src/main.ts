@@ -6,7 +6,8 @@ import { setupStore } from './stores/store';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import directives from '@/directives/directives'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-
+// 导入 nprogress样式
+import 'nprogress/nprogress.css';
 import '@/router/routeGuard'
 import '@/assets/css/tailwindcss/tailwindcss.css'
 import '@/assets/css/index.scss'

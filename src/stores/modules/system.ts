@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import { systemState } from "../modulesType/systemType";
 import { getPageListData } from "../../service/system/systemAPI";
 import type { IUserResType } from "@/views/Main/system/user/userViewType";
-import * as _ from 'lodash';
 export const useSystemStore = defineStore("system", {
   state: (): systemState => ({
     userTableData: [],
@@ -18,7 +17,6 @@ export const useSystemStore = defineStore("system", {
       setTimeout(()=>{
         this.tableLoading = false
       }, 500)
-      
     },
   },
   getters: {},

@@ -2,7 +2,7 @@ import zpRequest from "../service";
 import type { IQueryInfo } from "@/views/Main/system/user/userViewType";
 import type { IDataResult } from '../serviceType';
 import type { ISystemDataType } from "./systemAPIType";
-enum loginAPI {
+enum systemAPI {
   LoginUrl = "/login",
   LoginUserInfo = '/users/',
   UserMenus = '/role/'
@@ -12,5 +12,6 @@ export function getPageListData(url: string, queryInfo: IQueryInfo) {
   return zpRequest.post<IDataResult<ISystemDataType>>({
     url: url,
     data: queryInfo,
+    isLoading: true
   });
 }

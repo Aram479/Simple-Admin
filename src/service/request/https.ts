@@ -2,6 +2,8 @@ import axios from "axios";
 import type { AxiosInstance } from "axios";
 import type { ZPRequestInterceptors, ZPRequestConfig } from "./types";
 import { showLoading, hideLoading } from "./loading"; //封装loading组件
+// 导入 nprogress模块
+import NProgress from 'nprogress';
 const DEAFULT_LOADING = false; //设置常量默认值,显示关闭loading
 
 class ZPRequest {
@@ -31,7 +33,8 @@ class ZPRequest {
       (config) => {
         //若isLoading为true则显示loading组件
         if (this.isLoading === true) {
-          showLoading();
+          // showLoading();
+          NProgress.start()
         }
         return config;
       },
@@ -44,6 +47,7 @@ class ZPRequest {
         const data = res.data;
         //当响应成功时停止loading组件
         hideLoading();
+        NProgress.done()
         //拦截错误信息
         if (!data || data.returnCode === "-1001") {
           console.log("请求失败,错误信息");
@@ -85,6 +89,7 @@ class ZPRequest {
           this.isLoading = DEAFULT_LOADING; //响应成功结束后改回默认值
           resolve(res);
           hideLoading();
+          NProgress.done()
         })
         .catch((err) => {
           this.isLoading = DEAFULT_LOADING; //响应失败结束后改回默认值
@@ -111,10 +116,12 @@ class ZPRequest {
   /* 链式调用 */
   all<T = any>(funcArr: Promise<T>[], config?: ZPRequestConfig<T>): Promise<T[]> {
     if(config?.isLoading){
-      showLoading()
+      // showLoading()
+      NProgress.start()
     }
     return axios.all<T>(funcArr).then((...res)=>{
       hideLoading()
+      NProgress.done()      
       /* 调用完毕时允许loading */
       this.isLoading = DEAFULT_LOADING
       return res[0]

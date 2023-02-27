@@ -33,7 +33,7 @@ export const DynamicRoutes: RouteRecordRaw[] = [
       path: '/main',
       name: 'Main',
       component: Main,
-      meta:{name: '首页', icon: 'HomeFilled'}
+      meta:{name: '首页', icon: 'HomeFilled', isNProgress: true}
     }]
   },
 ];

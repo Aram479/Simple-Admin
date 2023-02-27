@@ -1,8 +1,8 @@
 import router from '.';
+import { storeToRefs } from 'pinia';
 import { useLoginStore } from '@/stores/modules/loginStore';
 import localCache from '@/utils/cache';
-import { storeToRefs } from 'pinia';
-router.beforeEach((to,form)=>{
+router.beforeEach((to, form)=>{
   const loginStore = useLoginStore()
   const { permissionList } = storeToRefs(loginStore)
   const token = localCache.getItem('token')

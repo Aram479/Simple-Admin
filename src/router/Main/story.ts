@@ -6,5 +6,5 @@ export default {
   children: getImportMetaRoute(
     import.meta.glob("./story/*.ts", { eager: true, import: "default" })
   ),
-  meta: { name: '随便聊聊', icon: 'ChatDotRound' },
+  meta: { name: '随便聊聊', icon: 'ChatDotRound', isNProgress: true },
 };
