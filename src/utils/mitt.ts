@@ -3,23 +3,23 @@ import mitt, {EventType} from "mitt";
 
 const emitter = mitt();
 
-function emit<K = string, T = any>(eventName: K extends EventType ? K : EventType, data?: T) {
+function emitBus<K = string, T = any>(eventName: K extends EventType ? K : EventType, data?: T) {
   emitter.emit(eventName, data);
 }
 
-function on<K = string, T = any>(eventName: K extends EventType ? K : EventType, callback: (data: T) => void)  {
-  emitter.on(eventName, (res) => callback(res));
+function onBus<K = string, T = any>(eventName: K extends EventType ? K : EventType, callback: (data: T) => void)  {
+  emitter.on(eventName, (res: any) => callback(res));
 };
 
 /**
  * @description: 通知刷新表格数据
  */
-const toRefreshTable = () => {
-  emitter.emit("refreshTable");
+const toRefreshTable = (data?: any) => {
+  emitter.emit("refreshTable", data);
 };
 
-const refreshTable = (callback: () => void) => {
-  emitter.on("refreshTable", () => callback());
+const refreshTable = (callback: (data?: any) => void) => {
+  emitter.on("refreshTable", (res) => callback(res));
 };
 
 /**
@@ -33,8 +33,8 @@ function eventbuss() {
   });
 
   return {
-    emit,
-    on,
+    emitBus,
+    onBus,
     toRefreshTable,
     refreshTable,
   };

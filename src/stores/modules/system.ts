@@ -36,10 +36,10 @@ export const useSystemStore = defineStore("system", {
       const pageUrl = `/${pageName}/list`
       this.tableLoading = true
       const { data } = await getPageListData(pageUrl, queryInfo);
-      console.log(data.list)
       const setStr = (_.capitalize(pageName) as 'Users' | 'Role' | 'Department' | 'Menu')
-      //根据pageName调用不同存储方法  capitalize 首字母大写
-      this[`set${setStr}List`](data.list, data.totalCount)
+      //根据pageName调用不同存储方法  capitalize 首字母大写   data.totalCount 可能为undifine 因为menu没有
+      this[`set${setStr}List`](data.list, data.totalCount ?? 0)
+      console.log(data)
       setTimeout(()=>{
         this.tableLoading = false
       }, 500)

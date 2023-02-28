@@ -1,12 +1,12 @@
 <template>
   <div class="searchForm">
     <div class="search-box">
-      <el-form :model="form" :label-width="labelWidth">
+      <el-form ref="formRef" :model="form" :label-width="labelWidth">
         <el-row :gutter="24">
           <!-- 搜索表单 -->
           <template v-for="item in formItems" :key="item.label">
             <el-col :span="6" v-bind="colSpan">
-              <el-form-item :label="item.label" :prop="item.prop">
+              <el-form-item :label="item.label" :prop="item.field">
                 <!-- 输入框 -->
                 <template v-if="item.type === 'input'">
                   <el-input v-model="form[item.field]" :placeholder="item.placeholder" :prefix-icon="item.prefixIcon" :suffix-icon="item.suffixIcon"
@@ -30,7 +30,7 @@
           <div class="options-box">
             <el-col class="option" :span="24">
               <el-button icon="Search" type="primary" @click="handleSearch">搜索</el-button>
-              <el-button icon="Refresh">重置</el-button>
+              <el-button icon="Refresh" @click="handleReset">重置</el-button>
             </el-col>
           </div>
         </el-row>
@@ -41,8 +41,11 @@
 
 <script lang="ts" setup>
 import { AnyAaaaRecord } from "dns";
-import { ref, reactive } from "vue";
-import { ISearchForm, ISearchItem, IColSpan, Iform } from './searchFormTypes';
+import { FormInstance } from "element-plus";
+import { ref, reactive, onMounted } from "vue";
+import { useEventbus } from '@/utils/mitt';
+import type { ISearchForm, ISearchItem, IColSpan, Iform } from './searchFormTypes';
+
 const props = withDefaults(defineProps<{
   formItems: ISearchItem[] // 表单item
   colSpan?: IColSpan,
@@ -58,14 +61,24 @@ const props = withDefaults(defineProps<{
   }),
   labelWidth: '80px'
 })
+const emit = defineEmits<{
+  (e: "handleSearchForm", form: Iform): void;
+}>();
+const { toRefreshTable, onBus } = useEventbus()
+const formRef = ref<FormInstance>()
 const form = ref<Iform>({})
 for (const item of props.formItems) {
   form.value[item.field] = ''
 }
-console.log(form.value)
 const handleSearch = ()=> {
   console.log(form.value)
+  emit('handleSearchForm', form.value)
 }
+const handleReset = ()=>{
+  formRef.value?.resetFields()
+  handleSearch()
+}
+
 
 </script>
 

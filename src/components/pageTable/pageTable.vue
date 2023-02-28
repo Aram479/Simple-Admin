@@ -37,6 +37,7 @@
       </template>
     </el-table>
     <el-pagination
+      v-if="totalCount"
       class="justify-end py-5"
       layout="total, sizes, prev, pager, next, jumper"
       v-model:current-page="pageInfo.currentPage"
@@ -52,7 +53,7 @@
 
 <script lang="ts" setup>
 import TableOperate from './tableOperate.vue'
-import { ref, computed, watch, watchEffect, nextTick, onMounted } from 'vue';
+import { ref, toRaw, computed, watch, watchEffect, nextTick, onMounted } from 'vue';
 import { useSystemStore } from "@/stores/modules/system";
 import { storeToRefs } from 'pinia';
 import { ElTable } from 'element-plus';
@@ -60,6 +61,7 @@ import { IUserResType, IQueryInfo } from '@/views/Main/system/user/userViewType'
 import { useEventbus } from '@/utils/mitt';
 import type { ITableHeader, IPageInfo } from './pageTableTypes'
 import type { ISystemListData } from "@/service/system/systemAPIType";
+import type { Iform } from '../searchForm/searchFormTypes';
 
 const props = withDefaults(defineProps<{
   headerData?: ITableHeader[],
@@ -96,6 +98,8 @@ const queryInfo = computed(()=> ({
   offset: (pageInfo.value.currentPage - 1) * pageInfo.value.pageSize,
   size: pageInfo.value.pageSize
 }))
+
+
 // 数据总条数
 const totalCount = computed<any>(()=> systemStore[`${props.pageName}Count` as keyof typeof systemStore])
 // 默认显示的列(不包含多选和序号)
@@ -106,6 +110,10 @@ const rowDensity = ref<string>("el-table--default")
 // 请求页面数据
 const getTableList = () => {
   systemStore.getPageListActions(resPageData.value);
+}
+/* 设置页面搜索数据 */
+const setSearchVale = (searchValue: Iform)=> {
+  resPageData.value.queryInfo = {...queryInfo.value, ...searchValue}
 }
 /* 行密度改变事件 */
 const handleRowDensity = (density: string)=>{
@@ -164,7 +172,8 @@ watch(()=> props.tableData, ()=>{
 
 /* 分页数据改变请求数据 */
 watchEffect(()=>{
-  resPageData.value.queryInfo = queryInfo.value
+  // resPageData.value.queryInfo 带有搜索数据
+  resPageData.value.queryInfo = {... resPageData.value.queryInfo, ...queryInfo.value}
   getTableList()
 })
 
@@ -181,6 +190,10 @@ const handleCurrentChange = ()=>{
 const handleSizeChange = () => {
   pageInfo.value.currentPage = 1
 }
+
+defineExpose({
+  setSearchVale
+})
 </script>
 
 <style lang="scss" scoped>

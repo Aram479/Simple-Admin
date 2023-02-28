@@ -4,46 +4,41 @@ import type { ISearchFormConfig } from "@/components/searchForm/searchFormTypes"
 export const searchConfig = reactive<ISearchFormConfig>({
   formItems: [
     {
-      field: 'userName',
+      field: 'name',
       type: 'input',
       label: "用户名",
-      prop: "form.userName",
       placeholder: "请输入用户名",
     },
     {
-      field: 'password',
+      field: 'realname',
       type: 'input',
-      label: "密码",
-      prop: "form.password",
-      placeholder: "请输入密码",
+      label: '真实姓名',
+      placeholder: '请输入真实姓名'
     },
     {
-      field: 'id',
+      field: 'cellphone',
       type: 'input',
-      label: "根据ID",
-      prop: "form.id",
-      placeholder: "请输入根据ID",
+      label: '电话号码',
+      placeholder: '请输入电话号码'
     },
     {
-      field: 'open',
+      field: 'enable',
       type: 'select',
-      label: "是否开启",
-      prop: "form.open",
-      placeholder: "请输入是否开启",
+      label: "用户状态",
+      placeholder: "请选择用户状态",
       options: [{
-        value: 'open',
+        value: 1,
         label: '开启',
       },
       {
-        value: 'close',
+        value: 0,
         label: '关闭',
       }]
     },
     {
-      field: 'createDate',
+      field: 'createAt',
       type: 'datepicker',
       label: "选择日期",
-      prop: "form.open",
       placeholder: '选择时间',
       dateOptions: {
         type: 'daterange',

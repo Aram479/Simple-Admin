@@ -6,22 +6,23 @@ export const searchConfig = reactive<ISearchFormConfig>({
     {
       field: 'name',
       type: 'input',
-      label: "角色名称",
-      prop: "form.name",
-      placeholder: "请输入角色名",
+      label: '部门名称',
+      prop: "name",
+      placeholder: '请输入部门名称',
+      rules: []
     },
     {
-      field: 'intro',
+      field: 'leader',
       type: 'input',
-      label: "权限介绍",
-      prop: "form.intro",
-      placeholder: "请输入权限介绍",
+      label: '部门领导',
+      placeholder: '请输入部门领导',
+      rules: []
     },
     {
-      field: 'createDate',
+      field: 'createAt',
       type: 'datepicker',
       label: "选择日期",
-      prop: "form.open",
+      prop: "open",
       placeholder: '选择时间',
       dateOptions: {
         type: 'daterange',

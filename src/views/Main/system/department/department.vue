@@ -1,7 +1,7 @@
 <template>
   <div class="department">
-    <SearchForm v-bind="searchConfig" />
-    <PageTable v-bind="tableConfig" pageName="department" :tableData="departmentList" ></PageTable>
+    <SearchForm v-bind="searchConfig" @handleSearchForm="handleSearchForm" />
+    <PageTable ref="tableRef" v-bind="tableConfig" pageName="department" :tableData="departmentList" ></PageTable>
   </div>
 </template>
 
@@ -12,8 +12,10 @@ import { useSystemStore } from "@/stores/modules/system";
 import { storeToRefs } from "pinia";
 import { searchConfig } from "./config/searchConfig";
 import { tableConfig } from './config/tableConfig';
+import { useSearchForm } from "@/hooks/systemHook";
 const systemStore = useSystemStore();
 const { departmentList } = storeToRefs(systemStore);
+const { tableRef, handleSearchForm } = useSearchForm()
 </script>
 
 <style lang="scss" scoped></style>

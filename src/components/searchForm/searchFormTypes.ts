@@ -5,13 +5,15 @@ export interface ISearchFormConfig {
   colSpan?: IColSpan;
 }
 export interface Iform {
-  intro?: string,
-  name?: string
-  userName?: string,
-  password?: string,
-  id?: string,
-  open?: string,
-  createDate?: any,
+  intro?: string;
+  name?: string;
+  userName?: string;
+  realname?: string;
+  id?: string;
+  cellphone?: string;
+  enable?: string;
+  leader?: string;
+  createAt?: any;
 }
 export type ISearchForm = Record<string, any>;
 export interface ISearchItem {
@@ -25,6 +27,7 @@ export interface ISearchItem {
   suffixIcon?: string;
   // 针对select
   options?: Option[];
+  rules?: any[];
   // 针对 DatePicker
   dateOptions?: {
     type?: string;
