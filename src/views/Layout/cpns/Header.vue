@@ -1,6 +1,6 @@
 <template>
   <div class='Header h-full'>
-    <div class="header-box h-full">
+    <div class="header-box h-full pl-5">
       <div class="header-left h-full flex items-center justify-between float-left">
         <!-- 面包屑 -->
         <el-breadcrumb separator="/">

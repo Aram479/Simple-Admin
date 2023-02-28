@@ -5,7 +5,7 @@ declare module "vue-router" {
     title?: string;
     name?: string;
     icon?: string;
-    isNProgress?: boolean // 页面是否需要加载进度条
+    noRequest?: boolean // 页面是否没有接口请求
   }
 }
 declare module "*.mjs"

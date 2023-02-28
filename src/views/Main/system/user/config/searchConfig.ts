@@ -1,7 +1,7 @@
 import { reactive } from "vue";
 import type { ISearchFormConfig } from "@/components/searchForm/searchFormTypes";
 
-export const formConfig = reactive<ISearchFormConfig>({
+export const searchConfig = reactive<ISearchFormConfig>({
   formItems: [
     {
       field: 'userName',

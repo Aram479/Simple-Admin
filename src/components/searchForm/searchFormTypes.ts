@@ -5,15 +5,17 @@ export interface ISearchFormConfig {
   colSpan?: IColSpan;
 }
 export interface Iform {
+  intro?: string,
+  name?: string
   userName?: string,
   password?: string,
   id?: string,
   open?: string,
-  createDate?: any
+  createDate?: any,
 }
 export type ISearchForm = Record<string, any>;
 export interface ISearchItem {
-  // 必传项，使用搜索 必须要有model值
+  // field必传项，使用搜索 必须要有model值
   field: keyof Iform;
   type?: string;
   label?: string;

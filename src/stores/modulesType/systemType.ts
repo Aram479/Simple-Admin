@@ -4,8 +4,8 @@ export interface systemState {
   usersCount: number,
   roleList: any[],
   roleCount: number,
-  goodsList: any[],
-  goodsCount: number,
+  departmentList: any[],
+  departmentCount: number,
   menuList: any[],
   menuCount: number,
   tableLoading: boolean

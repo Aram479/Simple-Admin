@@ -9,8 +9,8 @@ export const useSystemStore = defineStore("system", {
     usersCount: 0,
     roleList: [],
     roleCount: 0,
-    goodsList: [],
-    goodsCount: 0,
+    departmentList: [],
+    departmentCount: 0,
     menuList: [],
     menuCount: 0,
     tableLoading: true,
@@ -24,9 +24,9 @@ export const useSystemStore = defineStore("system", {
       this.roleList = roleList
       this.roleCount = total
     },
-    setGoodsList(goodsList: any[], total: number) {
-      this.goodsList = goodsList
-      this.goodsCount = total
+    setDepartmentList(departmentList: any[], total: number) {
+      this.departmentList = departmentList
+      this.departmentCount = total
     },
     setMenuList(menuList: any[], total: number) {
       this.menuList = menuList
@@ -37,7 +37,7 @@ export const useSystemStore = defineStore("system", {
       this.tableLoading = true
       const { data } = await getPageListData(pageUrl, queryInfo);
       console.log(data.list)
-      const setStr = (_.capitalize(pageName) as 'Users' | 'Role' | 'Goods' | 'Menu')
+      const setStr = (_.capitalize(pageName) as 'Users' | 'Role' | 'Department' | 'Menu')
       //根据pageName调用不同存储方法  capitalize 首字母大写
       this[`set${setStr}List`](data.list, data.totalCount)
       setTimeout(()=>{

@@ -4,5 +4,5 @@ export default {
   name: 'goods',
   component: goods,
   children: [],
-  meta: { name: '商品信息', icon: '', isNProgress: true },
+  meta: { name: '商品信息', icon: ''  },
 }

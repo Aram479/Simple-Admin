@@ -4,5 +4,5 @@ export default {
   name: 'overview',
   component: overview,
   children: [],
-  meta: { name: '商品统计', icon: '', isNProgress: true },
+  meta: { name: '商品统计', icon: ''  },
 }

@@ -2,15 +2,42 @@ export interface ISystemDataType {
   list: ISystemListData[];
   totalCount: number;
 }
-
-export interface ISystemListData {
-  cellphone?: number;
-  createAt?: string;
-  departmentId?: number;
-  enable?: number;
+interface ISystemPublic {
   id?: number;
   name?: string;
-  realname?: string;
-  roleId?: number;
+  createAt?: string;
   updateAt?: string;
 }
+interface IUsersList extends ISystemPublic {
+  cellphone?: number;
+  departmentId?: number;
+  enable?: number;
+  realname?: string;
+  roleId?: number;
+}
+interface IRoleList extends ISystemPublic {
+  intro: string,
+  menuList: any[]
+}
+interface IGoodsList extends ISystemPublic {
+  children: any[]
+  icon: string
+  sort: number
+  type: number
+  url: string
+}
+interface IMenuList extends ISystemPublic {
+  children: any[]
+  icon: string
+  sort: number
+  type: number
+  url: string
+}
+interface IDepartmentList extends ISystemPublic{
+
+leader: string
+
+parentId: number
+
+}
+export type ISystemListData = IUsersList | IRoleList | IDepartmentList | IMenuList

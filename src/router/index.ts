@@ -10,7 +10,8 @@ const router = createRouter({
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Login,
+      meta:{ noRequest: true }
     },
     {
       path: "/403",
@@ -33,7 +34,7 @@ export const DynamicRoutes: RouteRecordRaw[] = [
       path: '/main',
       name: 'Main',
       component: Main,
-      meta:{name: '首页', icon: 'HomeFilled', isNProgress: true}
+      meta:{name: '首页', icon: 'HomeFilled', noRequest: true }
     }]
   },
 ];

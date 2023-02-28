@@ -60,8 +60,9 @@ const props = withDefaults(defineProps<{
 })
 const form = ref<Iform>({})
 for (const item of props.formItems) {
-  if(item.field) form.value[item.field] = ''
+  form.value[item.field] = ''
 }
+console.log(form.value)
 const handleSearch = ()=> {
   console.log(form.value)
 }

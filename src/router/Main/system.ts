@@ -6,5 +6,5 @@ export default {
   children: getImportMetaRoute(
     import.meta.glob("./system/*.ts", { eager: true, import: "default" })
   ),
-  meta: { name: '系统管理', icon: 'Setting', isNProgress: true },
+  meta: { name: '系统管理', icon: 'Setting'  },
 };

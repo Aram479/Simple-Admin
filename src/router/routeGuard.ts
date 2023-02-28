@@ -2,7 +2,9 @@ import router from '.';
 import { storeToRefs } from 'pinia';
 import { useLoginStore } from '@/stores/modules/loginStore';
 import localCache from '@/utils/cache';
+import NProgress from 'nprogress';
 router.beforeEach((to, form)=>{
+  NProgress.start()
   const loginStore = useLoginStore()
   const { permissionList } = storeToRefs(loginStore)
   const token = localCache.getItem('token')
@@ -17,4 +19,7 @@ router.beforeEach((to, form)=>{
   } else if(to.path === '/login' && token) {
     return form.fullPath
   }
+})
+router.afterEach((to)=>{
+  if(to.meta.noRequest) NProgress.done()
 })

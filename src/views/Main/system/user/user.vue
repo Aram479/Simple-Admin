@@ -1,6 +1,6 @@
 <template>
   <div class="user">
-    <SearchForm v-bind="formConfig" />
+    <SearchForm v-bind="searchConfig" />
     <PageTable v-bind="tableConfig" pageName="users" :tableData="usersList">
       <template #enable="scope">
         <el-tag :type="scope.row.enable ? 'success': 'danger'">{{ scope.row.enable ? '启用': '禁用' }}</el-tag>
@@ -21,8 +21,7 @@ import PageTable from "@/components/pageTable/pageTable.vue";
 import { ref, onMounted, watchEffect } from 'vue';
 import { storeToRefs } from "pinia";
 import { useSystemStore } from "@/stores/modules/system";
-import { useEventbus } from '@/utils/mitt';
-import { formConfig } from "./config/searchConfig";
+import { searchConfig } from "./config/searchConfig";
 import { tableConfig } from './config/tableConfig';
 
 const systemStore = useSystemStore();

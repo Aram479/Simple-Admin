@@ -4,5 +4,5 @@ export default {
   name: 'dashboard',
   component: dashboard,
   children: [],
-  meta: { name: '核心技术', icon: '', isNProgress: true },
+  meta: { name: '核心技术', icon: ''  },
 }
