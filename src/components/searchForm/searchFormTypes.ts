@@ -10,9 +10,12 @@ export interface Iform {
   userName?: string;
   realname?: string;
   id?: string;
+  status?: string;
   cellphone?: string;
   enable?: string;
   leader?: string;
+  address?: string,
+  updateAt?: string,
   createAt?: any;
 }
 export type ISearchForm = Record<string, any>;

@@ -56,8 +56,10 @@ import { CheckedInfo } from "element-plus/es/components/tree-v2/src/types";
 import { useRoute, RouteMeta } from 'vue-router';
 const props = withDefaults(defineProps<{
   headerData: ITableHeader[],
+  tableName?: string
 }>(), {
   headerData: ()=> ([]),
+  tableName: ''
 })
 const emit = defineEmits<{
   (e: "handleRowDensity", density: string): void;
@@ -66,11 +68,6 @@ const emit = defineEmits<{
 const route = useRoute()
 // 刷新表格
 const { toRefreshTable } = useEventbus();
-// 当前页标题
-const tableName = computed(()=>{
-  let name = ref(route.meta.name)
-  return name.value?.replace('管理', '')
-})
 // 选择的行密度
 const dropdownActive = ref<string>('default')
 // 默认树形选择节点

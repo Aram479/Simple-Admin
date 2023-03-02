@@ -2,6 +2,7 @@ import type { ISystemListData } from "@/service/system/systemAPIType";
 export interface ITableConfig {
   headerData?: ITableHeader[];
   tableData?: ISystemListData[];
+  tableName?: string
 }
 
 export interface ITableHeader {

@@ -13,4 +13,5 @@ export const tableConfig = reactive<ITableConfig>({
     { prop: "updateAt", label: "更新时间", minWidth: "80", slotName: "updateAt" },
     { prop: "options", label: "操作", minWidth: "80", slotName: "options" },
   ],
+  tableName: '用户'
 });

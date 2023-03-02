@@ -1,8 +1,8 @@
 <template>
   <div class="pageTable">
-    <TableOperate @handleRowDensity="handleRowDensity" @handleTreeChange="handleTreeChecks" :headerData="headerData" />
+    <TableOperate @handleRowDensity="handleRowDensity" @handleTreeChange="handleTreeChecks" :headerData="headerData" v-bind="$attrs" />
     <el-table ref="tableRef" v-if="checksCol.length" :header-row-class-name="rowDensity" :cell-class-name="rowDensity" v-loading="tableLoading" :data="tableData" border @select="handleSelectChange" @select-all="handleSelectChange">
-      <template v-for="(item, index) in headerData" :key="item.prop" >
+      <template v-for="(item, index) in headerData" :key="item.prop">
         <el-table-column v-if="checksCol.indexOf(item.prop) !== -1" align="center" :type="item.type" :prop="item.prop" :label="item.label" :min-width="item.minWidth">
           <!-- 不能在多选插槽赋值 多选的样式是用element的 -->
           <template #default="scoped" v-if="item.type !== 'selection'">
@@ -27,10 +27,12 @@
               </div>
               <!-- 序号列 -->
               <div v-else-if="item.prop === 'index'">{{ (totalCount + 1) - scoped.row.id > 0 ? (totalCount + 1) - scoped.row.id : index }}</div>
+              <!-- 图片列 -->
+              <div v-else-if="item.prop === 'imgUrl'"><el-image fit="contain" :src="scoped.row.imgUrl" :previewSrcList="[scoped.row.imgUrl]" preview-teleported style="width: 90px; height: 90px" /></div>
               <!-- 时间列 -->
               <span v-else-if="~['createAt', 'updateAt'].indexOf(item.prop)" v-format-time>{{ scoped.row[item.prop]}}</span>
               <!-- 其他列数据 -->
-              <span v-else>{{ scoped.row[item.prop]}}</span>
+              <span v-else class="truncate cursor-default" :title="scoped.row[item.prop]">{{ scoped.row[item.prop]}}</span>
             </slot>
           </template>
         </el-table-column>

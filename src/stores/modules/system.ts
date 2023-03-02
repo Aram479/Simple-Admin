@@ -13,6 +13,8 @@ export const useSystemStore = defineStore("system", {
     departmentCount: 0,
     menuList: [],
     menuCount: 0,
+    goodsList: [],
+    goodsCount: 0,
     tableLoading: true,
   }),
   actions: {
@@ -24,19 +26,23 @@ export const useSystemStore = defineStore("system", {
       this.roleList = roleList
       this.roleCount = total
     },
+    setMenuList(menuList: any[], total: number) {
+      this.menuList = menuList
+      this.menuCount = total
+    },
     setDepartmentList(departmentList: any[], total: number) {
       this.departmentList = departmentList
       this.departmentCount = total
     },
-    setMenuList(menuList: any[], total: number) {
-      this.menuList = menuList
-      this.menuCount = total
+    setGoodsList(goodsList: any[], total: number) {
+      this.goodsList = goodsList
+      this.goodsCount = total
     },
     async getPageListActions({pageName, queryInfo}: IUserResType) {
       const pageUrl = `/${pageName}/list`
       this.tableLoading = true
       const { data } = await getPageListData(pageUrl, queryInfo);
-      const setStr = (_.capitalize(pageName) as 'Users' | 'Role' | 'Department' | 'Menu')
+      const setStr = (_.capitalize(pageName) as 'Users' | 'Role' | 'Department' | 'Menu' | 'Goods')
       //根据pageName调用不同存储方法  capitalize 首字母大写   data.totalCount 可能为undifine 因为menu没有
       this[`set${setStr}List`](data.list, data.totalCount ?? 0)
       console.log(data)

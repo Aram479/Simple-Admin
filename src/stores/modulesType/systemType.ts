@@ -8,5 +8,7 @@ export interface systemState {
   departmentCount: number,
   menuList: any[],
   menuCount: number,
+  goodsList: any[],
+  goodsCount: number,
   tableLoading: boolean
 }
