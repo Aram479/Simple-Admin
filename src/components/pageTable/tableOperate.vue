@@ -97,8 +97,9 @@ const treeArr = ref<ITreeData[]>([
     children: [],
   },
 ])
+
 treeArr.value[0].children = props.headerData.map((item, index)=> (item.id = treeArr.value[0].id + (index + 1)) ? item : ({} as ITableHeader ))
-defaultCheck.value = treeArr.value[0].children.filter(item => !item.type).map(item=> item.id)
+defaultCheck.value = treeArr.value[0].children.filter(item => item.isShow || !item.type).map(item=> item.id)
 
 /* 刷新表格事件 */
 const handleReTable = () => {

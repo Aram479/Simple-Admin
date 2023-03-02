@@ -1,7 +1,18 @@
 <template>
   <div class="pageTable">
     <TableOperate @handleRowDensity="handleRowDensity" @handleTreeChange="handleTreeChecks" :headerData="headerData" v-bind="$attrs" />
-    <el-table ref="tableRef" v-if="checksCol.length" :header-row-class-name="rowDensity" :cell-class-name="rowDensity" v-loading="tableLoading" :data="tableData" border @select="handleSelectChange" @select-all="handleSelectChange">
+    <el-table 
+      ref="tableRef" 
+      v-if="checksCol.length" 
+      v-bind="elTableProps"
+      :header-row-class-name="rowDensity" 
+      :cell-class-name="rowDensity" 
+      v-loading="tableLoading" 
+      :data="tableData" 
+      border 
+      @select="handleSelectChange" 
+      @select-all="handleSelectChange"
+    >
       <template v-for="(item, index) in headerData" :key="item.prop">
         <el-table-column v-if="checksCol.indexOf(item.prop) !== -1" align="center" :type="item.type" :prop="item.prop" :label="item.label" :min-width="item.minWidth">
           <!-- 不能在多选插槽赋值 多选的样式是用element的 -->
@@ -30,9 +41,9 @@
               <!-- 图片列 -->
               <div v-else-if="item.prop === 'imgUrl'"><el-image fit="contain" :src="scoped.row.imgUrl" :previewSrcList="[scoped.row.imgUrl]" preview-teleported style="width: 90px; height: 90px" /></div>
               <!-- 时间列 -->
-              <span v-else-if="~['createAt', 'updateAt'].indexOf(item.prop)" v-format-time>{{ scoped.row[item.prop]}}</span>
+              <span v-else-if="~['createAt', 'updateAt'].indexOf(item.prop)" v-format-time>{{ scoped.row[item.prop] }}</span>
               <!-- 其他列数据 -->
-              <span v-else class="truncate cursor-default" :title="scoped.row[item.prop]">{{ scoped.row[item.prop]}}</span>
+              <span v-else class="truncate cursor-default" :title="scoped.row[item.prop]">{{ scoped.row[item.prop] ?? '暂无数据' }}</span>
             </slot>
           </template>
         </el-table-column>
@@ -61,13 +72,14 @@ import { storeToRefs } from 'pinia';
 import { ElTable } from 'element-plus';
 import { IUserResType, IQueryInfo } from '@/views/Main/system/user/userViewType';
 import { useEventbus } from '@/utils/mitt';
-import type { ITableHeader, IPageInfo } from './pageTableTypes'
+import type { ITableHeader, IPageInfo, IElTableProps } from './pageTableTypes'
 import type { ISystemListData } from "@/service/system/systemAPIType";
 import type { Iform } from '../searchForm/searchFormTypes';
 
 const props = withDefaults(defineProps<{
   headerData?: ITableHeader[],
   tableData?: ISystemListData[],
+  elTableProps?: IElTableProps,
   pageName: string,
 }>(), {
   headerData: ()=> ([]),
@@ -101,11 +113,10 @@ const queryInfo = computed(()=> ({
   size: pageInfo.value.pageSize
 }))
 
-
 // 数据总条数
 const totalCount = computed<any>(()=> systemStore[`${props.pageName}Count` as keyof typeof systemStore])
 // 默认显示的列(不包含多选和序号)
-const checksCol = ref<string[]>(props.headerData.filter(item=> !item.type).map(item=> item.prop))
+const checksCol = ref<string[]>(props.headerData.filter(item=> item.isShow || !item.type).map(item=> item.prop))
 // 行密度
 const rowDensity = ref<string>("el-table--default")
 
@@ -164,7 +175,6 @@ const toggleSelection = () => {
     }
   })
 }
-
 /* tableData数据改变，记录选中的行 */
 watch(()=> props.tableData, ()=>{
   nextTick(()=>{
