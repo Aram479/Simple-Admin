@@ -4,5 +4,5 @@ export default {
   name: 'department',
   component: department,
   children: [],
-  meta: { name: '部门管理', icon: ''  },
+  meta: { name: '部门管理', icon: '', zhCN: '部门管理', en: 'Department Manage' },
 }

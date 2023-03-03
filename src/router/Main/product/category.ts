@@ -4,5 +4,5 @@ export default {
   name: 'category',
   component: category,
   children: [],
-  meta: { name: '商品类别', icon: ''  },
+  meta: { name: '商品类别', icon: '', zhCN: '商品类别', en: 'Commodity Category' },
 }

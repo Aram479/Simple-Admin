@@ -4,5 +4,5 @@ export default {
   name: 'chat',
   component: chat,
   children: [],
-  meta: { name: '你的故事', icon: ''  },
+  meta: { name: '你的故事', icon: '', zhCN: '你的故事', en: 'Your Story' },
 }

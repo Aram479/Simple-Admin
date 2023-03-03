@@ -7,7 +7,7 @@
           <el-icon color="black">
             <component :is="firItem.meta?.icon"></component>
           </el-icon>
-          <span>{{ firItem.meta?.name }}</span>
+          <span>{{ $t(<string>firItem.meta?.en) }}</span>
         </template>
         <SubMenu :menu="firItem.children" :routeActive="routeActive"></SubMenu>
       </el-sub-menu>
@@ -17,7 +17,7 @@
           <el-icon color="black">
             <component v-if="firItem.meta?.icon" :is="firItem.meta?.icon"></component>
           </el-icon>
-          <span>{{ firItem.meta?.name }}</span>
+          <span>{{ $t(<string>firItem.meta?.en) }}</span>
         </div>
       </el-menu-item>
     </template>

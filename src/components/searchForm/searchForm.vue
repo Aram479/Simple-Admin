@@ -29,8 +29,8 @@
           <!-- 按钮选项 -->
           <div class="options-box">
             <el-col class="option" :span="24">
-              <el-button icon="Search" type="primary" @click="handleSearch">搜索</el-button>
-              <el-button icon="Refresh" @click="handleReset">重置</el-button>
+              <el-button icon="Search" type="primary" @click="handleSearch">{{ $t('Search') }}</el-button>
+              <el-button icon="Refresh" @click="handleReset">{{ $t('Reset') }}</el-button>
             </el-col>
           </div>
         </el-row>
@@ -40,9 +40,8 @@
 </template>
 
 <script lang="ts" setup>
-import { AnyAaaaRecord } from "dns";
 import { FormInstance } from "element-plus";
-import { ref, reactive, onMounted } from "vue";
+import { ref } from "vue";
 import { useEventbus } from '@/utils/mitt';
 import type { ISearchForm, ISearchItem, IColSpan, Iform } from './searchFormTypes';
 

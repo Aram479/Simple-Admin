@@ -21,8 +21,8 @@
             <slot :name="item.slotName" :row="scoped.row">
               <!-- 操作列按钮 -->
               <div class="options-box" v-if="item.prop === 'options'">
-                <el-button type="primary" icon="EditPen" size="small">修改</el-button>
-                <el-button type="danger" icon="Delete" size="small">删除</el-button>
+                <el-button type="primary" icon="EditPen" size="small">{{ $t('Edit') }}</el-button>
+                <el-button type="danger" icon="Delete" size="small">{{ $t('Delete') }}</el-button>
                 <!-- 其他操作 -->
                 <el-dropdown class="mx-3">
                   <span class="el-dropdown-link">

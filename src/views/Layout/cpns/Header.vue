@@ -4,12 +4,12 @@
       <div class="header-left h-full flex items-center justify-between float-left">
         <!-- 面包屑 -->
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item v-for="breadItem in breadcrumbList" :to="{ path: breadItem.path || breadItem.redirect }">{{breadItem.meta.name}}</el-breadcrumb-item>
+          <el-breadcrumb-item v-for="breadItem in breadcrumbList" :to="{ path: breadItem.path || breadItem.redirect }">{{$t(<string>breadItem.meta.en)}}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
       <div class="header-right flex items-center justify-evenly h-full float-right">
         <!-- 搜索 -->
-        <div class="right-icon"><el-icon :size="iconSize"><Search /></el-icon></div>
+        <div class="right-icon" @click="searchClick"><el-icon :size="iconSize"><Search /></el-icon></div>
         <!-- 通知 -->
         <div class="right-icon w-16"><el-badge class="flex items-center" :value="12"><el-icon :size="iconSize"><Bell /></el-icon></el-badge></div>
         <!-- 语言 -->
@@ -64,21 +64,26 @@
         </div>
       </div>
     </el-drawer>
+    <!-- 搜索菜单modal -->
+    <SearchMenuModal ref="menuModal" />
   </div>
 </template>
 
 <script lang='ts' setup>
+import SearchMenuModal from '@/components/Modal/searchMenuModal/searchMenuModal.vue';
 import { reactive, ref, computed, onMounted } from 'vue';
 import { useThemesStore } from '@/stores/modules/themes';
-import type { themesType } from '@/views/Layout/LayoutViewType';
 import { useRoute, useRouter } from 'vue-router';
+import { useI18n } from "vue-i18n";
 import localCache from '@/utils/cache';
+import type { themesType } from '@/views/Layout/LayoutViewType';
 
+const { locale } = useI18n();
 const route = useRoute()
 const router = useRouter()
 const themesStore = useThemesStore()
-
-const languages = reactive([{name: '简体中文'},{name: 'English'}])
+const menuModal = ref<InstanceType<typeof SearchMenuModal>>()
+const languages = reactive([{name: '简体中文', value: 'zhCN'},{name: 'English', value: 'en'}])
 const themeColors = reactive<themesType[]>([
   {id: 'darkBlue', color: '#1b2a47'},
   {id: 'whiteTheme', color: '#fff'},
@@ -86,20 +91,30 @@ const themeColors = reactive<themesType[]>([
 ])
 const colorActive = ref(localCache.getItem('themeName') || 'darkBlue')
 const breadcrumbList = computed(()=> route.matched.slice(1))
-const langActive = ref(0)
+const langActive = ref(languages.findIndex(item=> item.value === localCache.getItem('lang')))
 const iconSize = ref(18)
 const drawerValue = ref(false)
 
+// 搜索菜单事件
+const searchClick = ()=> {
+  menuModal.value!.isModal = true
+}
+// 语言切换
 const langClick = (index: number)=>{
   langActive.value = index
+  locale.value = languages[index].value
+  localCache.setItem('lang', locale.value)
 }
+// 设置事件
 const settingClick = ()=> {
   drawerValue.value = true
 }
+// 主题色切换事件
 const colorClick = (item: themesType, index: number)=> {
   colorActive.value = item.id
   themesStore.setTheme(item.id)
 }
+// 退出
 const logoutClick = ()=> {
   localCache.clearCache()
   router.replace('/login')

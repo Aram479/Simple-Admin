@@ -4,5 +4,5 @@ export default {
   name: 'menu',
   component: menu,
   children: [],
-  meta: { name: '菜单管理', icon: ''  },
+  meta: { name: '菜单管理', icon: '', zhCN: '菜单管理', en: 'Menu Manage' },
 }

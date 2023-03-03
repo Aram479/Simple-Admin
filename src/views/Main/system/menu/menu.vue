@@ -14,7 +14,7 @@ import { tableConfig } from './config/tableConfig';
 import { useSearchForm } from "@/hooks/systemHook";
 const systemStore = useSystemStore();
 const { menuList } = storeToRefs(systemStore);
-const { tableRef, handleSearchForm } = useSearchForm()
+const { tableRef } = useSearchForm()
 </script>
 
 <style lang="scss" scoped></style>
