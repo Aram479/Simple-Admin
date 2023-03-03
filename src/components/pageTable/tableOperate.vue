@@ -130,7 +130,7 @@ const handleTreeChange = (currentData: any, tree: CheckedInfo) => {
       cursor: pointer;
       transition: color 0.2s;
       &:hover {
-        color: #79bbff;
+        color: var(--el-color-primary);
       }
     }
   }

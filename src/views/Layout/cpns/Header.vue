@@ -11,11 +11,11 @@
         <!-- 搜索 -->
         <div class="right-icon" @click="searchClick"><el-icon :size="iconSize"><Search /></el-icon></div>
         <!-- 通知 -->
-        <div class="right-icon w-16"><el-badge class="flex items-center" :value="12"><el-icon :size="iconSize"><Bell /></el-icon></el-badge></div>
+        <div class="right-icon w-16"><el-badge :value="12"><el-icon :size="iconSize"><Bell /></el-icon></el-badge></div>
         <!-- 语言 -->
         <el-dropdown trigger="click">
           <div class="icon flex items-center">
-            <el-icon :size="iconSize"><Watermelon /></el-icon>
+            <i class="iconfont icon-language text-lg"></i>
           </div>
           <template #dropdown>
             <el-dropdown-menu class="w-32">
@@ -87,7 +87,8 @@ const languages = reactive([{name: '简体中文', value: 'zhCN'},{name: 'Englis
 const themeColors = reactive<themesType[]>([
   {id: 'darkBlue', color: '#1b2a47'},
   {id: 'whiteTheme', color: '#fff'},
-  {id: 'purpleTheme', color: '#722ed1'}
+  {id: 'purpleTheme', color: '#722ed1'},
+  {id: 'matta', color: '#10b981'}
 ])
 const colorActive = ref(localCache.getItem('themeName') || 'darkBlue')
 const breadcrumbList = computed(()=> route.matched.slice(1))
@@ -133,7 +134,7 @@ onMounted(()=>{
     .right-icon, .el-dropdown {
       height: 100%;
       &:hover {
-        background-color: #f6f6f6;
+        background-color:  #f6f6f6;
       }
     }
     .right-icon {
@@ -143,6 +144,7 @@ onMounted(()=>{
       justify-content: center;
       padding: 0px 0.75rem;
       .el-badge {
+        @include flex(center, none);
         position: relative;
         z-index: 1;
       }

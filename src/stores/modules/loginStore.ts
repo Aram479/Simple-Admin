@@ -42,6 +42,7 @@ export const useLoginStore = defineStore("login", {
           this.userMenus = userMenus.data
           localCache.setItem("userInfo", this.userInfo);
           localCache.setItem("userMenus", this.userMenus);
+          localCache.setItem('lang', 'zhCN')
           router.push('/')
         }
       }

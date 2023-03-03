@@ -26,7 +26,7 @@
                 <!-- 其他操作 -->
                 <el-dropdown class="mx-3">
                   <span class="el-dropdown-link">
-                    <el-icon color="#4285f4" :size="18"><MoreFilled /></el-icon>
+                    <el-icon style="--color: var(--el-color-primary)" :size="18"><MoreFilled /></el-icon>
                   </span>
                   <template #dropdown>
                     <el-dropdown-menu>

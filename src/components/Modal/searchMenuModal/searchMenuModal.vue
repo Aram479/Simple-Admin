@@ -34,7 +34,7 @@ const { handleSearchMenu, searchList } = useSearchMenu()
 
 const isModal = ref<boolean>(false);
 const searchValue = ref<string>("");
-const activeIndex = ref<number>(-1)
+const activeIndex = ref<number>(0)
 const routeActive = computed(()=> (index: number)=> activeIndex.value === index)
 
 // 路由点击事件
@@ -71,7 +71,7 @@ defineExpose({
       border-radius: 5px;
       transition: 0.2s;
       &:hover {
-        background-color: #409eff;
+        background-color: var(--el-color-primary);
         color: white;
       }
       .route-icon {
@@ -85,7 +85,7 @@ defineExpose({
   }
 }
 .active {
-  background-color: #409eff;
+  background-color: var(--el-color-primary);
   color: white;
 }
 </style>

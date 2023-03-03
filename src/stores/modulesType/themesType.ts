@@ -7,4 +7,5 @@ export interface themeType {
   darkBlue?: string,
   whiteTheme?: string,
   purpleTheme?: string,
+  matta?: string,
 }

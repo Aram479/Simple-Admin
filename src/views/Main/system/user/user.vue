@@ -3,7 +3,7 @@
     <SearchForm v-bind="searchConfig" @handleSearchForm="handleSearchForm" />
     <PageTable ref="tableRef" v-bind="tableConfig" pageName="users" :tableData="usersList">
       <template #enable="scope">
-        <el-tag :type="scope.row.enable ? 'success': 'danger'">{{ scope.row.enable ? '启用': '禁用' }}</el-tag>
+        <el-tag effect="plain" :type="scope.row.enable ? '': 'danger'">{{ scope.row.enable ? '启用': '禁用' }}</el-tag>
       </template>
     </PageTable>
   </div>
