@@ -2,9 +2,11 @@
   <div class="tableOperate mb-4">
     <div class="title-box">{{ tableName }}管理</div>
     <div class="operate-box">
-      <div class="button-box mr-4">
-        <el-button type="primary" icon="CirclePlusFilled">新建{{ tableName }}</el-button>
-      </div>
+      <slot name="create">
+        <div class="button-box mr-4">
+          <el-button type="primary" icon="CirclePlusFilled">新建{{ tableName }}</el-button>
+        </div>
+      </slot>
       <div class="icon-box">
         <!-- 刷新 -->
         <el-icon :size="20" @click="handleReTable"><Refresh /></el-icon>
@@ -141,7 +143,7 @@ const handleTreeChange = (currentData: any, tree: CheckedInfo) => {
   $bg-color: var(--el-color-primary);
   $text-color: white;
   background-color: $bg-color;
-  color: $text-color;
+  color: $text-color !important;
   &:hover {
     background-color: $bg-color !important;
     color: $text-color !important;

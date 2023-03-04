@@ -3,7 +3,7 @@ import type { AxiosInstance } from "axios";
 import type { ZPRequestInterceptors, ZPRequestConfig } from "./types";
 import { showLoading, hideLoading } from "./loading"; //封装loading组件
 // 导入 nprogress模块
-import NProgress from 'nprogress';
+import NProgress from '@/utils/nprogress';
 const DEAFULT_LOADING = false; //设置常量默认值,显示关闭loading
 
 class ZPRequest {

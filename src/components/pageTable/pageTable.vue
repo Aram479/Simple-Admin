@@ -1,6 +1,12 @@
 <template>
   <div class="pageTable">
-    <TableOperate @handleRowDensity="handleRowDensity" @handleTreeChange="handleTreeChecks" :headerData="headerData" v-bind="$attrs" />
+    <TableOperate @handleRowDensity="handleRowDensity" @handleTreeChange="handleTreeChecks" :headerData="headerData" v-bind="$attrs">
+      <template #create>
+        <div class="button-box mr-4">
+          <el-button type="primary" icon="CirclePlusFilled" v-if="isCreate">新建{{ $attrs.tableName }}</el-button>
+        </div>
+      </template>
+    </TableOperate>
     <el-table 
       ref="tableRef" 
       v-if="checksCol.length" 
@@ -21,8 +27,8 @@
             <slot :name="item.slotName" :row="scoped.row">
               <!-- 操作列按钮 -->
               <div class="options-box" v-if="item.prop === 'options'">
-                <el-button type="primary" icon="EditPen" size="small">{{ $t('Edit') }}</el-button>
-                <el-button type="danger" icon="Delete" size="small">{{ $t('Delete') }}</el-button>
+                <el-button v-if="isUpdate" type="primary" icon="EditPen" size="small">{{ $t('Edit') }}</el-button>
+                <el-button v-if="isDelete" type="danger" icon="Delete" size="small">{{ $t('Delete') }}</el-button>
                 <!-- 其他操作 -->
                 <el-dropdown class="mx-3">
                   <span class="el-dropdown-link">
@@ -69,9 +75,10 @@ import TableOperate from './tableOperate.vue'
 import { ref, toRaw, computed, watch, watchEffect, nextTick, onMounted } from 'vue';
 import { useSystemStore } from "@/stores/modules/system";
 import { storeToRefs } from 'pinia';
-import { ElTable } from 'element-plus';
+import { ElMessage, ElTable } from 'element-plus';
 import { IUserResType, IQueryInfo } from '@/views/Main/system/user/userViewType';
 import { useEventbus } from '@/utils/mitt';
+import { userPermission } from '@/hooks/systemHook';
 import type { ITableHeader, IPageInfo, IElTableProps } from './pageTableTypes'
 import type { ISystemListData } from "@/service/system/systemAPIType";
 import type { Iform } from '../searchForm/searchFormTypes';
@@ -91,6 +98,12 @@ const emit = defineEmits<{
 const systemStore = useSystemStore();
 const { tableLoading } = storeToRefs(systemStore);
 const { refreshTable } = useEventbus()
+
+// 按钮权限 CRUD
+const isCreate = userPermission(props.pageName, 'create')
+const isUpdate = userPermission(props.pageName, 'update')
+const isDelete = userPermission(props.pageName, 'delete')
+const isRead = userPermission(props.pageName, 'query')
 // 分页请求数据
 const resPageData = ref<IUserResType>({
   pageName: props.pageName,
@@ -108,9 +121,10 @@ const pageInfo = ref<IPageInfo>({
   pageSize: 5
 })
 // 分页请求数据
-const queryInfo = computed(()=> ({
+const queryInfo = computed(()=> (searchData?:Iform)=> ({
   offset: (pageInfo.value.currentPage - 1) * pageInfo.value.pageSize,
-  size: pageInfo.value.pageSize
+  size: pageInfo.value.pageSize,
+  ...searchData
 }))
 
 // 数据总条数
@@ -121,12 +135,18 @@ const checksCol = ref<string[]>(props.headerData.filter(item=> item.isShow || !i
 const rowDensity = ref<string>("el-table--default")
 
 // 请求页面数据
-const getTableList = () => {
+const getTableList = (searchValue?: Iform) => {
+  if(!isRead) return 
+  // 获取监听搜索数据
+  tableSearchValue.value = searchValue
+  resPageData.value.queryInfo = queryInfo.value(searchValue)
   systemStore.getPageListActions(resPageData.value);
 }
+const tableSearchValue = ref<Iform | undefined>({})
+const WSearchValue = computed(()=> tableSearchValue.value)
 /* 设置页面搜索数据 */
 const setSearchVale = (searchValue: Iform)=> {
-  resPageData.value.queryInfo = {...queryInfo.value, ...searchValue}
+  getTableList(searchValue)
 }
 /* 行密度改变事件 */
 const handleRowDensity = (density: string)=>{
@@ -175,6 +195,14 @@ const toggleSelection = () => {
     }
   })
 }
+
+/* 刷新列表 */
+onMounted(() => {
+  refreshTable(()=>{
+    getTableList(WSearchValue.value)
+  })
+})
+
 /* tableData数据改变，记录选中的行 */
 watch(()=> props.tableData, ()=>{
   nextTick(()=>{
@@ -183,17 +211,11 @@ watch(()=> props.tableData, ()=>{
 })
 
 /* 分页数据改变请求数据 */
-watchEffect(()=>{
-  // resPageData.value.queryInfo 带有搜索数据
-  resPageData.value.queryInfo = {... resPageData.value.queryInfo, ...queryInfo.value}
+watch(queryInfo.value, ()=>{
   getTableList()
-})
-
-/* 刷新列表 */
-onMounted(() => {
-  refreshTable(()=>{
-    getTableList()
-  })
+}, {
+  immediate: true,
+  deep: true
 })
 
 const handleCurrentChange = ()=>{

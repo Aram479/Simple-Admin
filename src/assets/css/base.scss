@@ -3,11 +3,30 @@ body {
   margin: 0;
 }
 
-html, body, #app {
+html,
+body,
+#app {
   width: 100%;
   height: 100%;
 }
 
-#nprogress .bar {
-  background: var(--el-color-primary) !important; //自定义颜色
+#nprogress {
+  & .bar {
+    background-color: var(--el-color-primary) !important;
+  }
+
+  & .peg {
+    box-shadow: 0 0 10px var(--el-color-primary),
+      0 0 5px var(--el-color-primary) !important;
+  }
+
+  & .spinner-icon {
+    border-top-color: var(--el-color-primary);
+    border-left-color: var(--el-color-primary);
+  }
+}
+
+*::selection {
+  background: var(--el-color-primary) !important; // 选中时的背景颜色
+  color: white; // 选中时的文字颜色
 }

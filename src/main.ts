@@ -10,7 +10,6 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 // 自定义语言包
 import { vueI18n } from './lang/i18n';
 // 导入 nprogress样式
-import 'nprogress/nprogress.css';
 import '@/router/routeGuard'
 import '@/assets/css/tailwindcss/tailwindcss.css'
 import '@/assets/css/index.scss'

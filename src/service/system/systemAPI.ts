@@ -7,7 +7,7 @@ enum systemAPI {
   LoginUserInfo = '/users/',
   UserMenus = '/role/'
 }
-/* 登录 获取token */
+/* 获取页面数据 */
 export function getPageListData(url: string, queryInfo: IQueryInfo) {
   return zpRequest.post<IDataResult<ISystemDataType>>({
     url: url,

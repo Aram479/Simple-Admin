@@ -1,25 +1,28 @@
 <template>
   <div>
     <template v-for="firItem in menu">
-      <!-- 有child -->
-      <el-sub-menu :index="firItem.name" v-if="firItem.children?.length">
-        <template #title>
-          <el-icon color="black">
-            <component :is="firItem.meta?.icon"></component>
-          </el-icon>
-          <span>{{ $t(<string>firItem.meta?.en) }}</span>
-        </template>
-        <SubMenu :menu="firItem.children" :routeActive="routeActive"></SubMenu>
-      </el-sub-menu>
-      <!-- 无child -->
-      <el-menu-item v-else :route="firItem" :index="firItem.name">
-        <div :class="['menuItem-box', routeActive === firItem.name ? 'itemActive' : '']">
-          <el-icon color="black">
-            <component v-if="firItem.meta?.icon" :is="firItem.meta?.icon"></component>
-          </el-icon>
-          <span>{{ $t(<string>firItem.meta?.en) }}</span>
-        </div>
-      </el-menu-item>
+      <template v-if="firItem.name">
+        <!-- 有child -->
+        <el-sub-menu :index="firItem.name" v-if="firItem.children?.length">
+          <template #title>
+            <el-icon color="black">
+              <component :is="firItem.meta?.icon"></component>
+            </el-icon>
+            <span>{{ $t(<string>firItem.meta?.en) }}</span>
+          </template>
+          <SubMenu :menu="firItem.children" :routeActive="routeActive"></SubMenu>
+        </el-sub-menu>
+        <!-- 无child -->
+        <el-menu-item v-else :route="firItem" :index="firItem.name">
+          <div :class="['menuItem-box', routeActive === firItem.name ? 'itemActive' : '']">
+            <el-icon color="black">
+              <component v-if="firItem.meta?.icon" :is="firItem.meta?.icon"></component>
+            </el-icon>
+            <span>{{ $t(<string>firItem.meta?.en) }}</span>
+          </div>
+        </el-menu-item>
+      </template>
+
     </template>
   </div>
 </template>
@@ -69,4 +72,5 @@ const props = withDefaults(defineProps<{
     transition: color 0s !important;
     color: var(--el-menu-active-color) !important;
   }
-}</style>
+}
+</style>

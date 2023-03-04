@@ -1,11 +1,11 @@
 import localCache from "@/utils/cache";
 import { defineStore } from "pinia";
 import { userLogin, resUserDataAll } from "@/service/login/loginAPI";
-import type { loginState } from "../modulesType/loginType";
+import type { loginState, menuType } from "../modulesType/loginType";
 import type { IAccount, IPhone } from "@/views/Login/LoginViewType";
 import router, { DynamicRoutes } from '@/router';
 import type { RouteRecordRaw } from "vue-router";
-import { mapMenusToRoutes, setDefaultRoute } from "@/utils/map-menus";
+import { mapMenusToPermissions, mapMenusToRoutes, setDefaultRoute } from "@/utils/map-menus";
 export const useLoginStore = defineStore("login", {
   state: (): loginState => ({
     token: localCache.getItem("token") ?? "",
@@ -14,11 +14,16 @@ export const useLoginStore = defineStore("login", {
     userMenus: localCache.getItem("userMenus") ?? [],
     sidebarMenu: [], // 导航菜单
     permissionList: [], // 路由权限
+    buttonPermission: [], // 按钮权限
   }),
   actions: {
     // 设置权限
     SET_PERMISSION(routes: RouteRecordRaw[]) {
       this.permissionList = routes;
+    },
+    // 设置按钮权限
+    SET_BUTTON_PERMISSION(permission: string[]) {
+      this.buttonPermission = permission;
     },
     // 设置菜单路由
     SET_MENU(menu?: RouteRecordRaw[]) {
@@ -78,7 +83,10 @@ export const useLoginStore = defineStore("login", {
       for (let r of DynamicRoutes) {
         router.addRoute(r);
       }
+      // 获取用户按钮权限
+      const permission = mapMenusToPermissions((<menuType[]>this.userMenus))
       router.push(toPath)
+      this.SET_BUTTON_PERMISSION(permission)
       // [...默认的路由, ...最后新生成的路由(完全体路由)]
       this.SET_PERMISSION([...initialRoutes, ...DynamicRoutes]);
     },

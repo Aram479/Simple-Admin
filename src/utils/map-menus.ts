@@ -1,5 +1,5 @@
-import type { menuType } from "@/stores/modulesType/loginType";
 import { RouteRecordRaw } from "vue-router";
+import type { menuType } from "@/stores/modulesType/loginType";
 export let firstMenu: any = null
 
 /* 根据用户筛选路由 */
@@ -40,4 +40,21 @@ export function setDefaultRoute(routes?: RouteRecordRaw[]) {
       setDefaultRoute(v.children);
     }
   });
+}
+
+/* 使用递归遍历所有的权限按钮 */
+export function mapMenusToPermissions(userMenus: menuType[]) {
+  const permissions: string[] = []
+  const _recurseGetPermission = (menus: any[]) => {
+    for (const menu of menus) {
+      /*如果传入的类型为1或2则继续递归*/
+      if (menu.type === 1 || menu.type === 2) {
+        _recurseGetPermission(menu.children ?? [])
+      } else if (menu.type === 3) {
+        permissions.push(menu.permission)
+      }
+    }
+  }
+  _recurseGetPermission(userMenus)
+  return permissions
 }
