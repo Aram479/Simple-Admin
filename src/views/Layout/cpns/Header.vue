@@ -63,6 +63,8 @@
           </div>
         </div>
       </div>
+      <!-- 暗黑模式切换 -->
+      <switch-dark />
     </el-drawer>
     <!-- 搜索菜单modal -->
     <SearchMenuModal ref="menuModal" />
@@ -71,8 +73,10 @@
 
 <script lang='ts' setup>
 import SearchMenuModal from '@/components/Modal/searchMenuModal/searchMenuModal.vue';
+import switchDark from '@/components/switchDark/switchDark.vue'
 import { reactive, ref, computed, onMounted } from 'vue';
 import { useThemesStore } from '@/stores/modules/themes';
+import { useDarkChange } from '@/hooks/darkHook';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from "vue-i18n";
 import localCache from '@/utils/cache';
@@ -82,6 +86,8 @@ const { locale } = useI18n();
 const route = useRoute()
 const router = useRouter()
 const themesStore = useThemesStore()
+const { isDark, toggleDark } = useDarkChange()
+
 const menuModal = ref<InstanceType<typeof SearchMenuModal>>()
 const languages = reactive([{name: '简体中文', value: 'zhCN'},{name: 'English', value: 'en'}])
 const themeColors = reactive<themesType[]>([
@@ -115,6 +121,10 @@ const colorClick = (item: themesType, index: number)=> {
   colorActive.value = item.id
   themesStore.setTheme(item.id)
 }
+// 暗黑模式切换
+// const handleSwitchChange = (change: boolean)=> {
+//   toggleDark()
+// }
 // 退出
 const logoutClick = ()=> {
   localCache.clearCache()
@@ -134,7 +144,7 @@ onMounted(()=>{
     .right-icon, .el-dropdown {
       height: 100%;
       &:hover {
-        background-color:  #f6f6f6;
+        background-color:  #a9a9a930;
       }
     }
     .right-icon {
@@ -173,4 +183,5 @@ onMounted(()=>{
     }
   }
 }
+
 </style>

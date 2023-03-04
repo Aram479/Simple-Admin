@@ -1,0 +1,94 @@
+@use "element-plus/theme-chalk/src/dark/css-vars.scss" as *;
+html.dark {
+  /* 自定义深色背景颜色 */
+  // --el-bg-color: #020409;
+  $border-style: #303030;
+  $color-white: #fff;
+
+  .navbar,
+  .searchForm, 
+  .pageTable,
+  .tags-view,
+  .contextmenu,
+  .sidebar-container,
+  .horizontal-header,
+  .sidebar-logo-container,
+  .horizontal-header .el-sub-menu__title,
+  .horizontal-header .submenu-title-noDropdown {
+    background: var(--el-bg-color) !important;
+  }
+  .el-main {
+    background-color: #020409 !important;
+  }
+  .app-main {
+    background: #020409 !important;
+  }
+
+  .frame {
+    filter: invert(0.9) hue-rotate(180deg);
+  }
+
+  /* 标签页 */
+  .tags-view {
+    .arrow-left,
+    .arrow-right {
+      box-shadow: none;
+      border-right: 1px solid $border-style;
+    }
+
+    .arrow-right {
+      border-left: 1px solid $border-style;
+    }
+  }
+
+  /* 项目配置面板 */
+  .right-panel-items {
+    .el-divider__text {
+      --el-bg-color: var(--el-bg-color);
+    }
+    .el-divider--horizontal {
+      border-top: none;
+    }
+  }
+
+  /* element-plus */
+  .el-table__cell {
+    background: var(--el-bg-color);
+  }
+  .el-card {
+    --el-card-bg-color: var(--el-bg-color);
+    // border: none !important;
+  }
+  .el-backtop {
+    --el-backtop-bg-color: var(--el-color-primary-light-9);
+    --el-backtop-hover-bg-color: var(--el-color-primary);
+  }
+  .el-dropdown-menu__item:not(.is-disabled):hover {
+    background: transparent;
+  }
+
+  /* 全局覆盖element-plus的el-dialog、el-drawer、el-message-box、el-notification组件右上角关闭图标的样式，表现更鲜明 */
+  .el-icon {
+    &.el-dialog__close,
+    &.el-drawer__close,
+    &.el-message-box__close,
+    &.el-notification__closeBtn {
+      &:hover {
+        color: rgba(255, 255, 255, 0.85) !important;
+        background-color: rgba(255, 255, 255, 0.12);
+      }
+    }
+  }
+  .el-table {
+    th {
+      color: #e5eaf3;
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+    &{
+      color: rgba(255, 255, 255, 0.85) !important;
+    }
+  }
+  .el-loading-mask  {
+    background-color: rgba(0, 0, 0, 0.3)!important;
+  }
+}

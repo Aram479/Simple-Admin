@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    DarkSwitch: typeof import('./src/components/switchDark/darkSwitch.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBadge: typeof import('element-plus/es')['ElBadge']
@@ -51,6 +52,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SearchForm: typeof import('./src/components/searchForm/searchForm.vue')['default']
     SearchMenuModal: typeof import('./src/components/Modal/searchMenuModal/searchMenuModal.vue')['default']
+    SwitchDark: typeof import('./src/components/switchDark/switchDark.vue')['default']
     SystemTitle: typeof import('./src/components/Login/systemTitle.vue')['default']
     TableOperate: typeof import('./src/components/pageTable/tableOperate.vue')['default']
   }
