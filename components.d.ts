@@ -7,7 +7,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    DarkSwitch: typeof import('./src/components/switchDark/darkSwitch.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBadge: typeof import('element-plus/es')['ElBadge']
@@ -41,13 +40,9 @@ declare module '@vue/runtime-core' {
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
-    ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
-    ElTag: typeof import('element-plus/es')['ElTag']
     ElTree: typeof import('element-plus/es')['ElTree']
-    MenuModal: typeof import('./src/components/Modal/menuModal.vue')['default']
     PageTable: typeof import('./src/components/pageTable/pageTable.vue')['default']
-    RouteMenuList: typeof import('./src/components/Modal/searchMenuModal/routeMenuList.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchForm: typeof import('./src/components/searchForm/searchForm.vue')['default']
@@ -55,6 +50,7 @@ declare module '@vue/runtime-core' {
     SwitchDark: typeof import('./src/components/switchDark/switchDark.vue')['default']
     SystemTitle: typeof import('./src/components/Login/systemTitle.vue')['default']
     TableOperate: typeof import('./src/components/pageTable/tableOperate.vue')['default']
+    TypeWriter: typeof import('./src/components/typeWriter/typeWriter.vue')['default']
   }
   export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

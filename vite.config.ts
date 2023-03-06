@@ -43,7 +43,13 @@ export default defineConfig({
         changeOrigin: true, //开启代理
         ws: true, //启用websockets
         rewrite: (path) => path.replace(/^\/api/, '')
-      }
+      },
+      // '/kpi': {
+      //   target: 'https://api.openai.com',
+      //   changeOrigin: true, //开启代理
+      //   ws: true, //启用websockets
+      //   rewrite: (path) => path.replace(/^\/kpi/, '')
+      // }
     }
   },
 })

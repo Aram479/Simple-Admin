@@ -3,6 +3,7 @@ import router from './router'
 import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import { setupStore } from './stores/store';
+import { setupMarkDown } from './utils/markDown';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import directives from '@/directives/directives'
 // element-plus 语言包
@@ -24,6 +25,7 @@ app.use(ElementPlus, {
 })
 directives(app)
 setupStore(app)
+setupMarkDown(app)
 vueI18n(app)
 app.use(router)
 app.use(ElementPlus)
