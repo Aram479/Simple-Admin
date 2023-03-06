@@ -3,6 +3,7 @@ export interface ISearchFormConfig {
   formItems?: ISearchItem[];
   labelWidth?: string;
   colSpan?: IColSpan;
+  isOptions?: boolean;
 }
 export interface Iform {
   intro?: string;
@@ -12,6 +13,7 @@ export interface Iform {
   id?: string;
   status?: string;
   cellphone?: string;
+  parentId?: string;
   enable?: string;
   leader?: string;
   address?: string,

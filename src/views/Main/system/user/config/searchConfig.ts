@@ -28,11 +28,11 @@ export const searchConfig = reactive<ISearchFormConfig>({
       placeholder: "请选择用户状态",
       options: [{
         value: 1,
-        label: '开启',
+        label: '启用',
       },
       {
         value: 0,
-        label: '关闭',
+        label: '禁用',
       }]
     },
     {

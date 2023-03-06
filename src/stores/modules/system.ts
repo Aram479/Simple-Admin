@@ -1,8 +1,11 @@
 import { defineStore } from "pinia";
 import { systemState } from "../modulesType/systemType";
-import { getPageListData } from "../../service/system/systemAPI";
-import type { IUserResType } from "@/views/Main/system/user/userViewType";
+import { deletePageData, editPageData, getPageListData } from "../../service/system/systemAPI";
+import { useEventbus } from '@/utils/mitt';
 import _ from 'lodash'
+import type { IRowType, IUserResType } from "@/views/Main/system/user/userViewType";
+
+const { toRefreshTable, onBus } = useEventbus()
 export const useSystemStore = defineStore("system", {
   state: (): systemState => ({
     usersList: [],
@@ -38,6 +41,7 @@ export const useSystemStore = defineStore("system", {
       this.goodsList = goodsList
       this.goodsCount = total
     },
+    /* 获取页面数据 */
     async getPageListActions({pageName, queryInfo}: IUserResType) {
       const pageUrl = `/${pageName}/list`
       this.tableLoading = true
@@ -45,11 +49,24 @@ export const useSystemStore = defineStore("system", {
       const setStr = (_.capitalize(pageName) as 'Users' | 'Role' | 'Department' | 'Menu' | 'Goods')
       //根据pageName调用不同存储方法  capitalize 首字母大写   data.totalCount 可能为undifine 因为menu没有
       this[`set${setStr}List`](data.list, data.totalCount ?? 0)
-      console.log(data)
       setTimeout(()=>{
         this.tableLoading = false
       }, 500)
     },
+    /* 删除某页面行数据 */
+    async deletePageActions({pageName, id}: IRowType) {
+      const pageUrl = `/${pageName}/${id}`
+      const res = await deletePageData(pageUrl)
+      console.log('删除', res)
+      toRefreshTable()
+    },
+    /* 编辑某页面行数据 */
+    async editPageDataAction({pageName, id, editData}: IRowType) {
+      const pageUrl = `/${pageName}/${id}`
+      const res = await editPageData(pageUrl, editData)
+      console.log('修改', res)
+      toRefreshTable()
+    }
   },
   getters: {},
 });

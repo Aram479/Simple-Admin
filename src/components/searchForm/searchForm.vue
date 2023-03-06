@@ -27,7 +27,7 @@
             </el-col>
           </template>
           <!-- 按钮选项 -->
-          <div class="options-box">
+          <div class="options-box" v-if="isOptions">
             <el-col class="option" :span="24">
               <el-button icon="Search" type="primary" @click="handleSearch">{{ $t('Search') }}</el-button>
               <el-button icon="Refresh" @click="handleReset">{{ $t('Reset') }}</el-button>
@@ -43,12 +43,15 @@
 import { FormInstance } from "element-plus";
 import { ref } from "vue";
 import { useEventbus } from '@/utils/mitt';
+import type { ISystemListData } from "@/service/system/systemAPIType";
 import type { ISearchForm, ISearchItem, IColSpan, Iform } from './searchFormTypes';
 
 const props = withDefaults(defineProps<{
   formItems: ISearchItem[] // 表单item
+  rowItems?: ISystemListData,
   colSpan?: IColSpan,
   labelWidth?: string,
+  isOptions?: boolean
 }>(), {
   formItems: () => ([]),
   colSpan: () => ({
@@ -58,7 +61,8 @@ const props = withDefaults(defineProps<{
     lg: 8,
     xl: 6
   }),
-  labelWidth: '80px'
+  labelWidth: '80px',
+  isOptions: true
 })
 const emit = defineEmits<{
   (e: "handleSearchForm", form: Iform): void;
@@ -67,16 +71,19 @@ const { toRefreshTable, onBus } = useEventbus()
 const formRef = ref<FormInstance>()
 const form = ref<Iform>({})
 for (const item of props.formItems) {
-  form.value[item.field] = ''
+  if(props.rowItems) form.value[item.field] = props.rowItems[item.field] ?? ''
 }
 const handleSearch = ()=> {
-  console.log(form.value)
   emit('handleSearchForm', form.value)
 }
 const handleReset = ()=>{
   formRef.value?.resetFields()
   handleSearch()
 }
+
+defineExpose({
+  form
+})
 
 
 </script>

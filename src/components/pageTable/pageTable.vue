@@ -1,5 +1,6 @@
 <template>
   <div class="pageTable">
+    <!-- 顶部操作 -->
     <TableOperate @handleRowDensity="handleRowDensity" @handleTreeChange="handleTreeChecks" :headerData="headerData" v-bind="$attrs">
       <template #create>
         <div class="button-box mr-4">
@@ -7,6 +8,7 @@
         </div>
       </template>
     </TableOperate>
+    <!-- 表格 -->
     <el-table 
       ref="tableRef" 
       v-if="checksCol.length" 
@@ -27,8 +29,23 @@
             <slot :name="item.slotName" :row="scoped.row">
               <!-- 操作列按钮 -->
               <div class="options-box" v-if="item.prop === 'options'">
-                <el-button v-if="isUpdate" type="primary" icon="EditPen" size="small">{{ $t('Edit') }}</el-button>
-                <el-button v-if="isDelete" type="danger" icon="Delete" size="small">{{ $t('Delete') }}</el-button>
+                <!-- 编辑 -->
+                <el-button v-if="isUpdate" type="primary" icon="EditPen" size="small" @click="handleEdit(scoped.row)">{{ $t('Edit') }}</el-button>
+                <!-- 删除 -->
+                <el-popconfirm
+                  width="220"
+                  :confirm-button-text="$t('Confirm')"
+                  :cancel-button-text="$t('Cancel')"
+                  icon="InfoFilled"
+                  icon-color="#f56c6c"
+                  :title="$t('Are you sure to delete the data?')"
+                  confirm-button-type="danger"
+                  @confirm="handleDelete(scoped.row)"
+                >
+                  <template #reference>
+                    <el-button v-if="isDelete" type="danger" icon="Delete" size="small">{{ $t('Delete') }}</el-button>
+                  </template>
+                </el-popconfirm>
                 <!-- 其他操作 -->
                 <el-dropdown class="mx-3">
                   <span class="el-dropdown-link">
@@ -55,6 +72,7 @@
         </el-table-column>
       </template>
     </el-table>
+    <!-- 分页 -->
     <el-pagination
       v-if="totalCount"
       class="justify-end py-5"
@@ -67,11 +85,14 @@
       @size-change="handleSizeChange"
       small
     />
+    <!-- 编辑/新建对话框 -->
+    <pageModal ref="pageModalRef" :modalConfig="modalData" :pageName="pageName" />
   </div>
 </template>
 
 <script lang="ts" setup>
 import TableOperate from './tableOperate.vue'
+import pageModal from './pageModal.vue';
 import { ref, toRaw, computed, watch, watchEffect, nextTick, onMounted } from 'vue';
 import { useSystemStore } from "@/stores/modules/system";
 import { storeToRefs } from 'pinia';
@@ -81,11 +102,12 @@ import { useEventbus } from '@/utils/mitt';
 import { userPermission } from '@/hooks/systemHook';
 import type { ITableHeader, IPageInfo, IElTableProps } from './pageTableTypes'
 import type { ISystemListData } from "@/service/system/systemAPIType";
-import type { Iform } from '../searchForm/searchFormTypes';
+import type { Iform, ISearchFormConfig } from '../searchForm/searchFormTypes';
 
 const props = withDefaults(defineProps<{
   headerData?: ITableHeader[],
   tableData?: ISystemListData[],
+  modalData?: ISearchFormConfig;
   elTableProps?: IElTableProps,
   pageName: string,
 }>(), {
@@ -108,11 +130,12 @@ const isRead = userPermission(props.pageName, 'query')
 const resPageData = ref<IUserResType>({
   pageName: props.pageName,
   queryInfo: {
-    offset: 0,
+    offset: 1,
     size: 5,
   },
 });
 const tableRef = ref<InstanceType<typeof ElTable>>();
+const pageModalRef = ref<InstanceType<typeof pageModal>>()
 // 多选时选择的行
 const selectRow = ref<ITableHeader[]>([])
 // 分页数据
@@ -195,7 +218,19 @@ const toggleSelection = () => {
     }
   })
 }
-
+/* 删除事件 */
+const handleDelete = (row: ISystemListData)=>{
+  const delData = {
+    pageName: props.pageName,
+    id: row.id
+  }
+  systemStore.deletePageActions(delData)
+}
+/* 编辑事件 */
+const handleEdit = (row: ISystemListData)=> {
+  pageModalRef.value!.isModal = true
+  pageModalRef.value!.rowItems = row
+}
 /* 刷新列表 */
 onMounted(() => {
   refreshTable(()=>{

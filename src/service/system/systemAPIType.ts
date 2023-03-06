@@ -3,7 +3,7 @@ export interface ISystemDataType {
   totalCount: number;
 }
 interface ISystemPublic {
-  id?: number;
+  id: number;
   name?: string;
   createAt?: string;
   updateAt?: string;

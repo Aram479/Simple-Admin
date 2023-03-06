@@ -18,4 +18,7 @@ export default {
   Reset: "Reset",
   Edit: "Edit",
   Delete: "Delete",
+  Confirm: "Confirm",
+  Cancel: "Cancel",
+  "Are you sure to delete the data?": "Are you sure to delete the data"
 };

@@ -13,5 +13,52 @@ export const tableConfig = reactive<ITableConfig>({
     { prop: "updateAt", label: "更新时间", minWidth: "80", slotName: "updateAt" },
     { prop: "options", label: "操作", minWidth: "80", slotName: "options" },
   ],
+  modalData:{
+    formItems: [
+      {
+        field: "name",
+        type: "input",
+        label: "用户名",
+        placeholder: "请输入用户名",
+      },
+      {
+        field: "realname",
+        type: "input",
+        label: "真实姓名",
+        placeholder: "请输入真实姓名",
+      },
+      {
+        field: "cellphone",
+        type: "input",
+        label: "电话号码",
+        placeholder: "请输入电话号码",
+      },
+      {
+        field: "enable",
+        type: "select",
+        label: "状态",
+        placeholder: "请选择状态",
+        options: [
+          {
+            value: 1,
+            label: "启用",
+          },
+          {
+            value: 0,
+            label: "禁用",
+          },
+        ],
+      },
+    ],
+    // 是否显示搜索/重置
+    isOptions: false,
+    colSpan: {
+      xs: 24,
+      sm: 24,
+      md: 12,
+      lg: 24,
+      xl: 24,
+    },
+  },
   tableName: '用户'
 });

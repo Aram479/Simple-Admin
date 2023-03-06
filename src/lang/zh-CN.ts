@@ -18,4 +18,7 @@ export default {
   Reset: "重置",
   Edit: "修改",
   Delete: "删除",
+  Confirm: "确定",
+  Cancel: "取消",
+  "Are you sure to delete the data?": '确定删除当前数据？'
 };

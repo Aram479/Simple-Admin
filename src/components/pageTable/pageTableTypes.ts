@@ -1,8 +1,10 @@
 import type { ISystemListData } from "@/service/system/systemAPIType";
 import { ElTable } from "element-plus";
+import { ISearchFormConfig } from "../searchForm/searchFormTypes";
 export interface ITableConfig {
   headerData?: ITableHeader[];
   tableData?: ISystemListData[];
+  modalData?: ISearchFormConfig;
   elTableProps?: IElTableProps;
   tableName?: string;
 }
