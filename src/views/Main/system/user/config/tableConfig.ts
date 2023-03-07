@@ -28,10 +28,31 @@ export const tableConfig = reactive<ITableConfig>({
         placeholder: "请输入真实姓名",
       },
       {
+        field: "password",
+        type: "input",
+        label: "密码",
+        placeholder: "请输入密码",
+        formType: 'create',
+      },
+      {
         field: "cellphone",
         type: "input",
         label: "电话号码",
         placeholder: "请输入电话号码",
+      },
+      {
+        field: "departmentId",
+        name: 'department',
+        type: "select",
+        label: "部门",
+        placeholder: "请选择部门",
+      },
+      {
+        field: "roleId",
+        name: 'role',
+        type: "select",
+        label: "角色",
+        placeholder: "请选择角色",
       },
       {
         field: "enable",
@@ -60,5 +81,6 @@ export const tableConfig = reactive<ITableConfig>({
       xl: 24,
     },
   },
-  tableName: '用户'
+  tableName: '用户管理',
+  tableBtnName: '新建用户'
 });

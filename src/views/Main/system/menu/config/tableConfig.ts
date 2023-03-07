@@ -19,5 +19,6 @@ export const tableConfig = reactive<ITableConfig>({
       children: 'children'
     }
   },
-  tableName: '菜单'
+  tableName: '菜单管理',
+  tableBtnName: '新建菜单'
 });

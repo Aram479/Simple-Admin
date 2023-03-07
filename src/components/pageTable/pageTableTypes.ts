@@ -7,6 +7,7 @@ export interface ITableConfig {
   modalData?: ISearchFormConfig;
   elTableProps?: IElTableProps;
   tableName?: string;
+  tableBtnName?: string;
 }
 
 export interface IElTableProps {

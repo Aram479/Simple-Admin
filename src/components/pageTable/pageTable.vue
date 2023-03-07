@@ -4,7 +4,7 @@
     <TableOperate @handleRowDensity="handleRowDensity" @handleTreeChange="handleTreeChecks" :headerData="headerData" v-bind="$attrs">
       <template #create>
         <div class="button-box mr-4">
-          <el-button type="primary" icon="CirclePlusFilled" v-if="isCreate">新建{{ $attrs.tableName }}</el-button>
+          <el-button type="primary" icon="CirclePlusFilled" v-if="isCreate" @click="handleCreate">{{ $attrs.tableBtnName }}</el-button>
         </div>
       </template>
     </TableOperate>
@@ -86,7 +86,7 @@
       small
     />
     <!-- 编辑/新建对话框 -->
-    <pageModal ref="pageModalRef" :modalConfig="modalData" :pageName="pageName" />
+    <pageModal ref="pageModalRef" :modalConfig="modalData" :pageName="pageName" v-bind="$attrs" />
   </div>
 </template>
 
@@ -96,13 +96,15 @@ import pageModal from './pageModal.vue';
 import { ref, toRaw, computed, watch, watchEffect, nextTick, onMounted } from 'vue';
 import { useSystemStore } from "@/stores/modules/system";
 import { storeToRefs } from 'pinia';
-import { ElMessage, ElTable } from 'element-plus';
+import { ElTable } from 'element-plus';
 import { IUserResType, IQueryInfo } from '@/views/Main/system/user/userViewType';
 import { useEventbus } from '@/utils/mitt';
 import { userPermission } from '@/hooks/systemHook';
+import { getPageListData } from "@/service/system/systemAPI";
 import type { ITableHeader, IPageInfo, IElTableProps } from './pageTableTypes'
 import type { ISystemListData } from "@/service/system/systemAPIType";
 import type { Iform, ISearchFormConfig } from '../searchForm/searchFormTypes';
+import type { Option } from 'element-plus/es/components/select-v2/src/select.types';
 
 const props = withDefaults(defineProps<{
   headerData?: ITableHeader[],
@@ -149,6 +151,9 @@ const queryInfo = computed(()=> (searchData?:Iform)=> ({
   size: pageInfo.value.pageSize,
   ...searchData
 }))
+
+const departmentOptions = ref<Option[]>()
+const roleOptions = ref<Option[]>()
 
 // 数据总条数
 const totalCount = computed<any>(()=> systemStore[`${props.pageName}Count` as keyof typeof systemStore])
@@ -218,24 +223,41 @@ const toggleSelection = () => {
     }
   })
 }
+/* 新建事件 */
+const handleCreate = (title: string)=> {
+  pageModalRef.value!.isModal = true
+  pageModalRef.value!.modalType = 'create'
+}
 /* 删除事件 */
-const handleDelete = (row: ISystemListData)=>{
+const handleDelete = (row: Iform)=>{
   const delData = {
     pageName: props.pageName,
-    id: row.id
+    id: <number>row.id
   }
   systemStore.deletePageActions(delData)
 }
 /* 编辑事件 */
-const handleEdit = (row: ISystemListData)=> {
+const handleEdit = (row: Iform)=> {
   pageModalRef.value!.isModal = true
   pageModalRef.value!.rowItems = row
+  pageModalRef.value!.modalType = 'edit'
+}
+
+const getOptions = ()=> {
+  props.modalData?.formItems?.map(async (item)=> {
+    if(~['department', 'role'].indexOf(<string>item.name)) {
+      const { data } = await getPageListData(`/${item.name}/list`)
+      item.options = data.list.map(item=> ({value: item.id, label: <string>item.name}))
+    }
+  })
+  console.log(props.modalData?.formItems)
 }
 /* 刷新列表 */
 onMounted(() => {
   refreshTable(()=>{
     getTableList(WSearchValue.value)
   })
+  getOptions()
 })
 
 /* tableData数据改变，记录选中的行 */

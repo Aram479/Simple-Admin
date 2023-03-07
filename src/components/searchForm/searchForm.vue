@@ -41,14 +41,12 @@
 
 <script lang="ts" setup>
 import { FormInstance } from "element-plus";
-import { ref } from "vue";
-import { useEventbus } from '@/utils/mitt';
-import type { ISystemListData } from "@/service/system/systemAPIType";
-import type { ISearchForm, ISearchItem, IColSpan, Iform } from './searchFormTypes';
+import { ref, watchEffect } from 'vue';
+import type { ISearchItem, IColSpan, Iform } from './searchFormTypes';
 
 const props = withDefaults(defineProps<{
   formItems: ISearchItem[] // 表单item
-  rowItems?: ISystemListData,
+  rowItems?: Iform,
   colSpan?: IColSpan,
   labelWidth?: string,
   isOptions?: boolean
@@ -67,22 +65,28 @@ const props = withDefaults(defineProps<{
 const emit = defineEmits<{
   (e: "handleSearchForm", form: Iform): void;
 }>();
-const { toRefreshTable, onBus } = useEventbus()
 const formRef = ref<FormInstance>()
 const form = ref<Iform>({})
-for (const item of props.formItems) {
-  if(props.rowItems) form.value[item.field] = props.rowItems[item.field] ?? ''
-}
+
 const handleSearch = ()=> {
   emit('handleSearchForm', form.value)
 }
-const handleReset = ()=>{
+const handleReset = ()=> {
+  console.log('重置')
   formRef.value?.resetFields()
+  form.value = {}
   handleSearch()
 }
-
+watchEffect(()=>{
+  for (const item of props.formItems) {
+    if(props.rowItems) {
+      form.value[item.field] = props.rowItems[item.field] ?? ''
+    }
+  }
+})
 defineExpose({
-  form
+  form,
+  handleReset
 })
 
 

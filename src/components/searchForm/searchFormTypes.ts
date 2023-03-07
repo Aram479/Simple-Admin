@@ -10,10 +10,13 @@ export interface Iform {
   name?: string;
   userName?: string;
   realname?: string;
-  id?: string;
+  password?: string
+  id?: number;
   status?: string;
   cellphone?: string;
   parentId?: string;
+  departmentId?: string
+  roleId?: string
   enable?: string;
   leader?: string;
   address?: string,
@@ -24,10 +27,12 @@ export type ISearchForm = Record<string, any>;
 export interface ISearchItem {
   // field必传项，使用搜索 必须要有model值
   field: keyof Iform;
+  name?: string, // 用于判断接口名称
   type?: string;
   label?: string;
   prop?: string;
   placeholder?: string;
+  formType?: string; // 用于判断创建和编辑表单
   prefixIcon?: string;
   suffixIcon?: string;
   // 针对select

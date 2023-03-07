@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { systemState } from "../modulesType/systemType";
-import { deletePageData, editPageData, getPageListData } from "../../service/system/systemAPI";
+import { deletePageData, editPageData, getPageListData, createPageData } from '../../service/system/systemAPI';
 import { useEventbus } from '@/utils/mitt';
 import _ from 'lodash'
 import type { IRowType, IUserResType } from "@/views/Main/system/user/userViewType";
@@ -46,12 +46,20 @@ export const useSystemStore = defineStore("system", {
       const pageUrl = `/${pageName}/list`
       this.tableLoading = true
       const { data } = await getPageListData(pageUrl, queryInfo);
+      console.log(data)
       const setStr = (_.capitalize(pageName) as 'Users' | 'Role' | 'Department' | 'Menu' | 'Goods')
       //根据pageName调用不同存储方法  capitalize 首字母大写   data.totalCount 可能为undifine 因为menu没有
       this[`set${setStr}List`](data.list, data.totalCount ?? 0)
       setTimeout(()=>{
         this.tableLoading = false
       }, 500)
+    },
+    /* 新增页面行数据 */
+    async createPageActions({pageName, newData}: IRowType) {
+      const pageUrl = `/${pageName}`
+      const res = await createPageData(pageUrl, newData)
+      console.log('新增', res)
+      toRefreshTable()
     },
     /* 删除某页面行数据 */
     async deletePageActions({pageName, id}: IRowType) {

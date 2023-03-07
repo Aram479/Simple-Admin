@@ -1,10 +1,10 @@
 <template>
   <div class="tableOperate mb-4">
-    <div class="title-box">{{ tableName }}管理</div>
+    <div class="title-box">{{ tableName }}</div>
     <div class="operate-box">
       <slot name="create">
         <div class="button-box mr-4">
-          <el-button type="primary" icon="CirclePlusFilled">新建{{ tableName }}</el-button>
+          <el-button type="primary" icon="CirclePlusFilled">{{ tableBtnName }}</el-button>
         </div>
       </slot>
       <div class="icon-box">
@@ -58,7 +58,8 @@ import { CheckedInfo } from "element-plus/es/components/tree-v2/src/types";
 import { useRoute, RouteMeta } from 'vue-router';
 const props = withDefaults(defineProps<{
   headerData: ITableHeader[],
-  tableName?: string
+  tableName?: string,
+  tableBtnName?: string
 }>(), {
   headerData: ()=> ([]),
   tableName: ''

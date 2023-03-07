@@ -47,5 +47,6 @@ export const tableConfig = reactive<ITableConfig>({
       xl: 24,
     },
   },
-  tableName: '部门'
+  tableName: '部门管理',
+  tableBtnName: '新建部门'
 });

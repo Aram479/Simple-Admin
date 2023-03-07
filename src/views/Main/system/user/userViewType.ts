@@ -7,8 +7,9 @@ export interface IUserResType {
 }
 export interface IRowType {
   pageName: string;
-  id: number,
+  id?: number,
   editData?: any
+  newData?: any
 }
 export interface IQueryInfo {
   offset?: number;
