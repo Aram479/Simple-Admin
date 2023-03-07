@@ -1,6 +1,18 @@
 import { nextTick, reactive, watchEffect } from "vue";
 import { storeToRefs } from "pinia";
 import type { ITableConfig } from "@/components/pageTable/pageTableTypes";
+const phoneValidate = (rule: any, value: any, callback: any) => {
+  if (value === '') {
+    callback(new Error('请输入手机号'))
+  } else {
+    const reg = /^1[3|4|5|7|8][0-9]\d{8}$/
+    if (reg.test(value)) {
+      callback();
+    } else {
+      return callback(new Error('请输入正确的手机号'));
+    }
+  }
+}
 export const tableConfig = reactive<ITableConfig>({
   headerData: [
     { prop: "selection", type: 'selection', label: "多选", minWidth: "20", slotName: "selection" },
@@ -20,12 +32,18 @@ export const tableConfig = reactive<ITableConfig>({
         type: "input",
         label: "用户名",
         placeholder: "请输入用户名",
+        rules:[
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+        ]
       },
       {
         field: "realname",
         type: "input",
         label: "真实姓名",
         placeholder: "请输入真实姓名",
+        rules:[
+          { required: true, message: '请输入真实姓名', trigger: 'blur' },
+        ]
       },
       {
         field: "password",
@@ -33,12 +51,17 @@ export const tableConfig = reactive<ITableConfig>({
         label: "密码",
         placeholder: "请输入密码",
         formType: 'create',
+        rules:[
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 6, message: '密码长度不能小于6位',  trigger: 'blur' }
+        ]
       },
       {
         field: "cellphone",
         type: "input",
         label: "电话号码",
         placeholder: "请输入电话号码",
+        rules:[{ required: true, validator: phoneValidate, trigger: 'blur' }]
       },
       {
         field: "departmentId",
@@ -46,6 +69,9 @@ export const tableConfig = reactive<ITableConfig>({
         type: "select",
         label: "部门",
         placeholder: "请选择部门",
+        rules:[
+          { required: true, message: '请选择部门', trigger: 'blur' },
+        ]
       },
       {
         field: "roleId",
@@ -53,6 +79,9 @@ export const tableConfig = reactive<ITableConfig>({
         type: "select",
         label: "角色",
         placeholder: "请选择角色",
+        rules:[
+          { required: true, message: '请选择角色', trigger: 'blur' },
+        ]
       },
       {
         field: "enable",
@@ -69,6 +98,9 @@ export const tableConfig = reactive<ITableConfig>({
             label: "禁用",
           },
         ],
+        rules:[
+          { required: true, message: '请选择状态', trigger: 'blur' },
+        ]
       },
     ],
     // 是否显示搜索/重置

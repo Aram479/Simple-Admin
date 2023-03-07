@@ -31,7 +31,8 @@ export const tableConfig = reactive<ITableConfig>({
       },
       {
         field: 'parentId',
-        type: 'input',
+        type: 'select',
+        name: 'department',
         label: '上级部门',
         placeholder: '请输入上级部门',
         rules: []

@@ -32,6 +32,7 @@ export interface ISearchItem {
   label?: string;
   prop?: string;
   placeholder?: string;
+  isHidden?: boolean,
   formType?: string; // 用于判断创建和编辑表单
   prefixIcon?: string;
   suffixIcon?: string;

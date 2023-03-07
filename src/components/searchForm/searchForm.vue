@@ -6,7 +6,7 @@
           <!-- 搜索表单 -->
           <template v-for="item in formItems" :key="item.label">
             <el-col :span="6" v-bind="colSpan">
-              <el-form-item :label="item.label" :prop="item.field">
+              <el-form-item :label="item.label" :prop="item.field" :rules="item.rules" v-if="!item.isHidden">
                 <!-- 输入框 -->
                 <template v-if="item.type === 'input'">
                   <el-input v-model="form[item.field]" :placeholder="item.placeholder" :prefix-icon="item.prefixIcon" :suffix-icon="item.suffixIcon"
@@ -77,6 +77,13 @@ const handleReset = ()=> {
   form.value = {}
   handleSearch()
 }
+const validateForm = ()=> {
+  return new Promise((reslove, reject)=>{
+    formRef.value?.validate((data)=> {
+      reslove(data)
+    })
+  })
+} 
 watchEffect(()=>{
   for (const item of props.formItems) {
     if(props.rowItems) {
@@ -86,7 +93,8 @@ watchEffect(()=>{
 })
 defineExpose({
   form,
-  handleReset
+  handleReset,
+  validateForm
 })
 
 

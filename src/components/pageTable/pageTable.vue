@@ -250,7 +250,6 @@ const getOptions = ()=> {
       item.options = data.list.map(item=> ({value: item.id, label: <string>item.name}))
     }
   })
-  console.log(props.modalData?.formItems)
 }
 /* 刷新列表 */
 onMounted(() => {

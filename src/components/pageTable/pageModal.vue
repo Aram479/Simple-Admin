@@ -47,21 +47,9 @@ const handleClose = ()=>{
   searchFormRef.value?.handleReset()
   rowItems.value = {}
 }
-const handleConfirm = ()=> {
-  if(modalType.value === 'create') {
-    handleCreate()
-  } else if(modalType.value === 'edit') {
-    handleEdit()
-  }
-}
-const handleEdit = ()=> {
-  const editData = {
-    pageName: props.pageName,
-    id: <number>rowItems.value?.id,
-    editData: formModel.value
-  }
-  systemStore.editPageDataAction(editData)
-  isModal.value = false
+const handleConfirm = async ()=> {
+  const validate = await searchFormRef.value!.validateForm()
+  if(validate) modalType.value === 'create' ? handleCreate() : handleEdit()
 }
 const handleCreate = ()=> {
   const creData = {
@@ -72,8 +60,21 @@ const handleCreate = ()=> {
   isModal.value = false
 }
 
+const handleEdit = ()=> {
+  const editData = {
+    pageName: props.pageName,
+    id: <number>rowItems.value?.id,
+    editData: formModel.value
+  }
+  systemStore.editPageDataAction(editData)
+  isModal.value = false
+}
+
 watch(modalType, (type)=> {
-  props.modalConfig.formItems?.filter(item=> true)
+  // 动态根据编辑或新增隐藏某组件
+  props.modalConfig.formItems?.map(item=> {
+    return item.formType && item.formType !== type ? item.isHidden = true : item.isHidden = false
+  })
   console.log(JSON.parse(JSON.stringify(props.modalConfig.formItems)))
 })
 defineExpose({

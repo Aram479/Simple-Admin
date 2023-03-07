@@ -57,6 +57,7 @@ export const useSystemStore = defineStore("system", {
     /* 新增页面行数据 */
     async createPageActions({pageName, newData}: IRowType) {
       const pageUrl = `/${pageName}`
+      console.log(pageUrl, newData)
       const res = await createPageData(pageUrl, newData)
       console.log('新增', res)
       toRefreshTable()
