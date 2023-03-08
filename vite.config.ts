@@ -44,12 +44,12 @@ export default defineConfig({
         ws: true, //启用websockets
         rewrite: (path) => path.replace(/^\/api/, '')
       },
-      // '/kpi': {
-      //   target: 'https://api.openai.com',
-      //   changeOrigin: true, //开启代理
-      //   ws: true, //启用websockets
-      //   rewrite: (path) => path.replace(/^\/kpi/, '')
-      // }
+      '/kpi': {
+        target: 'https://openai-node-eta.vercel.app/',
+        changeOrigin: true, //开启代理
+        ws: true, //启用websockets
+        rewrite: (path) => path.replace(/^\/kpi/, '')
+      }
     }
   },
 })

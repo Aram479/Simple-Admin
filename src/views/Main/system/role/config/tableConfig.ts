@@ -19,6 +19,9 @@ export const tableConfig = reactive<ITableConfig>({
         label: "角色名称",
         prop: "name",
         placeholder: "请输入角色名",
+        rules:[
+          { required: true, message: '请输入角色名', trigger: 'blur' },
+        ]
       },
       {
         field: 'intro',
@@ -26,6 +29,9 @@ export const tableConfig = reactive<ITableConfig>({
         label: "权限介绍",
         prop: "intro",
         placeholder: "请输入权限介绍",
+        rules:[
+          { required: true, message: '请输入权限介绍', trigger: 'blur' },
+        ]
       },
     ],
     // 是否显示搜索/重置

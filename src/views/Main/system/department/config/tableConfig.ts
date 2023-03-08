@@ -20,14 +20,18 @@ export const tableConfig = reactive<ITableConfig>({
         label: '部门名称',
         prop: "name",
         placeholder: '请输入部门名称',
-        rules: []
+        rules:[
+          { required: true, message: '请输入部门名称', trigger: 'blur' },
+        ]
       },
       {
         field: 'leader',
         type: 'input',
         label: '部门领导',
         placeholder: '请输入部门领导',
-        rules: []
+        rules:[
+          { required: true, message: '请输入部门领导', trigger: 'blur' },
+        ]
       },
       {
         field: 'parentId',
@@ -35,7 +39,9 @@ export const tableConfig = reactive<ITableConfig>({
         name: 'department',
         label: '上级部门',
         placeholder: '请输入上级部门',
-        rules: []
+        rules:[
+          { required: true, message: '请输入上级部门', trigger: 'blur' },
+        ]
       },
     ],
     // 是否显示搜索/重置

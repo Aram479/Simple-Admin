@@ -7,6 +7,8 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CmsSetting: typeof import('./src/components/cmsSetting/cmsSetting.vue')['default']
+    DarkSetup: typeof import('./src/components/cmsSetting/cpns/darkSetup.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBadge: typeof import('element-plus/es')['ElBadge']
@@ -44,15 +46,22 @@ declare module '@vue/runtime-core' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTree: typeof import('element-plus/es')['ElTree']
+    LeftModel: typeof import('./src/components/cmsSetting/cpns/navbarCpns/leftModel.vue')['default']
+    MixModel: typeof import('./src/components/cmsSetting/cpns/navbarCpns/mixModel.vue')['default']
+    MyMenu: typeof import('./src/components/myMenu/myMenu.vue')['default']
+    NavBarSetup: typeof import('./src/components/cmsSetting/cpns/navBarSetup.vue')['default']
     PageModal: typeof import('./src/components/pageTable/pageModal.vue')['default']
     PageTable: typeof import('./src/components/pageTable/pageTable.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchForm: typeof import('./src/components/searchForm/searchForm.vue')['default']
     SearchMenuModal: typeof import('./src/components/Modal/searchMenuModal/searchMenuModal.vue')['default']
-    SwitchDark: typeof import('./src/components/switchDark/switchDark.vue')['default']
+    SwitchDark: typeof import('./src/components/cmsSetting/cpns/switchDark.vue')['default']
     SystemTitle: typeof import('./src/components/Login/systemTitle.vue')['default']
     TableOperate: typeof import('./src/components/pageTable/tableOperate.vue')['default']
+    ThemeOption: typeof import('./src/components/cmsSetting/cpns/themeOption.vue')['default']
+    ThemeSetup: typeof import('./src/components/cmsSetting/cpns/themeSetup.vue')['default']
+    TopModel: typeof import('./src/components/cmsSetting/cpns/navbarCpns/topModel.vue')['default']
     TypeWriter: typeof import('./src/components/typeWriter/typeWriter.vue')['default']
   }
   export interface ComponentCustomProperties {

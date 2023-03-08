@@ -1,12 +1,12 @@
 <template>
   <div class="login">
     <LoginPanel />
-    <switch-dark class="float-right p-5" />
+    <darkSetup class="float-right p-5" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import switchDark from '@/components/switchDark/switchDark.vue'
+import darkSetup from '@/components/cmsSetting/cpns/darkSetup.vue'
 import { ref, computed } from 'vue';
 import LoginPanel from './cpns/LoginPanel.vue';
 

@@ -15,9 +15,9 @@ import { getGPTValue, getChatGPTValue } from '../../service/openAI/openAIAPI';
 const iptValue = ref<string>('')
 const gptValue = ref<string>('')
 const handleChatGPT = async ()=> {
-  const completion = await getGPTValue(iptValue.value)
-  // gptValue.value = <string>completion.data.choices[0].message?.content
-  gptValue.value = <string>completion.data.choices[0].text
+  const completion = await getChatGPTValue(iptValue.value)
+  gptValue.value = <string>completion.data.choices[0].message?.content
+  // gptValue.value = <string>completion.data.choices[0].text
     console.log(completion)
 }
 </script>

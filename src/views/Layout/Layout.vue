@@ -1,7 +1,7 @@
 <template>
   <div class="Layout h-full" :style="themeStyle">
     <el-container class="h-full">
-      <el-aside width="210px"><Aside /></el-aside>
+      <el-aside width="210px" v-if="menuMode === 'vertical'"><Aside /></el-aside>
       <el-container>
         <el-header><Header /></el-header>
         <el-main><RouterView></RouterView></el-main>
@@ -16,7 +16,7 @@ import Header from './cpns/Header.vue';
 import { useThemesStore } from "@/stores/modules/themes";
 import { storeToRefs } from "pinia";
 const themesStore = useThemesStore();
-const { themeStyle } = storeToRefs(themesStore);
+const { themeStyle, menuMode } = storeToRefs(themesStore);
 </script>
 
 <style lang="scss" scoped>

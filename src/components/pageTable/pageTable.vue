@@ -22,7 +22,7 @@
       @select-all="handleSelectChange"
     >
       <template v-for="(item, index) in headerData" :key="item.prop">
-        <el-table-column v-if="checksCol.indexOf(item.prop) !== -1" align="center" :type="item.type" :prop="item.prop" :label="item.label" :min-width="item.minWidth">
+        <el-table-column v-if="checksCol.indexOf(item.prop) !== -1" align="center" :type="item.type" :prop="item.prop" :label="item.label" :min-width="item.minWidth"  :fixed="item.prop === 'options' && 'right'">
           <!-- 不能在多选插槽赋值 多选的样式是用element的 -->
           <template #default="scoped" v-if="item.type !== 'selection'">
             <!-- 动态插槽 -->

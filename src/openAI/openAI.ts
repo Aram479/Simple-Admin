@@ -2,10 +2,10 @@ import { Configuration, OpenAIApi } from "openai";
 
 const configuration = new Configuration({
   organization: "org-VTWaRfTGd4TpR3sUneEnCRWU",
-  apiKey: "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"
+  apiKey: "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",
+  basePath: '/kpi'
 });
 const openai = new OpenAIApi(configuration);
-export default openai
 // const completion = await openai.createCompletion({
 //   model: "text-davinci-003",
 //   prompt: "typescript完整封装axios",
@@ -13,3 +13,4 @@ export default openai
 //   temperature: 0,
 //   top_p: 1,
 // });
+export default openai
