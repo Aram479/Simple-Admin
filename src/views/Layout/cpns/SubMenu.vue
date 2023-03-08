@@ -3,7 +3,7 @@
     <template v-for="firItem in menu">
       <template v-if="firItem.name">
         <!-- 有child -->
-        <el-sub-menu :index="firItem.name" v-if="firItem.children?.length">
+        <el-sub-menu :index="firItem.name" v-if="firItem.children?.length" :key="firItem.name">
           <template #title>
             <el-icon color="black">
               <component :is="firItem.meta?.icon"></component>

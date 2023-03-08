@@ -6,15 +6,15 @@ import type { themeName, themesState } from "../modulesType/themesType";
 export const useThemesStore = defineStore("theme", {
   state: (): themesState => ({
     themeColor: '',
-    themeName: localCache.getItem('themeData').themeName ?? 'darkBlue',
-    menuMode: 'vertical',
+    themeName: localCache.getItem('themeData')?.themeName ?? 'darkBlue',
+    menuMode: localCache.getItem('themeData')?.menuMode ?? 'vertical',
     ...themes
   }),
   actions: {
     setTheme() {
       const themeData = {
         themeName: this.themeName,
-        menuMode: this.menuMode,
+        menuMode: this.menuMode, 
       }
       console.log(themeData)
       this.themeColor = this[<themeName>this.themeName]

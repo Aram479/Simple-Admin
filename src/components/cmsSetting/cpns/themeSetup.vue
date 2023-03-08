@@ -33,7 +33,7 @@ import { useThemesStore } from "@/stores/modules/themes";
 import { storeToRefs } from 'pinia';
 const themesStore = useThemesStore();
 const { themeName } = storeToRefs(themesStore)
-const colorActive = ref(localCache.getItem("themeName") || "darkBlue");
+const colorActive = ref(localCache.getItem("themeData")?.themeName ?? "darkBlue");
 const themeColors = reactive<themesType[]>([
   { id: "darkBlue", color: "#1b2a47" },
   { id: "whiteTheme", color: "#fff" },

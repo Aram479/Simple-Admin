@@ -5,7 +5,6 @@ import { useEventbus } from '@/utils/mitt';
 import _ from 'lodash'
 import type { IRowType, IUserResType } from "@/views/Main/system/user/userViewType";
 
-const { toRefreshTable, onBus } = useEventbus()
 export const useSystemStore = defineStore("system", {
   state: (): systemState => ({
     usersList: [],
@@ -60,21 +59,21 @@ export const useSystemStore = defineStore("system", {
       console.log(pageUrl, newData)
       const res = await createPageData(pageUrl, newData)
       console.log('新增', res)
-      toRefreshTable()
+      useEventbus().toRefreshTable()
     },
     /* 删除某页面行数据 */
     async deletePageActions({pageName, id}: IRowType) {
       const pageUrl = `/${pageName}/${id}`
       const res = await deletePageData(pageUrl)
       console.log('删除', res)
-      toRefreshTable()
+      useEventbus().toRefreshTable()
     },
     /* 编辑某页面行数据 */
     async editPageDataAction({pageName, id, editData}: IRowType) {
       const pageUrl = `/${pageName}/${id}`
       const res = await editPageData(pageUrl, editData)
       console.log('修改', res)
-      toRefreshTable()
+      useEventbus().toRefreshTable()
     }
   },
   getters: {},

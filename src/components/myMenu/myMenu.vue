@@ -1,12 +1,12 @@
 <template>
   <div class="myMenu">
     <!-- 菜单 -->
-    <el-menu class="border-none" router unique-opened :mode="menuMode" ellipsis :default-active="routeActive">
+    <el-menu class="border-none" menu-trigger="click" router unique-opened :mode="menuMode" ellipsis :default-active="routeActive">
       <!-- <SubMenu :menu="sidebarMenu" :routeActive="routeActive" /> -->
       <template v-for="firItem in sidebarMenu">
         <template v-if="firItem.name">
           <!-- 有child -->
-          <el-sub-menu :index="firItem.name" v-if="firItem.children?.length">
+          <el-sub-menu :index="firItem.name" v-if="firItem.children?.length" :key="firItem.name">
             <template #title>
               <el-icon color="black">
                 <component :is="firItem.meta?.icon"></component>
@@ -17,7 +17,7 @@
           </el-sub-menu>
           <!-- 无child -->
           <el-menu-item v-else :route="firItem" :index="firItem.name">
-            <div :class="['menuItem-box', routeActive === firItem.name ? 'itemActive' : '']">
+            <div :class="['menuItem-box', routeActive === firItem.name && menuMode !== 'horizontal' ? 'itemActive' : '']">
               <el-icon color="black">
                 <component v-if="firItem.meta?.icon" :is="firItem.meta?.icon"></component>
               </el-icon>

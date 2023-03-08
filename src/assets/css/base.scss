@@ -30,3 +30,18 @@ body,
   background: var(--el-color-primary) !important; // 选中时的背景颜色
   color: white; // 选中时的文字颜色
 }
+
+.el-menu--horizontal {
+  .el-menu--popup {
+    background-color: var(--el-menu-bg-color) !important;
+    .el-menu-item {
+      background-color: var(--el-menu-bg-color) !important;
+    }
+  }
+}
+
+/* 无子菜单时激活 border-bottom */
+.el-menu--horizontal > .el-sub-menu.is-active .el-sub-menu__title,
+.el-menu--horizontal > .el-menu-item.is-active {
+  border-bottom: 3px solid var(--el-color-primary) !important;
+}

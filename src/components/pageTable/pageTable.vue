@@ -251,13 +251,14 @@ const getOptions = ()=> {
     }
   })
 }
-/* 刷新列表 */
-onMounted(() => {
-  refreshTable(()=>{
-    getTableList(WSearchValue.value)
-  })
-  getOptions()
-})
+
+
+const handleCurrentChange = ()=>{
+  // emit('currentChange', queryInfo.value)
+}
+const handleSizeChange = () => {
+  pageInfo.value.currentPage = 1
+}
 
 /* tableData数据改变，记录选中的行 */
 watch(()=> props.tableData, ()=>{
@@ -274,12 +275,13 @@ watch(queryInfo.value, ()=>{
   deep: true
 })
 
-const handleCurrentChange = ()=>{
-  // emit('currentChange', queryInfo.value)
-}
-const handleSizeChange = () => {
-  pageInfo.value.currentPage = 1
-}
+/* 刷新列表 */
+onMounted(() => {
+  refreshTable(()=>{
+    getTableList(WSearchValue.value)
+  })
+  getOptions()
+})
 
 defineExpose({
   setSearchVale

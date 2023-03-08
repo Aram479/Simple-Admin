@@ -4,6 +4,8 @@ import { defineConfig } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import themePreprocessorPlugin from "@pureadmin/theme";
+import { genScssMultipleScopeVars } from './src/utils/theme'
 import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
@@ -18,7 +20,14 @@ export default defineConfig({
     }),
     Components({
       resolvers: [ElementPlusResolver()],
-    })
+    }),
+    // 自定义主题
+    themePreprocessorPlugin({
+      scss: {
+        multipleScopeVars: genScssMultipleScopeVars(),
+        extract: true
+      }
+    }),
   ],
   resolve: {
     alias: {

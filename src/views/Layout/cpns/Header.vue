@@ -107,16 +107,25 @@ const logoutClick = ()=> {
   router.replace('/login')
 }
 onMounted(()=>{
-  console.log(localCache.getItem('themeData').themeName)
-  themeName!.value = localCache.getItem('themeData').themeName
   themesStore.setTheme()
 })
 </script>
 
 <style lang='scss' scoped>
 .header-box {
-  .header-left, .header-right {
+  @include flex(center, space-between);
+  .header-left {
     @include flex(center, space-between);
+    flex: 7;
+  }
+  .header-right {
+    @include flex(center, flex-end);
+    flex: 3;
+  }
+  .myMenu {
+    width: 100%
+  }
+  .header-left, .header-right {
     position: relative;
     top:50%;
     transform: translateY(-50%);

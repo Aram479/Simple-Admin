@@ -10,13 +10,14 @@
 import topModel from '@/components/cmsSetting/cpns/navbarCpns/topModel.vue'
 import leftModel from '@/components/cmsSetting/cpns/navbarCpns/leftModel.vue'
 import mixModel from '@/components/cmsSetting/cpns/navbarCpns/mixModel.vue'
+import localCache from "@/utils/cache";
 import { ref, reactive } from 'vue';
 import { useThemesStore } from '@/stores/modules/themes';
 import { storeToRefs } from "pinia";
 
 const themesStore = useThemesStore()
 const { menuMode } = storeToRefs(themesStore);
-const navBarActive = ref<string>('vertical')
+const navBarActive = ref<string>(localCache.getItem("themeData")?.menuMode ?? 'vertical')
 const navBars = [
   { value: 'vertical', label: '左侧模式', component: leftModel },
   { value: 'horizontal', label: '顶部模式', component: topModel },

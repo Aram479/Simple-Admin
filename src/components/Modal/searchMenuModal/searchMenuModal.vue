@@ -34,7 +34,7 @@ const { handleSearchMenu, searchList } = useSearchMenu()
 
 const isModal = ref<boolean>(false);
 const searchValue = ref<string>("");
-const activeIndex = ref<number>(0)
+const activeIndex = ref<number>(-1)
 const routeActive = computed(()=> (index: number)=> activeIndex.value === index)
 
 // 路由点击事件
@@ -62,7 +62,7 @@ defineExpose({
     flex-direction: column;
     padding: 20px;
     .list-box {
-      cursor: default;
+      cursor: pointer;
       display: flex;
       align-items: center;
       padding: 13px;

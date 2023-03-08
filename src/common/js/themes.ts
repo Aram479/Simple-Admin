@@ -4,6 +4,7 @@
  * @name --bg-color 背景颜色
  *
  * element menu组件的
+ * 纵向(vertical)的
  * @name --el-menu-text-color;    文字颜色
  * @name --el-menu-active-color   选中时文字颜色
  * @name --el-menu-bg-color       背景颜色
@@ -11,6 +12,8 @@
  * @name --el-menu-item-active-bg-color;  item菜单选中时背景颜色
  * @name --el-menu-hover-text-color  指向时文字颜色
  * @name --el-menu-hover-bg-color;   指向时背景颜色
+ * 横向(horizontal)的
+ * @name --el-bg-color-overlay
  */
 
 export default {
@@ -27,7 +30,7 @@ export default {
   
   --el-menu-hover-text-color: #fff;
   --el-menu-hover-bg-color: #001529;
-
+  --el-bg-color-overlay: none;
   `,
 
   whiteTheme: `
@@ -43,6 +46,7 @@ export default {
   
   --el-menu-hover-text-color: #000;
   --el-menu-hover-bg-color: #fff;
+  --el-bg-color-overlay: none;
   `,
 
   purpleTheme: `
@@ -66,6 +70,7 @@ export default {
   
   --el-menu-hover-text-color: #fff;
   --el-menu-hover-bg-color: #130824;
+  --el-bg-color-overlay: none;
   `,
   matta: `
     --font-color: #9da5ad;
@@ -88,5 +93,6 @@ export default {
     
     --el-menu-hover-text-color: #fff;
     --el-menu-hover-bg-color: #033629;
+    --el-bg-color-overlay: none;
   `
 };
