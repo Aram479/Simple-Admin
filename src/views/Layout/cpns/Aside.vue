@@ -3,7 +3,7 @@
     <!-- logo标题 -->
     <logo />
     <!-- 菜单 -->
-    <MyMenu />
+    <MyMenu v-bind="$attrs" />
   </div>
 </template>
 

@@ -6,6 +6,7 @@ export interface loginState {
   userInfo: any
   userMenus: menuType[],
   sidebarMenu?: RouteRecordRaw[],
+  menuChildList?: RouteRecordRaw[]
   permissionList?: RouteRecordRaw[],
   buttonPermission?: string[]
 }

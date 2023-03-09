@@ -1,7 +1,9 @@
 <template>
   <div class="Layout h-full">
     <el-container class="h-full">
-      <el-aside width="210px" v-if="menuMode === 'vertical'"><Aside /></el-aside>
+      <el-aside width="210px" v-if="menuMode === 'vertical' || menuMode === 'mix'">
+        <Aside :menuList="menuMode === 'vertical' ? [] : menuChildList" mode="vertical" />
+      </el-aside>
       <el-container>
         <el-header><Header /></el-header>
         <el-main><RouterView></RouterView></el-main>
@@ -13,10 +15,14 @@
 <script lang="ts" setup>
 import Aside from './cpns/Aside.vue';
 import Header from './cpns/Header.vue';
+import { useLoginStore } from "@/stores/modules/loginStore";
 import { useThemesStore } from "@/stores/modules/themes";
 import { storeToRefs } from "pinia";
+const loginStore = useLoginStore();
 const themesStore = useThemesStore();
+const { menuChildList } = storeToRefs(loginStore);
 const { menuMode } = storeToRefs(themesStore);
+
 </script>
 
 <style lang="scss" scoped>

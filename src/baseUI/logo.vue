@@ -1,7 +1,7 @@
 <template>
   <div class="logo">
     <!-- logo标题 -->
-    <div :class="['logo-tile text-xl font-bold p-3', menuMode === 'horizontal' && 'mr-6']" v-if="showLogo">
+    <div :class="['logo-tile text-xl font-bold p-3', isHorizontal && 'mr-6']" v-if="showLogo">
       <el-icon class="mr-3" color="#4285f4" size="35"><SwitchFilled /></el-icon>
       <span>MyAdmin</span>
     </div>
@@ -13,7 +13,7 @@ import { useThemesStore } from "@/stores/modules/themes";
 import { storeToRefs } from 'pinia';
 
 const themesStore = useThemesStore();
-const { showLogo, menuMode } = storeToRefs(themesStore)
+const { showLogo, menuMode, isHorizontal } = storeToRefs(themesStore)
 </script>
 
 <style lang="scss" scoped>

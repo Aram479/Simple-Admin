@@ -1,8 +1,8 @@
 <template>
   <div class='Header h-full'>
-    <div :class="['header-box h-full pl-5', menuMode === 'horizontal' ? 'headerMenu': '']">
+    <div :class="['header-box h-full pl-5', isHorizontal ? 'headerMenu': '']">
       <div class="header-left h-full float-left">
-        <Aside class="headerAside float-left h-full w-full" v-if="menuMode === 'horizontal'" />
+        <MyMenu class="headerAside float-left h-full w-full" mode="horizontal" v-if="isHorizontal" />
         <!-- 面包屑 -->
         <el-breadcrumb separator="/" v-else>
           <el-breadcrumb-item v-for="breadItem in breadcrumbList" :to="{ path: breadItem.path || breadItem.redirect }">{{$t(<string>breadItem.meta.en)}}</el-breadcrumb-item>
@@ -62,6 +62,7 @@
 
 <script lang='ts' setup>
 import Aside from './Aside.vue';
+import MyMenu from '@/components/myMenu/myMenu.vue';
 import SearchMenuModal from '@/components/Modal/searchMenuModal/searchMenuModal.vue';
 import CmsSetting from '@/components/cmsSetting/cmsSetting.vue';
 import { reactive, ref, computed, onMounted } from 'vue';
@@ -75,7 +76,7 @@ const { locale } = useI18n();
 const route = useRoute()
 const router = useRouter()
 const themesStore = useThemesStore()
-const { menuMode } = storeToRefs(themesStore);
+const { menuMode, isHorizontal } = storeToRefs(themesStore);
 const cmsSettingRef = ref<InstanceType<typeof CmsSetting>>()
 const menuModal = ref<InstanceType<typeof SearchMenuModal>>()
 const languages = reactive([{name: '简体中文', value: 'zhCN'},{name: 'English', value: 'en'}])

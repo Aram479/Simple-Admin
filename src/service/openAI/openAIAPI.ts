@@ -5,7 +5,7 @@ export function getGPTValue(keyword: string) {
     {
       model: "text-davinci-003",
       prompt: keyword,
-      max_tokens: 100,
+      max_tokens: 4000,
       temperature: 0,
       top_p: 1,
     },

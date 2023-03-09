@@ -25,9 +25,15 @@ const navBars = [
 ]
 const navBarSetupClick = (value: string)=> {
   navBarActive.value = value
-  if (value === 'mix') menuMode!.value = 'horizontal'
-  else menuMode!.value = value
+  menuMode!.value = value
   themesStore.setTheme()
+  // document.querySelector('body')?.setAttribute('style', <string>this.themeColor)
+}
+function toggleClass(flag: boolean, clsName: string, target?: HTMLElement) {
+  const targetEl = target || document.body;
+  let { className } = targetEl;
+  className = className.replace(clsName, "").trim();
+  targetEl.className = flag ? `${className} ${clsName} ` : className;
 }
 </script>
 

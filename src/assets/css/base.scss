@@ -57,9 +57,11 @@ body,
 
 // 3.9日
 .el-menu--popup-container {
-  display: none !important;
+  display: var(--popup-container) !important;
 }
 .el-sub-menu__icon-arrow {
-  display: none !important;
+  display: var(--popup-container) !important;
 }
+
+
 

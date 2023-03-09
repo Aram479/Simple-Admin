@@ -13,6 +13,7 @@ export const useLoginStore = defineStore("login", {
     userInfo: localCache.getItem("userInfo") ?? {},
     userMenus: localCache.getItem("userMenus") ?? [],
     sidebarMenu: [], // 导航菜单
+    menuChildList: [], // mix模式下菜单children
     permissionList: [], // 路由权限
     buttonPermission: [], // 按钮权限
   }),

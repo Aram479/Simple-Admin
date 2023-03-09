@@ -30,12 +30,18 @@ export const useThemesStore = defineStore("theme", {
         this.themeColor = this.themeColor?.replace('menu-active-color: #fff', 'menu-active-color: #409eff')
       }
       document.querySelector('body')?.setAttribute('style', <string>this.themeColor)
+      if(this.menuMode === 'mix') {
+        document.querySelector('body')?.setAttribute('style', '--popup-container: none')
+      }
       localCache.setItem('themeData', themeData)
     },
   },
   getters: {
     themeStyle(state) {
       return state.themeColor
+    },
+    isHorizontal(state) {
+      return ~['horizontal', 'mix'].indexOf(<string>state.menuMode) ? 'horizontal' : ''
     }
   }
 });
