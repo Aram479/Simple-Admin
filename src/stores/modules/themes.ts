@@ -8,6 +8,11 @@ export const useThemesStore = defineStore("theme", {
     themeColor: '',
     themeName: localCache.getItem('themeData')?.themeName ?? 'darkBlue',
     menuMode: localCache.getItem('themeData')?.menuMode ?? 'vertical',
+    dark: localStorage.getItem('vueuse-color-scheme') === 'dark',
+    grey: localCache.getItem('themeData')?.grey ?? false,
+    weakness: localCache.getItem('themeData')?.weakness ?? false,
+    showLogo: localCache.getItem('themeData')?.showLogo ?? true,
+    unique: localCache.getItem('themeData')?.unique ?? true,
     ...themes
   }),
   actions: {
@@ -15,10 +20,16 @@ export const useThemesStore = defineStore("theme", {
       const themeData = {
         themeName: this.themeName,
         menuMode: this.menuMode, 
+        grey: this.grey,
+        weakness: this.weakness,
+        showLogo: this.showLogo,
+        unique: this.unique,
       }
-      console.log(themeData)
       this.themeColor = this[<themeName>this.themeName]
-      // localCache.setItem('themeName', this.themeName)
+      if(this.menuMode === 'horizontal' && this.themeName === 'whiteTheme') {
+        this.themeColor = this.themeColor?.replace('menu-active-color: #fff', 'menu-active-color: #409eff')
+      }
+      document.querySelector('body')?.setAttribute('style', <string>this.themeColor)
       localCache.setItem('themeData', themeData)
     },
   },

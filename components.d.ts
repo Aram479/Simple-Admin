@@ -51,6 +51,7 @@ declare module '@vue/runtime-core' {
     MyMenu: typeof import('./src/components/myMenu/myMenu.vue')['default']
     NavBarSetup: typeof import('./src/components/cmsSetting/cpns/navBarSetup.vue')['default']
     PageModal: typeof import('./src/components/pageTable/pageModal.vue')['default']
+    PageSetup: typeof import('./src/components/cmsSetting/cpns/pageSetup.vue')['default']
     PageTable: typeof import('./src/components/pageTable/pageTable.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

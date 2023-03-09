@@ -32,6 +32,7 @@ body,
 }
 
 .el-menu--horizontal {
+  border-bottom: none !important;
   .el-menu--popup {
     background-color: var(--el-menu-bg-color) !important;
     .el-menu-item {
@@ -45,3 +46,20 @@ body,
 .el-menu--horizontal > .el-menu-item.is-active {
   border-bottom: 3px solid var(--el-color-primary) !important;
 }
+.el-menu--horizontal>.el-sub-menu .el-sub-menu__title:hover {
+  background-color: var(--el-menu-bg-color) !important;
+}
+
+.el-switch.is-checked .el-switch__core {
+  border-color: var(--el-color-primary) !important;
+  background-color: var(--el-color-primary) !important;
+}
+
+// 3.9日
+.el-menu--popup-container {
+  display: none !important;
+}
+.el-sub-menu__icon-arrow {
+  display: none !important;
+}
+

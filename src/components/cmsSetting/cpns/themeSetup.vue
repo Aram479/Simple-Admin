@@ -7,6 +7,7 @@
           v-for="(colorItem, colorIndex) in themeColors"
           :key="colorItem.id"
         >
+        <!-- 指针 -->
           <div class="active-icon" v-if="colorActive === colorItem.id">
             <el-icon
               :color="colorItem.color === '#fff' ? 'black' : '#fff'"
@@ -14,6 +15,7 @@
               ><CaretBottom
             /></el-icon>
           </div>
+          <!-- 颜色 -->
           <div
             class="w-5 h-5 m-0.5 rounded-sm shadow-2xl"
             :style="{ backgroundColor: colorItem.color }"

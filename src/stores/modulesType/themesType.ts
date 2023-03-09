@@ -2,7 +2,12 @@ export type themeName = keyof themeType
 export interface themesState extends themeType{
   themeColor?: string,
   themeName?: themeName,
-  menuMode?: string
+  dark?: boolean,
+  menuMode?: string,
+  grey: boolean,
+  weakness: boolean,
+  showLogo: boolean,
+  unique: boolean,
 }
 export interface themeType {
   darkBlue?: string,

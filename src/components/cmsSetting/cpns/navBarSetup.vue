@@ -25,7 +25,8 @@ const navBars = [
 ]
 const navBarSetupClick = (value: string)=> {
   navBarActive.value = value
-  menuMode!.value = value
+  if (value === 'mix') menuMode!.value = 'horizontal'
+  else menuMode!.value = value
   themesStore.setTheme()
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="Layout h-full" :style="themeStyle">
+  <div class="Layout h-full">
     <el-container class="h-full">
       <el-aside width="210px" v-if="menuMode === 'vertical'"><Aside /></el-aside>
       <el-container>
@@ -16,7 +16,7 @@ import Header from './cpns/Header.vue';
 import { useThemesStore } from "@/stores/modules/themes";
 import { storeToRefs } from "pinia";
 const themesStore = useThemesStore();
-const { themeStyle, menuMode } = storeToRefs(themesStore);
+const { menuMode } = storeToRefs(themesStore);
 </script>
 
 <style lang="scss" scoped>
@@ -29,6 +29,5 @@ const { themeStyle, menuMode } = storeToRefs(themesStore);
 .el-header {
   --el-header-padding: 0px;
   --el-header-height: 3rem;
-  border-bottom: 1px solid #ececec;
 }
 </style>

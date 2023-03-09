@@ -42,6 +42,7 @@ const props = withDefaults(defineProps<{
 <style lang="scss" scoped>
 .el-menu-item {
   --el-menu-sub-item-height: 45px;
+  --el-menu-horizontal-sub-item-height: 40px;
   font-size: 13px !important;
   padding: 5px 10px !important;
   background-color: var(--el-meun-item-bg-color);
@@ -51,6 +52,7 @@ const props = withDefaults(defineProps<{
   }
 
   .menuItem-box {
+    @include flex(center, flex-start);
     width: 100%;
     padding-left: 10px;
     border-radius: 5px;
@@ -64,6 +66,7 @@ const props = withDefaults(defineProps<{
 }
 
 .itemActive {
+  height: 100%;
   background-color: var(--el-menu-item-active-bg-color) !important;
   color: var(--el-menu-active-color) !important;
 

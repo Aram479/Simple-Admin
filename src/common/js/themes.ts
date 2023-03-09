@@ -30,7 +30,6 @@ export default {
   
   --el-menu-hover-text-color: #fff;
   --el-menu-hover-bg-color: #001529;
-  --el-bg-color-overlay: none;
   `,
 
   whiteTheme: `
@@ -46,7 +45,6 @@ export default {
   
   --el-menu-hover-text-color: #000;
   --el-menu-hover-bg-color: #fff;
-  --el-bg-color-overlay: none;
   `,
 
   purpleTheme: `
@@ -70,7 +68,6 @@ export default {
   
   --el-menu-hover-text-color: #fff;
   --el-menu-hover-bg-color: #130824;
-  --el-bg-color-overlay: none;
   `,
   matta: `
     --font-color: #9da5ad;
@@ -93,6 +90,5 @@ export default {
     
     --el-menu-hover-text-color: #fff;
     --el-menu-hover-bg-color: #033629;
-    --el-bg-color-overlay: none;
   `
 };

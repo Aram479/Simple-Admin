@@ -1,12 +1,12 @@
 <template>
-  <div class="myMenu">
+  <div class="myMenu h-full w-full">
     <!-- 菜单 -->
-    <el-menu class="border-none" menu-trigger="click" router unique-opened :mode="menuMode" ellipsis :default-active="routeActive">
+    <el-menu class="border-none" menu-trigger="click" router :unique-opened="unique" :mode="menuMode" ellipsis :default-active="routeActive" >
       <!-- <SubMenu :menu="sidebarMenu" :routeActive="routeActive" /> -->
       <template v-for="firItem in sidebarMenu">
         <template v-if="firItem.name">
           <!-- 有child -->
-          <el-sub-menu :index="firItem.name" v-if="firItem.children?.length" :key="firItem.name">
+          <el-sub-menu :index="firItem.name" v-if="firItem.children?.length" :key="firItem.name" @click="handleSubMenu(firItem.path)">
             <template #title>
               <el-icon color="black">
                 <component :is="firItem.meta?.icon"></component>
@@ -36,14 +36,21 @@ import { ref, watchEffect } from "vue";
 import { useLoginStore } from "@/stores/modules/loginStore";
 import { useThemesStore } from '@/stores/modules/themes';
 import { storeToRefs } from "pinia";
-import { RouteRecordName, useRoute } from "vue-router";
+import { RouteRecordName, useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
+const router = useRouter()
 const loginStore = useLoginStore();
 const themesStore = useThemesStore()
 const { sidebarMenu } = storeToRefs(loginStore);
-const { menuMode } = storeToRefs(themesStore);
+const { menuMode, unique } = storeToRefs(themesStore);
 let routeActive = ref<RouteRecordName>();
+
+// 3.9日
+/* 一级菜单点击事件 */
+const handleSubMenu = (path: string)=> {
+  router.push(path)
+}
 watchEffect(() => {
   if (route.name) routeActive.value = route.name;
 });

@@ -2,7 +2,7 @@
   <div class='Header h-full'>
     <div :class="['header-box h-full pl-5', menuMode === 'horizontal' ? 'headerMenu': '']">
       <div class="header-left h-full float-left">
-        <myMenu class="float-left h-full" v-if="menuMode === 'horizontal'" />
+        <Aside class="headerAside float-left h-full w-full" v-if="menuMode === 'horizontal'" />
         <!-- 面包屑 -->
         <el-breadcrumb separator="/" v-else>
           <el-breadcrumb-item v-for="breadItem in breadcrumbList" :to="{ path: breadItem.path || breadItem.redirect }">{{$t(<string>breadItem.meta.en)}}</el-breadcrumb-item>
@@ -61,7 +61,7 @@
 </template>
 
 <script lang='ts' setup>
-import myMenu from '@/components/myMenu/myMenu.vue'
+import Aside from './Aside.vue';
 import SearchMenuModal from '@/components/Modal/searchMenuModal/searchMenuModal.vue';
 import CmsSetting from '@/components/cmsSetting/cmsSetting.vue';
 import { reactive, ref, computed, onMounted } from 'vue';
@@ -75,7 +75,7 @@ const { locale } = useI18n();
 const route = useRoute()
 const router = useRouter()
 const themesStore = useThemesStore()
-const { menuMode, themeName } = storeToRefs(themesStore);
+const { menuMode } = storeToRefs(themesStore);
 const cmsSettingRef = ref<InstanceType<typeof CmsSetting>>()
 const menuModal = ref<InstanceType<typeof SearchMenuModal>>()
 const languages = reactive([{name: '简体中文', value: 'zhCN'},{name: 'English', value: 'en'}])
@@ -116,11 +116,13 @@ onMounted(()=>{
   @include flex(center, space-between);
   .header-left {
     @include flex(center, space-between);
-    flex: 7;
+    flex-grow: 1;
+    .headerAside {
+      @include flex(center, space-between);
+    }
   }
   .header-right {
     @include flex(center, flex-end);
-    flex: 3;
   }
   .myMenu {
     width: 100%
