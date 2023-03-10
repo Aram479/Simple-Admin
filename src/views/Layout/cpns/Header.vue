@@ -2,7 +2,7 @@
   <div class='Header h-full'>
     <div :class="['header-box h-full pl-5', isHorizontal ? 'headerMenu': '']">
       <div class="header-left h-full float-left">
-        <MyMenu class="headerAside float-left h-full w-full" mode="horizontal" v-if="isHorizontal" />
+        <Aside v-if="isHorizontal" :menuList="sidebarMenu" class="headerAside float-left h-full w-full" mode="horizontal" listType="first" :isLogo="isMix ? false : true" />
         <!-- 面包屑 -->
         <el-breadcrumb separator="/" v-else>
           <el-breadcrumb-item v-for="breadItem in breadcrumbList" :to="{ path: breadItem.path || breadItem.redirect }">{{$t(<string>breadItem.meta.en)}}</el-breadcrumb-item>
@@ -71,12 +71,15 @@ import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from "vue-i18n";
 import { storeToRefs } from 'pinia';
 import localCache from '@/utils/cache';
+import { useLoginStore } from "@/stores/modules/loginStore";
 
 const { locale } = useI18n();
 const route = useRoute()
 const router = useRouter()
+const loginStore = useLoginStore();
 const themesStore = useThemesStore()
-const { menuMode, isHorizontal } = storeToRefs(themesStore);
+const { sidebarMenu } = storeToRefs(loginStore);
+const { menuMode, isHorizontal, isMix } = storeToRefs(themesStore);
 const cmsSettingRef = ref<InstanceType<typeof CmsSetting>>()
 const menuModal = ref<InstanceType<typeof SearchMenuModal>>()
 const languages = reactive([{name: '简体中文', value: 'zhCN'},{name: 'English', value: 'en'}])

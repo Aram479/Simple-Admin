@@ -25,7 +25,7 @@ export const DynamicRoutes: RouteRecordRaw[] = [
     children: [
       {
         path: "/main",
-        name: "Main",
+        name: "main",
         component: Main,
         meta: {
           name: "首页",

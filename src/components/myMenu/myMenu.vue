@@ -1,12 +1,12 @@
 <template>
   <div class="myMenu h-full w-full">
     <!-- 菜单 -->
-    <el-menu class="border-none" menu-trigger="click" router :unique-opened="unique" :mode="mode || menuMode" ellipsis :default-active="routeActive" @open="handleMenuOpen">
+    <el-menu class="border-none" menu-trigger="hover" router :unique-opened="unique" :mode="mode || menuMode" ellipsis :default-active="routeActive">
       <!-- <SubMenu :menu="sidebarMenu" :routeActive="routeActive" /> -->
-      <template v-for="firItem in menuData">
+      <template v-for="firItem in menuList">
         <template v-if="firItem.name">
           <!-- 有child -->
-          <el-sub-menu :index="firItem.name" v-if="firItem.children?.length" :key="firItem.name" @click="isHorizontal ? handleSubMenu(firItem) : ''">
+          <el-sub-menu :index="firItem.name" v-if="firItem.children?.length" :key="firItem.name" @click="handleSubMenu(firItem)">
             <template #title>
               <el-icon color="black">
                 <component :is="firItem.meta?.icon"></component>
@@ -16,8 +16,8 @@
             <SubMenu :menu="firItem.children" :routeActive="routeActive"></SubMenu>
           </el-sub-menu>
           <!-- 无child -->
-          <el-menu-item v-else :route="firItem" :index="firItem.name">
-            <div :class="['menuItem-box', routeActive === firItem.name && !isHorizontal ? 'itemActive' : '']">
+          <el-menu-item v-else :route="firItem" :index="firItem.name" @click="isMix ? handleSubMenu(firItem) : ''">
+            <div :class="['menuItem-box', routeActive === firItem.name && listType === 'second' ?  'itemActive' : '']">
               <el-icon color="black">
                 <component v-if="firItem.meta?.icon" :is="firItem.meta?.icon"></component>
               </el-icon>
@@ -32,47 +32,56 @@
 
 <script lang="ts" setup>
 import SubMenu from "@/views/Layout/cpns/SubMenu.vue";
-import { ref, computed, watchEffect } from "vue";
+import { ref, watchEffect, onMounted } from 'vue';
 import { useLoginStore } from "@/stores/modules/loginStore";
 import { useThemesStore } from '@/stores/modules/themes';
 import { storeToRefs } from "pinia";
 import { RouteRecordName, useRoute, useRouter } from 'vue-router';
 import type { RouteRecordRaw } from "vue-router"
-import { json } from "stream/consumers";
 
 const props = withDefaults(defineProps<{
   menuList: RouteRecordRaw[],
   mode: string,
+  listType?: string
 }>(), {
   menuList: ()=> ([]),
-  mode: ''
+  mode: '',
+  listType: 'second'
 })
+const emit = defineEmits<{
+  (e: "handleSubMenuClick", children?: RouteRecordRaw[]): void;
+}>();
 
 const route = useRoute();
 const router = useRouter()
 const loginStore = useLoginStore();
 const themesStore = useThemesStore()
 const { sidebarMenu, menuChildList } = storeToRefs(loginStore);
-const { menuMode, isHorizontal, unique } = storeToRefs(themesStore);
+const { menuMode, isVertical, isHorizontal, isMix , unique } = storeToRefs(themesStore);
 let routeActive = ref<RouteRecordName>();
 
-const menuData = computed(()=> {
-  return props.menuList.length ? props.menuList : sidebarMenu?.value
-})
 // 3.9日
 /* 一级菜单点击事件 */
 const handleSubMenu = (item: RouteRecordRaw)=> {
-  menuChildList!.value = item.children
-  router.push(item.path)
+  if(item.children?.length || item.name === 'main') emit('handleSubMenuClick', (item.children || [item]))
+  if(props.mode === 'horizontal' && isMix.value) router.push(item.path); console.log(111)
 }
-const handleMenuOpen = (name: string)=> {
-  menuChildList!.value = sidebarMenu?.value?.find(item=> item.name === name)?.children
-}
+
 watchEffect(() => {
   if (route.name) {
     routeActive.value = route.name
   };
 });
+
+onMounted(() => {
+  sidebarMenu?.value?.find(item => {
+    if(item.name === <string>route.path.split('/')[1] && (item.children?.length || item.component)){
+      emit('handleSubMenuClick', (item.children || [item]))
+      // return item.children
+    }
+  })
+  // handleSubMenu()
+})
 </script>
 
 <style lang="scss" scoped>

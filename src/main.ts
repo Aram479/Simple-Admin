@@ -5,6 +5,7 @@ import { createApp } from 'vue'
 import { setupStore } from './stores/store';
 import { setupMarkDown } from './utils/markDown';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import echarts from "./echarts/echarts"
 import directives from '@/directives/directives'
 // element-plus 语言包
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
@@ -17,6 +18,9 @@ import '@/assets/css/index.scss'
 import 'element-plus/dist/index.css'
 
 const app = createApp(App)
+
+// 全局引用echarts 使用provide传给子组件
+app.config.globalProperties.$echarts = echarts
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }

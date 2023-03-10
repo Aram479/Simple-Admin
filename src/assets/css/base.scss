@@ -45,6 +45,7 @@ body,
 .el-menu--horizontal > .el-sub-menu.is-active .el-sub-menu__title,
 .el-menu--horizontal > .el-menu-item.is-active {
   border-bottom: 3px solid var(--el-color-primary) !important;
+  color: var(--el-menu-item-active-bg-color) !important
 }
 .el-menu--horizontal>.el-sub-menu .el-sub-menu__title:hover {
   background-color: var(--el-menu-bg-color) !important;
@@ -61,6 +62,12 @@ body,
 }
 .el-sub-menu__icon-arrow {
   display: var(--popup-container) !important;
+}
+
+.el-table {
+  th {
+    background-color: #f5f7fa !important;
+  }
 }
 
 
