@@ -22,14 +22,14 @@ export function deletePageData(url: string) {
     url: url
   })
 }
-/* 新建用户数据 */
+/* 新建数据 */
 export function createPageData(url: string, newData: any) {
   return zpRequest.post<IDataResult>({
     url: url,
     data: newData
   })
 }
-/* 更新用户数据 */
+/* 更新数据 */
 export function editPageData(url: string, editData: any) {
   return zpRequest.patch<IDataResult>({
     url: url,

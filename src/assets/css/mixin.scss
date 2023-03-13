@@ -12,7 +12,10 @@
     animation: bounce-in-up calc(($i + 4) / 10)+s; //$i+s
   }
 }
-
+.fade-in-left {
+  animation-name: fade-in-left;
+  animation: fade-in-left 0.8s; //$i+s
+}
 @keyframes bounce-in-up {
   0% {
     transform: translateY(150%);
@@ -26,3 +29,19 @@
     opacity: 1;
   }
 }
+
+@keyframes fade-in-left {
+  0% {
+    transform: translateX(-5%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(-3%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+

@@ -300,14 +300,3 @@ defineExpose({
   justify-content: center;
 }
 </style>
-<style>
-.el-table--large {
-  padding: 12px 0px !important;
-}
-.el-table--default {
-  padding: 8px 0px !important;
-}
-.el-table--small {
-  padding: 4px 0px !important;
-}
-</style>

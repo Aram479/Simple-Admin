@@ -5,7 +5,7 @@
         class="table-box"
         v-for="(tableItem, tableItemIndex) in moretableData"
       >
-        <el-table :data="tableItem" border style="width: 100%">
+        <el-table :data="tableItem" border header-row-class-name="el-table--default" cell-class-name="el-table--default">
           <template v-for="(table, tableIndex, key) in tableItem">
             <el-table-column
               v-for="(item, key, index) in table"

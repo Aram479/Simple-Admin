@@ -10,5 +10,7 @@ export interface systemState {
   menuCount: number,
   goodsList: any[],
   goodsCount: number,
+  categoryList: any[],
+  categoryCount: number,
   tableLoading: boolean
 }
