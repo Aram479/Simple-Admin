@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
+import utc from 'dayjs/plugin/utc'
 import type { App } from "vue";
-
+dayjs.extend(utc)
 /* 时间过滤 */
 export default function (app: App) {
   app.directive("format-time", {

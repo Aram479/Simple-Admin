@@ -1,3 +1,4 @@
+import { menuType } from "@/stores/modulesType/loginType";
 import { Option } from "element-plus/es/components/select-v2/src/select.types";
 export interface ISearchFormConfig {
   formItems?: ISearchItem[];
@@ -19,6 +20,8 @@ export interface Iform {
   roleId?: string
   enable?: string;
   leader?: string;
+  tree?: string,
+  menuList?: string,
   address?: string,
   updateAt?: string,
   createAt?: any;
@@ -39,6 +42,12 @@ export interface ISearchItem {
   // 针对select
   options?: Option[];
   rules?: any[];
+  // 针对tree
+  treeOptions?: {
+    id: number,
+    label: string,
+    children?: menuType[]
+  }[]
   // 针对 DatePicker
   dateOptions?: {
     type?: string;

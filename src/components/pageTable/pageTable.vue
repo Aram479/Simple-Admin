@@ -101,6 +101,8 @@ import { IUserResType, IQueryInfo } from '@/views/Main/system/user/userViewType'
 import { useEventbus } from '@/utils/mitt';
 import { userPermission } from '@/hooks/systemHook';
 import { getPageListData } from "@/service/system/systemAPI";
+import { menuType } from '@/stores/modulesType/loginType';
+import _ from "lodash";
 import type { ITableHeader, IPageInfo, IElTableProps } from './pageTableTypes'
 import type { ISystemListData } from "@/service/system/systemAPIType";
 import type { Iform, ISearchFormConfig } from '../searchForm/searchFormTypes';
@@ -245,9 +247,15 @@ const handleEdit = (row: Iform)=> {
 
 const getOptions = ()=> {
   props.modalData?.formItems?.map(async (item)=> {
-    if(~['department', 'role'].indexOf(<string>item.name)) {
+    if(~['department', 'menu', 'role'].indexOf(<string>item.name)) {
       const { data } = await getPageListData(`/${item.name}/list`)
-      item.options = data.list.map(item=> ({value: item.id, label: <string>item.name}))
+      if(item.name === 'menu') {
+       if(item.treeOptions) {
+        item.treeOptions[0].children = <menuType[]>data.list
+       }
+      } else {
+        item.options = data.list.map(item=> ({value: item.id, label: <string>item.name}))
+      }
     }
   })
 }

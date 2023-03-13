@@ -33,6 +33,20 @@ export const tableConfig = reactive<ITableConfig>({
           { required: true, message: '请输入权限介绍', trigger: 'blur' },
         ]
       },
+      {
+        field: 'menuList',
+        type: 'tree',
+        name: 'menu',
+        label: "树形数据",
+        prop: "tree",
+        treeOptions:[
+          {
+            id: 1,
+            label: '全选',
+            children: [],
+          }
+        ]
+      },
     ],
     // 是否显示搜索/重置
     isOptions: false,

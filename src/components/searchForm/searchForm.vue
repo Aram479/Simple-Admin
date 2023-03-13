@@ -23,6 +23,19 @@
                   <el-date-picker v-model="form[item.field]" :placeholder="item.placeholder" range-separator="-" v-bind="item.dateOptions"
                     size="default" />
                 </template>
+                <!-- 树形控件 -->
+                <template v-else-if="item.type === 'tree'">
+                  <el-tree
+                    class="p-4 py-2"
+                    node-key="id"
+                    :data="item.treeOptions"
+                    :default-checked-keys="defaultCheck(form[item.field])"
+                    :props="defaultProps"
+                    default-expand-all
+                    show-checkbox
+                    @check="handleTreeChange"
+                  />
+                </template>
               </el-form-item>
             </el-col>
           </template>
@@ -40,9 +53,12 @@
 </template>
 
 <script lang="ts" setup>
+import { menuType } from "@/stores/modulesType/loginType";
 import { FormInstance } from "element-plus";
-import { ref, watchEffect } from 'vue';
+import { ref, computed, watchEffect } from 'vue';
+import _ from "lodash";
 import type { ISearchItem, IColSpan, Iform } from './searchFormTypes';
+import type { CheckedInfo } from "element-plus/es/components/tree-v2/src/types";
 
 const props = withDefaults(defineProps<{
   formItems: ISearchItem[] // 表单item
@@ -68,6 +84,34 @@ const emit = defineEmits<{
 const formRef = ref<FormInstance>()
 const form = ref<Iform>({})
 
+// 默认树形选择节点
+const defaultCheck = computed(()=> (menuList: menuType[])=> {
+  let ids:number[] = []
+  _.cloneDeepWith(menuList, (item)=>{
+    if(item && item.id) {
+      ids.push(item.id)
+    }
+  })
+  return ids
+})
+
+/* 树形选择复选改变事件 */
+const handleTreeChange = (currentData: any, tree: CheckedInfo) => {
+  // const checked = tree.checkedNodes.map(item=> item.prop)
+  console.log(tree)
+  // form.value.menuList =  tree.checkedNodes
+  // console.log(tree)
+  // emit('handleTreeChange', checked)
+  // const activeColArr = tree
+}
+
+
+
+// 展示的字段名
+const defaultProps = {
+  children: 'children',
+  label: 'name',
+}
 const handleSearch = ()=> {
   emit('handleSearchForm', form.value)
 }
@@ -87,6 +131,7 @@ const validateForm = ()=> {
 watchEffect(()=>{
   for (const item of props.formItems) {
     if(props.rowItems) {
+      console.log(123)
       form.value[item.field] = props.rowItems[item.field] ?? ''
     }
   }
