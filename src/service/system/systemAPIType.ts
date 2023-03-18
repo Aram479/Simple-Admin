@@ -34,10 +34,7 @@ interface IMenuList extends ISystemPublic {
   url: string
 }
 interface IDepartmentList extends ISystemPublic{
-
-leader: string
-
-parentId: number
-
+  leader: string
+  parentId: number
 }
 export type ISystemListData = IUsersList | IRoleList | IDepartmentList | IMenuList

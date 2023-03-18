@@ -4,5 +4,5 @@ export default {
   name: 'dashboard',
   component: dashboard,
   children: [],
-  meta: { name: '核心技术', icon: '', zhCN: '核心技术', en: 'Core Technology' },
+  meta: { name: '商品统计', icon: '', zhCN: '商品统计', en: 'Commodity Statistics' },
 }

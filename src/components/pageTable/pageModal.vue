@@ -2,7 +2,7 @@
   <div class='pageModal'>
     <!-- 编辑/新建弹出框 -->
     <el-dialog v-model="isModal" :title="tableBtnName" width="30%" center @closed="handleClose">
-      <SearchForm ref="searchFormRef" v-bind="modalConfig" :rowItems="rowItems"></SearchForm>
+      <SearchForm ref="searchFormRef" v-bind="modalConfig" :rowItems="rowItems" :modalType="modalType"></SearchForm>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="isModal = false">{{ $t('Cancel') }}</el-button>
@@ -66,8 +66,7 @@ const handleEdit = ()=> {
     id: <number>rowItems.value?.id,
     editData: formModel.value
   }
-  console.log(editData)
-  // systemStore.editPageDataAction(editData)
+  systemStore.editPageDataAction(editData)
   isModal.value = false
 }
 
@@ -76,7 +75,6 @@ watch(modalType, (type)=> {
   props.modalConfig.formItems?.map(item=> {
     return item.formType && item.formType !== type ? item.isHidden = true : item.isHidden = false
   })
-  console.log(JSON.parse(JSON.stringify(props.modalConfig.formItems)))
 })
 defineExpose({
   isModal,

@@ -48,7 +48,7 @@ export default defineConfig({
     hmr: true,
     proxy: {
       '/api': {
-        target: 'http://152.136.185.210:5000',
+        target: 'http://123.207.32.32:5000',
         changeOrigin: true, //开启代理
         ws: true, //启用websockets
         rewrite: (path) => path.replace(/^\/api/, '')

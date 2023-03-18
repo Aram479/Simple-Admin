@@ -45,7 +45,7 @@ export interface ISearchItem {
   // 针对tree
   treeOptions?: {
     id: number,
-    label: string,
+    name: string,
     children?: menuType[]
   }[]
   // 针对 DatePicker

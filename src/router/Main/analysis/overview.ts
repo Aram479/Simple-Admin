@@ -4,5 +4,5 @@ export default {
   name: 'overview',
   component: overview,
   children: [],
-  meta: { name: '商品统计', icon: '', zhCN: '商品统计', en: 'Commodity Statistics' },
+  meta: { name: '核心技术', icon: '', zhCN: '核心技术', en: 'Core Technology' },
 }

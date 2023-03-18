@@ -25,16 +25,20 @@
                 </template>
                 <!-- 树形控件 -->
                 <template v-else-if="item.type === 'tree'">
-                  <el-tree
-                    class="p-4 py-2"
-                    node-key="id"
-                    :data="item.treeOptions"
-                    :default-checked-keys="defaultCheck(form[item.field])"
-                    :props="defaultProps"
-                    default-expand-all
-                    show-checkbox
-                    @check="handleTreeChange"
-                  />
+                  <el-scrollbar height="200px">
+                    {{ modalType }}
+                    <el-tree
+                      v-if="form.menuList || modalType === 'create'"
+                      class="p-4 py-2"
+                      node-key="id"
+                      :data="item.treeOptions"
+                      :default-checked-keys="defaultCheck(form[item.field])"
+                      :props="defaultProps"
+                      default-expand-all
+                      show-checkbox
+                      @check="handleTreeChange"
+                    />
+                  </el-scrollbar>
                 </template>
               </el-form-item>
             </el-col>
@@ -65,6 +69,7 @@ const props = withDefaults(defineProps<{
   rowItems?: Iform,
   colSpan?: IColSpan,
   labelWidth?: string,
+  modalType?: string,
   isOptions?: boolean
 }>(), {
   formItems: () => ([]),
@@ -98,11 +103,7 @@ const defaultCheck = computed(()=> (menuList: menuType[])=> {
 /* 树形选择复选改变事件 */
 const handleTreeChange = (currentData: any, tree: CheckedInfo) => {
   // const checked = tree.checkedNodes.map(item=> item.prop)
-  console.log(tree)
-  // form.value.menuList =  tree.checkedNodes
-  // console.log(tree)
-  // emit('handleTreeChange', checked)
-  // const activeColArr = tree
+  if(form.value?.menuList) form.value!.menuList =  tree.checkedNodes
 }
 
 

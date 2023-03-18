@@ -37,12 +37,12 @@ export const tableConfig = reactive<ITableConfig>({
         field: 'menuList',
         type: 'tree',
         name: 'menu',
-        label: "树形数据",
+        label: "菜单权限",
         prop: "tree",
         treeOptions:[
           {
             id: 1,
-            label: '全选',
+            name: '全选',
             children: [],
           }
         ]

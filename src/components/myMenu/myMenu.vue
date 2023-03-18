@@ -64,7 +64,7 @@ let routeActive = ref<RouteRecordName>();
 /* 一级菜单点击事件 */
 const handleSubMenu = (item: RouteRecordRaw)=> {
   if(item.children?.length || item.name === 'main') emit('handleSubMenuClick', (item.children || [item]))
-  if(props.mode === 'horizontal' && isMix.value) router.push(item.path); console.log(111)
+  if(props.mode === 'horizontal' && isMix.value) router.push(item.path);
 }
 
 watchEffect(() => {

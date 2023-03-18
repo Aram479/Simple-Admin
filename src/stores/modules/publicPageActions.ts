@@ -9,7 +9,6 @@ export function publicPageActions(state: any) {
     const pageUrl = `/${pageName}/list`
     state.tableLoading = true
     const { data } = await getPageListData(pageUrl, queryInfo);
-    console.log(pageName)
     // const setStr = (_.capitalize(pageName))
     // //根据pageName调用不同存储方法  capitalize 首字母大写   data.totalCount 可能为undifine 因为menu没有
     // This[`set${setStr}List`](data.list, data.totalCount ?? 0)
@@ -23,23 +22,19 @@ export function publicPageActions(state: any) {
   /* 新增页面行数据 */
   const createPageActions = async ({pageName, newData}: IRowType)=> {
     const pageUrl = `/${pageName}`
-    console.log(pageUrl, newData)
     const res = await createPageData(pageUrl, newData)
-    console.log('新增', res)
     useEventbus().toRefreshTable()
   }
   /* 删除某页面行数据 */
   const deletePageActions = async ({pageName, id}: IRowType)=> {
     const pageUrl = `/${pageName}/${id}`
     const res = await deletePageData(pageUrl)
-    console.log('删除', res)
     useEventbus().toRefreshTable()
   }
   /* 编辑某页面行数据 */
   const editPageDataAction = async ({pageName, id, editData}: IRowType)=> {
     const pageUrl = `/${pageName}/${id}`
     const res = await editPageData(pageUrl, editData)
-    console.log('修改', res)
     useEventbus().toRefreshTable()
   }
   return {
