@@ -9,20 +9,11 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  props: {
-    textArrs: {
-      type: Array,
-      default: () => []
-    }
-  },
-
-  setup() {
-    return {}
-  }
+<script lang='ts' setup>
+const props = withDefaults(defineProps<{
+  textArrs?: any[],
+}>(), {
+  textArrs: ()=> ([]),
 })
 </script>
 

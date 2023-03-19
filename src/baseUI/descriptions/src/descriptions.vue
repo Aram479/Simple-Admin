@@ -11,27 +11,15 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  components: {},
-  props: {
-    title: {
-      type: String,
-      default: ''
-    },
-    column: {
-      type: Number,
-      default: 1
-    },
-    tableDatas: {
-      type: Array,
-      default: () => []
-    }
-  },
-  setup() {
-    return {}
-  }
+<script lang="ts" setup>
+const props = withDefaults(defineProps<{
+  title: string,
+  column: number,
+  tableDatas: any[],
+}>(), {
+  title: '',
+  column: 1,
+  tableDatas: () => ([])
 })
 </script>
 
