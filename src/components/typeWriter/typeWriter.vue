@@ -108,9 +108,6 @@ $thepink: black;
   position: relative;
 }
 
-.cut {
-  color: $thepink;
-}
 
 .typer-cursor {
   position: absolute;

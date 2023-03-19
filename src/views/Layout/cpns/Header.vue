@@ -12,7 +12,7 @@
         <!-- 搜索 -->
         <div class="right-icon" @click="searchClick"><el-icon :size="iconSize"><Search /></el-icon></div>
         <!-- 通知 -->
-        <div class="right-icon w-16"><el-badge :value="12"><el-icon :size="iconSize"><Bell /></el-icon></el-badge></div>
+        <!-- <div class="right-icon w-16"><el-badge :value="12"><el-icon :size="iconSize"><Bell /></el-icon></el-badge></div> -->
         <!-- 语言 -->
         <el-dropdown trigger="click">
           <div class="icon flex items-center">
@@ -37,12 +37,12 @@
           </div>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>
+              <!-- <el-dropdown-item>
                 <el-icon :size="iconSize"><UserFilled /></el-icon>
                 <span>Github</span>
-              </el-dropdown-item>
+              </el-dropdown-item> -->
               <!-- style="--el-dropdown-menuItem-hover-color: red; --el-dropdown-menuItem-hover-fill: green" -->
-              <el-dropdown-item divided style="--el-dropdown-menuItem-hover-color: white; --el-dropdown-menuItem-hover-fill: #f87171" @click="logoutClick">
+              <el-dropdown-item style="--el-dropdown-menuItem-hover-color: white; --el-dropdown-menuItem-hover-fill: #f87171" @click="logoutClick">
                 <el-icon :size="iconSize"><SwitchButton /></el-icon>
                 <span>退出系统</span>
               </el-dropdown-item>

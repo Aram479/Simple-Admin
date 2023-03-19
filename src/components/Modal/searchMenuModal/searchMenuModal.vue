@@ -1,6 +1,7 @@
 <template>
   <div class="searchMenuModal">
     <el-dialog v-model="isModal" width="40%"  @closed="handleCloseModal">
+      <div class="font-bold text-lg">菜单搜索</div>
       <div class="modal-content-box">
         <el-input
           v-model="searchValue"

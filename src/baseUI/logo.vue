@@ -2,7 +2,7 @@
   <div class="logo">
     <!-- logo标题 -->
     <div :class="['logo-tile text-xl font-bold p-3', isHorizontal && 'mr-6']" v-if="showLogo">
-      <el-icon class="mr-3" color="#4285f4" size="35"><SwitchFilled /></el-icon>
+      <img src="@/assets/img/logo.png" class="mr-2" style="width: 28px" />
       <span>Simple Admin</span>
     </div>
   </div>
