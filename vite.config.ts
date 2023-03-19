@@ -16,6 +16,10 @@ export default defineConfig({
   define: {
     'process.env': {}
   },
+  base: './',
+  build: {
+    sourcemap: true,
+  },
   plugins: [
     vue(),
     AutoImport({
