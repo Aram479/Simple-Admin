@@ -1,5 +1,13 @@
 <template>
   <div class='dashboard'>
+        <!-- 1.顶部数据统计 -->
+    <el-row :gutter="10">
+      <template v-for="item in topPanelDatas" :key="item.title">
+        <el-col :md="12" :lg="6" :xl="6">
+          <CountCard :panelData="item" />
+        </el-col>
+      </template>
+    </el-row>
     <el-row class="h-full" :gutter="24">
       <el-col :span="12"><EchartCard v-if="categoryGoodsCount.length" title="分类商品数量(饼图)" type="pie" :optionData="pieData(categoryGoodsCount)" class="h-full py-2" /></el-col>
       <el-col :span="12"><EchartCard v-if="categoryGoodsSale.length" title="分类商品的销量" type="line" :optionData="xANDyData(categoryGoodsSale)" class="h-full py-2" /></el-col>
@@ -10,6 +18,7 @@
 </template>
 
 <script lang='ts' setup>
+import CountCard from '@/components/card/countCard.vue';
 import EchartCard from '@/components/card/echartCard.vue';
 import { reactive, ref, computed } from 'vue'
 import { useAnalysisStore } from '@/stores/modules/analysis';
@@ -17,7 +26,7 @@ import { storeToRefs } from 'pinia';
 import type { ICategoryData } from '@/service/analysis/analysisAPIType';
 const analysisStore = useAnalysisStore()
 analysisStore.getDashboardAction()
-const { categoryGoodsCount, categoryGoodsSale, categoryGoodsFavor, addressGoodsSale } = storeToRefs(analysisStore)
+const { topPanelDatas, categoryGoodsCount, categoryGoodsSale, categoryGoodsFavor, addressGoodsSale } = storeToRefs(analysisStore)
 const xANDyData = computed(()=> (arr: ICategoryData[], key: string = 'goodsCount')=> {
   return {
     xData: <string[] | number[]>arr.map((item)=> item.name || item.address),

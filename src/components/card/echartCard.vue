@@ -1,7 +1,10 @@
 <template>
   <div class="echartCard">
-    <el-card class="box-card" :header="title">
-      <div ref="echartRef" id="main"></div>
+    <el-card class="box-card h-full" :body-style="{height}">
+      <template #header>
+        <typeWriter :str="title"></typeWriter>
+      </template>
+      <div ref="echartRef" id="main" style="height: 100%;"></div>
     </el-card>
   </div>
 </template>
@@ -14,11 +17,13 @@ import { useBarEchart, useLineEchart, usePieEchart, useEchartOption } from '@/ho
 import type { EChartsOption } from "echarts";
 
 const props = withDefaults(defineProps<{
+  height?: string,
   title?: string
   type: string,
   optionData: any,
   option?: EChartsOption,
 }>(), {
+  height: '23rem',
   title: '标题',
   option: ()=> ({}),
 })
@@ -77,7 +82,6 @@ onMounted(() => {
 }
 #main {
   width: 100%;
-  height: 20rem;
   // max-height: 500px;
 }
 </style>

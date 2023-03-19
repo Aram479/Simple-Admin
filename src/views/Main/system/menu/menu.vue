@@ -1,7 +1,7 @@
 <template>
   <div class="menu">
     <!-- <SearchForm v-bind="searchConfig" /> -->
-    <PageTable ref="tableRef" v-bind="tableConfig" pageName="menu" :tableData="menuList"></PageTable>
+    <PageTable ref="tableRef" v-bind="tableConfig" pageName="menu" :tableData="menuList" :showCreate="false"></PageTable>
   </div>
 </template>
 

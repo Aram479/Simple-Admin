@@ -23,6 +23,7 @@ import { ref, onMounted } from "vue";
  * @property {String} str 展示的字符
  * @property {Number} duration 打出每个字符时间
  * @property {Number} clearDuration 删除每个字符时间
+ * @property {Number} timeout 延迟打印时间 routerview动画(fade-in-left) 为0.8s
  * @property {Boolean} isCursor 是否显示光标
  * @property {Boolean} loop 是否循环
  */
@@ -32,6 +33,7 @@ const props = withDefaults(
     str?: string | string[];
     duration?: number;
     clearDuration?: number;
+    timeout?: number
     isCursor?: boolean;
     loop?: boolean;
   }>(),
@@ -39,6 +41,7 @@ const props = withDefaults(
     str: "你好，世界",
     duration: 100,
     clearDuration: 50,
+    timeout: 500,
     isCursor: false,
     loop: false,
   }
@@ -85,7 +88,9 @@ const wipe = (i: number) => {
   };
 };
 onMounted(() => {
-  begin();
+  setTimeout(() => {
+    begin();
+  }, props.timeout);
 });
 </script>
 <style scoped lang="scss">

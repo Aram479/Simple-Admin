@@ -8,10 +8,10 @@
         :rules="rules"
       >
         <el-form-item class="bounce-in-up" prop="name">
-          <el-input class="w-50" v-model="account.name" clearable size="large" placeholder="账号" :prefix-icon="UserFilled" />
+          <el-input class="w-50" v-model="account.name" clearable size="large" placeholder="默认coderwhy" :prefix-icon="UserFilled" />
         </el-form-item>
         <el-form-item class="bounce-in-up" prop="password">
-          <el-input v-model="account.password" show-password type="password" size="large" placeholder="密码" :prefix-icon="Lock"/>
+          <el-input v-model="account.password" show-password type="password" size="large" placeholder="默认123456" :prefix-icon="Lock"/>
         </el-form-item>
       </el-form>
     </div>

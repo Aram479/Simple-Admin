@@ -8,6 +8,8 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     CmsSetting: typeof import('./src/components/cmsSetting/cmsSetting.vue')['default']
+    CountCard: typeof import('./src/components/card/countCard.vue')['default']
+    Countup: typeof import('./src/components/countup/countup.vue')['default']
     DarkSetup: typeof import('./src/components/cmsSetting/cpns/darkSetup.vue')['default']
     EchartCard: typeof import('./src/components/card/echartCard.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
@@ -21,6 +23,8 @@ declare module '@vue/runtime-core' {
     ElCol: typeof import('element-plus/es')['ElCol']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
+    ElDescriptions: typeof import('element-plus/es')['ElDescriptions']
+    ElDescriptionsItem: typeof import('element-plus/es')['ElDescriptionsItem']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElDivider: typeof import('element-plus/es')['ElDivider']
     ElDrawer: typeof import('element-plus/es')['ElDrawer']
@@ -51,6 +55,7 @@ declare module '@vue/runtime-core' {
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTimeline: typeof import('element-plus/es')['ElTimeline']
     ElTimelineItem: typeof import('element-plus/es')['ElTimelineItem']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElTree: typeof import('element-plus/es')['ElTree']
     GithubCard: typeof import('./src/components/card/githubCard.vue')['default']
     LeftModel: typeof import('./src/components/cmsSetting/cpns/navbarCpns/leftModel.vue')['default']
@@ -65,6 +70,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SearchForm: typeof import('./src/components/searchForm/searchForm.vue')['default']
     SearchMenuModal: typeof import('./src/components/Modal/searchMenuModal/searchMenuModal.vue')['default']
+    StatisticalPanel: typeof import('./src/components/card/statistical-panel.vue')['default']
     SwitchDark: typeof import('./src/components/cmsSetting/cpns/switchDark.vue')['default']
     SystemTitle: typeof import('./src/components/Login/systemTitle.vue')['default']
     TableOperate: typeof import('./src/components/pageTable/tableOperate.vue')['default']

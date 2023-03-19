@@ -10,6 +10,7 @@ html.dark {
   .pageTable,
   .tags-view,
   .contextmenu,
+  .statistical,
   .sidebar-container,
   .horizontal-header,
   .sidebar-logo-container,
@@ -58,6 +59,12 @@ html.dark {
   .el-card {
     --el-card-bg-color: var(--el-bg-color);
     // border: none !important;
+  }
+  .statistical * {
+    color: #e5eaf3 !important;
+  }
+  .word {
+    color: #e5eaf3 !important;
   }
   .el-backtop {
     --el-backtop-bg-color: var(--el-color-primary-light-9);

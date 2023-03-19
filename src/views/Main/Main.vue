@@ -1,15 +1,15 @@
 <template>
-  <div class="Main h-full">
+  <div class="Main">
     <!-- chatGPT -->
     <!-- <el-button @click="handleChatGPT">搜索</el-button>
     <el-input v-model="iptValue"></el-input>
     <v-md-preview :text="gptValue"></v-md-preview> -->
     <el-row class="h-full" :gutter="24">
-      <el-col :span="12"><LogCard class="h-full py-2" /></el-col>
-      <el-col :span="12"><GithubCard class="h-full py-2" /></el-col>
-      <el-col :span="8"><EchartCard class="h-full py-2" title="GitHub折线图信息" type="line" :optionData="optionData" :option="lineOption" /></el-col>
-      <el-col :span="8"><EchartCard class="h-full py-2" title="GitHub饼图信息" type="pie" :optionData="pieData" /></el-col>
-      <el-col :span="8"><EchartCard class="h-full py-2" title="GitHub柱状图信息" type="bar" :optionData="optionData" :option="barOption" /></el-col>
+      <el-col :span="12"><LogCard class="py-2" height="20rem" /></el-col>
+      <el-col :span="12"><GithubCard class="py-2" height="20rem" /></el-col>
+      <el-col :span="8"><EchartCard class="py-2" height="20rem" title="GitHub折线图信息" type="line" :optionData="optionData" :option="lineOption" /></el-col>
+      <el-col :span="8"><EchartCard class="py-2" height="20rem" title="GitHub饼图信息" type="pie" :optionData="pieData" /></el-col>
+      <el-col :span="8"><EchartCard class="py-2" height="20rem" title="GitHub柱状图信息" type="bar" :optionData="optionData" :option="barOption" /></el-col>
       <!-- <el-col :span="8"><GithubCard class="h-full py-2" /></el-col>
       <el-col :span="8"><GithubCard class="h-full py-2" /></el-col> -->
     </el-row>
@@ -39,11 +39,6 @@ const lineOption = ref<any>({
     right: '4%',
     bottom: '3%',
     containLabel: true
-  },
-  toolbox: {
-    feature: {
-      saveAsImage: {}
-    }
   },
   xAxis: {
     type: 'category',
@@ -80,16 +75,8 @@ const barOption = ref<any>({
     axisPointer: {
       type: 'cross',
       crossStyle: {
-        color: '#999'
+        color: 'var(--el-color-primary)',
       }
-    }
-  },
-  toolbox: {
-    feature: {
-      dataView: { show: true, readOnly: false },
-      magicType: { show: true, type: ['line', 'bar'] },
-      restore: { show: true },
-      saveAsImage: { show: true }
     }
   },
   legend: {
@@ -176,7 +163,6 @@ const barOption = ref<any>({
     }
   ]
 })
-
 const pieData = ref<any>([
   {
     name: 'fock',
@@ -203,7 +189,4 @@ const handleChatGPT = async ()=> {
 </script>
 
 <style lang="scss" scoped>
-.aaa {
-  height: 100% !important;
-}
 </style>

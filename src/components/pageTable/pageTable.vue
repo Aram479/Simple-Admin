@@ -4,7 +4,7 @@
     <TableOperate @handleRowDensity="handleRowDensity" @handleTreeChange="handleTreeChecks" :headerData="headerData" v-bind="$attrs">
       <template #create>
         <div class="button-box mr-4">
-          <el-button type="primary" icon="CirclePlusFilled" v-if="isCreate" @click="handleCreate">{{ $attrs.tableBtnName }}</el-button>
+          <el-button type="primary" icon="CirclePlusFilled" v-if="isCreate && showCreate" @click="handleCreate">{{ $attrs.tableBtnName }}</el-button>
         </div>
       </template>
     </TableOperate>
@@ -114,9 +114,11 @@ const props = withDefaults(defineProps<{
   modalData?: ISearchFormConfig;
   elTableProps?: IElTableProps,
   pageName: string,
+  showCreate?: boolean
 }>(), {
   headerData: ()=> ([]),
   tableData: ()=> ([]),
+  showCreate: true,
 })
 const emit = defineEmits<{
   (e: "currentChange", queryInfo: IQueryInfo): void;

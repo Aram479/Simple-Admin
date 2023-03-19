@@ -1,7 +1,7 @@
 <template>
   <div class="Layout h-full">
     <el-container class="h-full">
-      <el-aside width="210px" v-if="isVertical || isMix">
+      <el-aside width="220px" v-if="isVertical || isMix">
         <Aside :menuList="isVertical ? sidebarMenu : menuChildList" mode="vertical" />
       </el-aside>
       <el-container>

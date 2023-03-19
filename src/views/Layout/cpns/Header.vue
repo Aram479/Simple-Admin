@@ -39,7 +39,7 @@
             <el-dropdown-menu>
               <el-dropdown-item>
                 <el-icon :size="iconSize"><UserFilled /></el-icon>
-                <span>用户信息</span>
+                <span>Github</span>
               </el-dropdown-item>
               <!-- style="--el-dropdown-menuItem-hover-color: red; --el-dropdown-menuItem-hover-fill: green" -->
               <el-dropdown-item divided style="--el-dropdown-menuItem-hover-color: white; --el-dropdown-menuItem-hover-fill: #f87171" @click="logoutClick">

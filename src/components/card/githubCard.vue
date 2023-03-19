@@ -1,6 +1,9 @@
 <template>
   <div class="githubCard">
-    <el-card class="box-card h-full" header="GitHub信息">
+    <el-card class="box-card h-full" :body-style="{height}">
+      <template #header>
+        <typeWriter str="GitHub信息"></typeWriter>
+      </template>
       <div
         class="table-box"
         v-for="(tableItem, tableItemIndex) in moretableData"
@@ -34,6 +37,11 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
+const props = withDefaults(defineProps<{
+  height: string,
+}>(), {
+  height: '23rem',
+})
 const moreTableHeader = ref<any[]>([
   [{ label: "用户名" }, { label: "手机" }, { label: "居住地" }],
   [{ label: "标签" }, { label: "联系地址" }],
@@ -55,7 +63,6 @@ const moretableData = ref<any[]>([
         { type: "info", label: "帅气" },
         { type: "danger", label: "阳光" },
         { type: "warning", label: "好学" },
-        { type: "", label: "追剧" },
       ],
       address: "英国伦敦",
     },

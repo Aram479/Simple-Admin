@@ -132,7 +132,6 @@ const validateForm = ()=> {
 watchEffect(()=>{
   for (const item of props.formItems) {
     if(props.rowItems) {
-      console.log(123)
       form.value[item.field] = props.rowItems[item.field] ?? ''
     }
   }

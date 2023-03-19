@@ -5,6 +5,8 @@ import { getCategoryGoodsData } from "@/service/analysis/analysisAPI";
 import type { analysisState } from "../modulesType/analysisType";
 export const useAnalysisStore = defineStore("analysis", () => {
   const state = reactive<analysisState>({
+    topPanelDatas: [],
+    goodsSaleTop10: [],
     categoryGoodsCount: [],
     categoryGoodsSale: [],
     categoryGoodsFavor: [],
@@ -12,12 +14,13 @@ export const useAnalysisStore = defineStore("analysis", () => {
 
   });
   const getDashboardAction = async ()=> {
-    const [cateCount, cateSale, cateFavor, addressSale] = await getCategoryGoodsData()
+    const [topPanel, saleTop10, cateCount, cateSale, cateFavor, addressSale] = await getCategoryGoodsData()
+    state.topPanelDatas = topPanel.data
+    state.goodsSaleTop10 = saleTop10.data
     state.categoryGoodsCount = cateCount.data
     state.categoryGoodsSale = cateSale.data
     state.categoryGoodsFavor = cateFavor.data
     state.addressGoodsSale = addressSale.data
-    console.log(state)
   }
   return {
     ...toRefs(state),

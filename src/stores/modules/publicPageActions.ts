@@ -14,7 +14,6 @@ export function publicPageActions(state: any) {
     // This[`set${setStr}List`](data.list, data.totalCount ?? 0)
     state[`${pageName}List`] = data.list
     state[`${pageName}Count`] = data.totalCount ?? 0
-    console.log(data.list)
     setTimeout(()=>{
       state.tableLoading = false
     }, 500)
