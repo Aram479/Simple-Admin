@@ -16,7 +16,6 @@ export default defineComponent({
   props: {
     textArrs: {
       type: Array,
-
       default: () => []
     }
   },
