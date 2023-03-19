@@ -6,9 +6,6 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import themePreprocessorPlugin from "@pureadmin/theme";
 import { genScssMultipleScopeVars } from './src/utils/theme'
-// 首屏加载插件
-import OptimizationPersist from 'vite-plugin-optimize-persist'
-import PkgConfig from 'vite-plugin-package-config'
 import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
@@ -34,9 +31,7 @@ export default defineConfig({
         multipleScopeVars: genScssMultipleScopeVars(),
         extract: true
       }
-    }),
-    PkgConfig(),
-    OptimizationPersist()
+    })
   ],
   resolve: {
     alias: {
