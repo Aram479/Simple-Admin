@@ -1,11 +1,13 @@
 import localCache from "@/utils/cache";
 import { defineStore } from "pinia";
 import { userLogin, resUserDataAll } from "@/service/login/loginAPI";
+import router, { DynamicRoutes } from '@/router';
+import { mapMenusToPermissions, mapMenusToRoutes, setDefaultRoute } from "@/utils/map-menus";
+import { Message } from "@/utils/message";
 import type { loginState, menuType } from "../modulesType/loginType";
 import type { IAccount, IPhone } from "@/views/Login/LoginViewType";
-import router, { DynamicRoutes } from '@/router';
 import type { RouteRecordRaw } from "vue-router";
-import { mapMenusToPermissions, mapMenusToRoutes, setDefaultRoute } from "@/utils/map-menus";
+
 export const useLoginStore = defineStore("login", {
   state: (): loginState => ({
     token: localCache.getItem("token") ?? "",
@@ -37,6 +39,12 @@ export const useLoginStore = defineStore("login", {
     /* account登录 */
     async accountLogin(accountLogin: IAccount) {
       const resAccountData = await userLogin(accountLogin);
+      console.log(resAccountData)
+      if(resAccountData.code !== 0) {
+        return Message('用户名或密码错误！', {
+          type: 'error'
+        })
+      }
       const { id, token } = resAccountData.data;
       if (id && token) {
         this.token = token;
@@ -50,6 +58,9 @@ export const useLoginStore = defineStore("login", {
           localCache.setItem("userMenus", this.userMenus);
           localCache.setItem('lang', 'zhCN')
           router.push('/')
+          return Message('登录成功！', {
+            type: 'success'
+          })
         }
       }
     },

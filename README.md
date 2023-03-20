@@ -1,40 +1,39 @@
-# my-admin-cms
+<h1>vue-simple-admin</h1>
 
-This template should help get you started developing with Vue 3 in Vite.
+## 简介
 
-## Recommended IDE Setup
+`vue-simple-admin` 是一款简单中后台管理系统模版。使用了最新的 `Vue3`、`Vite`、`Element-Plus`、`TypeScript`、`Pinia`、`Tailwindcss` 等主流技术开发
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+内置 `暗黑模式` 接口使用`coderwhy`老师vue3管理系统
 
-## Type Support for `.vue` Imports in TS
+## 预览
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+- [点我查看预览](https://www.simpleadmin.xyz/)
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## 安装使用
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+- 获取项目代码
 
-## Customize configuration
+```bash
+git clone https://github.com/Aram479/Simple-Admin.git
+or
+git clone https://gitcode.net/qq_53255961/my-admin-cms.git
+```
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- 安装依赖
 
-## Project Setup
-
-```sh
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+- 运行
 
-```sh
+```bash
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+- 打包
 
-```sh
+```bash
 npm run build
 ```

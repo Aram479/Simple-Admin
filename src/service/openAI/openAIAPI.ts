@@ -8,12 +8,6 @@ export function getGPTValue(keyword: string) {
       max_tokens: 4000,
       temperature: 0,
       top_p: 1,
-    },
-    {
-      headers: {
-        Authorization:
-          "Bearer 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",
-      },
     }
   );
 }

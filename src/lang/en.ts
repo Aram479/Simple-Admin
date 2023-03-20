@@ -20,5 +20,6 @@ export default {
   Delete: "Delete",
   Confirm: "Confirm",
   Cancel: "Cancel",
-  "Are you sure to delete the data?": "Are you sure to delete the data"
+  "Are you sure to delete the data?": "Are you sure to delete the data",
+  ChatGpt: 'ChatGPT',
 };

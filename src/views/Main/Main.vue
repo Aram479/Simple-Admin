@@ -1,17 +1,12 @@
 <template>
   <div class="Main">
-    <!-- chatGPT -->
-    <!-- <el-button @click="handleChatGPT">搜索</el-button>
-    <el-input v-model="iptValue"></el-input>
-    <v-md-preview :text="gptValue"></v-md-preview> -->
+    
     <el-row class="h-full" :gutter="24">
       <el-col :span="12"><LogCard class="py-2" height="20rem" /></el-col>
       <el-col :span="12"><GithubCard class="py-2" height="20rem" /></el-col>
       <el-col :span="8"><EchartCard class="py-2" height="20rem" title="GitHub折线图信息" type="line" :optionData="optionData" :option="lineOption" /></el-col>
       <el-col :span="8"><EchartCard class="py-2" height="20rem" title="GitHub饼图信息" type="pie" :optionData="pieData" /></el-col>
       <el-col :span="8"><EchartCard class="py-2" height="20rem" title="GitHub柱状图信息" type="bar" :optionData="optionData" :option="barOption" /></el-col>
-      <!-- <el-col :span="8"><GithubCard class="h-full py-2" /></el-col>
-      <el-col :span="8"><GithubCard class="h-full py-2" /></el-col> -->
     </el-row>
   </div>
 </template>
@@ -21,7 +16,6 @@ import LogCard from '@/components/card/logCard.vue';
 import GithubCard from '@/components/card/githubCard.vue'
 import EchartCard from '@/components/card/echartCard.vue';
 import { ref } from 'vue';
-import { getGPTValue, getChatGPTValue } from '@/service/openAI/openAIAPI';
 
 const optionData = ref<any>({
   xData: ['fock', 'star', 'watcher'],
@@ -178,14 +172,6 @@ const pieData = ref<any>([
   },
 ])
 
-
-const iptValue = ref<string>('')
-const gptValue = ref<string>('')
-const handleChatGPT = async ()=> {
-  const completion = await getGPTValue(iptValue.value)
-  // gptValue.value = <string>completion.data.choices[0].message?.content
-  gptValue.value = <string>completion.data.choices[0].text
-}
 </script>
 
 <style lang="scss" scoped>
