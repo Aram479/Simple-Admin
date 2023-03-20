@@ -39,7 +39,6 @@ export const useLoginStore = defineStore("login", {
     /* account登录 */
     async accountLogin(accountLogin: IAccount) {
       const resAccountData = await userLogin(accountLogin);
-      console.log(resAccountData)
       if(resAccountData.code !== 0) {
         return Message('用户名或密码错误！', {
           type: 'error'

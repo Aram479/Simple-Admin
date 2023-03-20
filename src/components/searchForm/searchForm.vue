@@ -117,7 +117,6 @@ const handleSearch = ()=> {
   emit('handleSearchForm', form.value)
 }
 const handleReset = ()=> {
-  console.log('重置')
   formRef.value?.resetFields()
   form.value = {}
   handleSearch()

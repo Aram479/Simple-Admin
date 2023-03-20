@@ -45,6 +45,7 @@ const gptValue = ref<string>('')
 const chatDatas = ref<any[]>([])
 const isChat = ref<boolean>(true)
 const handleChatGPT = async (value: string)=> {
+  let errMessage = ''
   if(!isChat.value) return
   isChat.value = false
   chatDatas.value.push({
@@ -52,13 +53,15 @@ const handleChatGPT = async (value: string)=> {
     chatValue: ''
   })
   iptValue.value = ''
-  const completion = await getGPTValue(value)
-  // gptValue.value = <string>completion.data.choices[0].message?.content
-  gptValue.value = <string>completion.data.choices[0].text
-
-  chatDatas.value[chatDatas.value.length - 1].chatValue = gptValue.value
-  console.log(111)
-  isChat.value = true
+  try {
+    const completion = await getGPTValue(value)
+    // gptValue.value = <string>completion.data.choices[0].message?.content
+    gptValue.value = <string>completion.data.choices[0].text
+    chatDatas.value[chatDatas.value.length - 1].chatValue = gptValue.value
+    isChat.value = true
+  } catch (error) {
+    chatDatas.value[chatDatas.value.length - 1].chatValue = '获取失败，系统key值过期或未科学(全局)上网！'
+  }
 }
 </script>
 
