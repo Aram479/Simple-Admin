@@ -11,11 +11,11 @@ export default defineConfig({
   define: {
     'process.env': {}
   },
-  // base: './',
+  base: './',
   
-  // build: {
-  //   sourcemap: true,
-  // },
+  build: {
+    sourcemap: true,
+  },
   plugins: [
     vue(),
     AutoImport({
