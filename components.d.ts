@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
     CountCard: typeof import('./src/components/card/countCard.vue')['default']
     DarkSetup: typeof import('./src/components/cmsSetting/cpns/darkSetup.vue')['default']
     EchartCard: typeof import('./src/components/card/echartCard.vue')['default']
+    ElAffix: typeof import('element-plus/es')['ElAffix']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
