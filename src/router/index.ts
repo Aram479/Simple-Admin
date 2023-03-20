@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, createWebHashHistory, RouteRecordRaw } 
 import Login from "@/views/Login/Login.vue";
 import Layout from "@/views/Layout/Layout.vue";
 import Main from "@/views/Main/Main.vue";
+import ChatGPT from '@/views/Main/ChatGPT.vue'
 import Forbidden from "@/views/ErrorPage/403.vue";
 import NotFound from "@/views/ErrorPage/404.vue";
 const router = createRouter({
@@ -33,6 +34,18 @@ export const DynamicRoutes: RouteRecordRaw[] = [
           noRequest: true,
           zhCN: "首页",
           en: "Home",
+        },
+      },
+      {
+        path: "/chatgpt",
+        name: "chatgpt",
+        component: ChatGPT,
+        meta: {
+          name: "chatgpt",
+          icon: "HomeFilled",
+          noRequest: true,
+          zhCN: "ChatGPT",
+          en: "ChatGPT",
         },
       },
       {
