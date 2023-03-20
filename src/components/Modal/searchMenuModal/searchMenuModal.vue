@@ -15,7 +15,9 @@
         </div>
         <!-- 列表页 -->
         <div :class="['list-box', routeActive(index) ? 'active' : '']" v-for="(item, index) in searchList" @click="routeClick(item, index)">
-          <div class="route-icon"><el-icon :color="routeActive(index) ? 'white' : ''"><component :is="item.meta?.icon || 'CollectionTag'"></component></el-icon></div>
+          <div class="route-icon">
+            <i v-if="item.meta?.isCustomIcon" :class="['iconfont', item.meta?.icon]"></i>
+            <el-icon v-else :color="routeActive(index) ? 'white' : ''"><component :is="item.meta?.icon || 'CollectionTag'"></component></el-icon></div>
           <span class="route-title">{{ $t(<string>item.meta?.en) }}</span>
           <i class="iconfont icon-corner-down-left"></i>
         </div>

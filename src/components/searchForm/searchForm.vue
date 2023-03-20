@@ -26,7 +26,6 @@
                 <!-- 树形控件 -->
                 <template v-else-if="item.type === 'tree'">
                   <el-scrollbar height="200px">
-                    {{ modalType }}
                     <el-tree
                       v-if="form.menuList || modalType === 'create'"
                       class="p-4 py-2"

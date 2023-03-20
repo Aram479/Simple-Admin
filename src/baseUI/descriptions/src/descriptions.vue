@@ -13,7 +13,7 @@
 
 <script lang="ts" setup>
 const props = withDefaults(defineProps<{
-  title: string,
+  title?: string,
   column: number,
   tableDatas: any[],
 }>(), {

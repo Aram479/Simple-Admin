@@ -19,7 +19,8 @@
           <el-menu-item v-else :route="firItem" :index="firItem.name" @click="isMix ? handleSubMenu(firItem) : ''">
             <div :class="['menuItem-box', routeActive === firItem.name && listType === 'second' ?  'itemActive' : '']">
               <el-icon color="black">
-                <component v-if="firItem.meta?.icon" :is="firItem.meta?.icon"></component>
+                <i v-if="firItem.meta?.isCustomIcon" :class="['iconfont', firItem.meta?.icon]"></i>
+                <component v-else="firItem.meta?.icon" :is="firItem.meta?.icon"></component>
               </el-icon>
               <span>{{ $t(<string>firItem.meta?.en) }}</span>
             </div>
