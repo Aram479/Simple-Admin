@@ -1,5 +1,6 @@
 import { useEventbus } from '@/utils/mitt';
 import { deletePageData, editPageData, getPageListData, createPageData } from '../../service/system/systemAPI';
+import { Message } from "@/utils/message";
 import _ from 'lodash'
 import type { IRowType, IUserResType } from "@/views/Main/system/user/userViewType";
 
@@ -22,18 +23,24 @@ export function publicPageActions(state: any) {
   const createPageActions = async ({pageName, newData}: IRowType)=> {
     const pageUrl = `/${pageName}`
     const res = await createPageData(pageUrl, newData)
+    if(res.code !== 0) return Message('添加失败', { type: 'error' })
+    else Message('添加成功', { type: 'success' })
     useEventbus().toRefreshTable()
   }
   /* 删除某页面行数据 */
   const deletePageActions = async ({pageName, id}: IRowType)=> {
     const pageUrl = `/${pageName}/${id}`
     const res = await deletePageData(pageUrl)
+    if(res.code !== 0) return Message('删除失败', { type: 'error' })
+    else Message('删除成功', { type: 'success' })
     useEventbus().toRefreshTable()
   }
   /* 编辑某页面行数据 */
   const editPageDataAction = async ({pageName, id, editData}: IRowType)=> {
     const pageUrl = `/${pageName}/${id}`
     const res = await editPageData(pageUrl, editData)
+    if(res.code !== 0) return Message('修改失败', { type: 'error' })
+    else Message('修改成功', { type: 'success' })
     useEventbus().toRefreshTable()
   }
   return {

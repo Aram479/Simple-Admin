@@ -57,7 +57,7 @@ class ZPRequest {
       },
       (err) => {
         //拦截错误类型，输出对应错误信息
-        if ([404, 400].indexOf(err.response.status)) {
+        if (~[404, 400].indexOf(err.response.status)) {
           console.log("请求错误");
         }
         return err.response;

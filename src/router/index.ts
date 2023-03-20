@@ -5,7 +5,7 @@ import Main from "@/views/Main/Main.vue";
 import Forbidden from "@/views/ErrorPage/403.vue";
 import NotFound from "@/views/ErrorPage/404.vue";
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/login",

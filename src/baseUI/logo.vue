@@ -1,7 +1,7 @@
 <template>
   <div class="logo">
     <!-- logo标题 -->
-    <div :class="['logo-tile text-xl font-bold p-3', isHorizontal && 'mr-6']" v-if="showLogo">
+    <div :class="['logo-tile text-xl font-bold p-3']" v-if="showLogo">
       <img src="@/assets/img/logo.png" class="mr-2" style="width: 28px" />
       <span>Simple Admin</span>
     </div>
@@ -22,6 +22,7 @@ const { showLogo, menuMode, isHorizontal } = storeToRefs(themesStore)
   .logo-tile {
     @include flex(center, none);
     color: #80aef8;
+    width: 210px;
   }
 }
 </style>
