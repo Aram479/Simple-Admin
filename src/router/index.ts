@@ -8,7 +8,7 @@ import Typewrite from '@/views/Assembly/Typewrite/Typewrite.vue'
 import Forbidden from "@/views/ErrorPage/403.vue";
 import NotFound from "@/views/ErrorPage/404.vue";
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/login",
