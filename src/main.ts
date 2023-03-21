@@ -22,7 +22,7 @@ import 'element-plus/dist/index.css'
 const app = createApp(App)
 // 使用地图插件
 app.use(Vue3BaiduMapGL, {
-  ak: 'cwHsf5i2fAQAlijOyELx5COtkFhItaSm',
+  ak: 'mSyDKeUXeiUWvNI7eXkuIyAyOzG2ol81',
 })
 // 全局引用echarts 使用provide传给子组件
 app.config.globalProperties.$echarts = echarts
