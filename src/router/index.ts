@@ -3,10 +3,12 @@ import Login from "@/views/Login/Login.vue";
 import Layout from "@/views/Layout/Layout.vue";
 import Main from "@/views/Main/Main.vue";
 import ChatGPT from '@/views/Main/ChatGPT.vue'
+import Map from '@/views/Assembly/Map/Map.vue'
+import Typewrite from '@/views/Assembly/Typewrite/Typewrite.vue'
 import Forbidden from "@/views/ErrorPage/403.vue";
 import NotFound from "@/views/ErrorPage/404.vue";
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/login",
@@ -47,6 +49,41 @@ export const DynamicRoutes: RouteRecordRaw[] = [
           noRequest: true,
           zhCN: "ChatGPT",
           en: "ChatGPT",
+        },
+      },
+      {
+        path: "/assembly",
+        name: "assembly",
+        children:[
+          {
+            path: "/map",
+            name: "map",
+            component: Map,
+            meta: {
+              name: "地图",
+              noRequest: true,
+              zhCN: "地图",
+              en: "Map",
+            },
+          },
+          {
+            path: "/typewrite",
+            name: "typewrite",
+            component: Typewrite,
+            meta: {
+              name: "打字机",
+              noRequest: true,
+              zhCN: "打字机",
+              en: "Typewrite",
+            },
+          },
+        ],
+        meta: {
+          name: "assembly",
+          icon: "Menu",
+          noRequest: true,
+          zhCN: "组件",
+          en: "Assembly",
         },
       },
       {

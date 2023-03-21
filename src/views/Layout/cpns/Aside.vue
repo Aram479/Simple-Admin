@@ -23,6 +23,7 @@ const props = withDefaults(defineProps<{
 const loginStore = useLoginStore();
 const { sidebarMenu, menuChildList } = storeToRefs(loginStore);
 const handleSubMenuClick = (children?: RouteRecordRaw[]) => {
+  console.log(children)
   menuChildList!.value = children
 }
 </script>

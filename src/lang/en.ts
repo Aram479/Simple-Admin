@@ -22,4 +22,7 @@ export default {
   Cancel: "Cancel",
   "Are you sure to delete the data?": "Are you sure to delete the data",
   ChatGpt: 'ChatGPT',
+  Assembly: 'Assembly',
+  Map: 'Map',
+  Typewrite: 'Typewrite'
 };

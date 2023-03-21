@@ -20,7 +20,7 @@
             <div :class="['menuItem-box', routeActive === firItem.name && listType === 'second' ?  'itemActive' : '']">
               <el-icon color="black">
                 <i v-if="firItem.meta?.isCustomIcon" :class="['iconfont', firItem.meta?.icon]"></i>
-                <component v-else="firItem.meta?.icon" :is="firItem.meta?.icon"></component>
+                <component v-else-if="!firItem.meta?.isCustomIcon && firItem.meta?.icon" :is="firItem.meta?.icon"></component>
               </el-icon>
               <span>{{ $t(<string>firItem.meta?.en) }}</span>
             </div>
@@ -64,7 +64,7 @@ let routeActive = ref<RouteRecordName>();
 // 3.9日
 /* 一级菜单点击事件 */
 const handleSubMenu = (item: RouteRecordRaw)=> {
-  if(item.children?.length || item.name === 'main') emit('handleSubMenuClick', (item.children || [item]))
+  if(item.children?.length || item.name === 'main' || item.name === 'chatgpt') emit('handleSubMenuClick', (item.children || [item]))
   if(props.mode === 'horizontal' && isMix.value) router.push(item.path);
 }
 
@@ -91,15 +91,14 @@ onMounted(() => {
     height: 100%;
     border-right: none;
     .el-menu-item {
-      --el-menu-sub-item-height: 100% !important;
+      --el-menu-item-height: 45px;
+      --el-menu-horizontal-item-height: 40px;
       font-size: 13px !important;
       padding: 5px 10px !important;
-      background-color: var(--el-meun-item-bg-color);
-
-      &:hover {
-        background-color: var(--el-meun-item-bg-color);
-      }
-
+      // background-color: var(--el-meun-item-bg-color);
+      // &:hover {
+      //   background-color: var(--el-meun-item-bg-color);
+      // }
       .menuItem-box {
         width: 100%;
         padding-left: 10px;

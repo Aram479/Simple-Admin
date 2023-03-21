@@ -22,4 +22,7 @@ export default {
   Cancel: "取消",
   "Are you sure to delete the data?": '确定删除当前数据？',
   ChatGpt: 'ChatGPT',
+  Assembly: '组件',
+  Map: '地图',
+  Typewrite: '打字机'
 };

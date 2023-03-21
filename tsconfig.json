@@ -10,7 +10,7 @@
     "preserveValueImports": false,
     "experimentalDecorators": true,
     "importsNotUsedAsValues": "preserve",
-    "types": ["node"],
+    "types": ["node", "vue3-baidu-map-gl/volar"],
   },
 
   "references": [

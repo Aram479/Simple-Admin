@@ -2,11 +2,11 @@
   <div class="Main">
     
     <el-row class="h-full" :gutter="24">
-      <el-col :span="12"><LogCard class="py-2" height="20rem" /></el-col>
-      <el-col :span="12"><GithubCard class="py-2" height="20rem" /></el-col>
-      <el-col :span="8"><EchartCard class="py-2" height="20rem" title="GitHub折线图信息" type="line" :optionData="optionData" :option="lineOption" /></el-col>
-      <el-col :span="8"><EchartCard class="py-2" height="20rem" title="GitHub饼图信息" type="pie" :optionData="pieData" /></el-col>
-      <el-col :span="8"><EchartCard class="py-2" height="20rem" title="GitHub柱状图信息" type="bar" :optionData="optionData" :option="barOption" /></el-col>
+      <el-col v-bind="colSpan" :span="12"><LogCard class="py-2" height="20rem" /></el-col>
+      <el-col v-bind="colSpan" :span="12"><GithubCard class="py-2" height="20rem" /></el-col>
+      <el-col v-bind="colSpan" :lg="8" :xl="8" :span="8"><EchartCard class="py-2" height="25rem" title="GitHub折线图信息" type="line" :optionData="optionData" :option="lineOption" /></el-col>
+      <el-col v-bind="colSpan" :lg="8" :xl="8" :span="8"><EchartCard class="py-2" height="25rem" title="GitHub饼图信息" type="pie" :optionData="pieData" /></el-col>
+      <el-col v-bind="colSpan" :lg="8" :xl="8" :md="24" :span="8"><EchartCard class="py-2" height="25rem" title="GitHub柱状图信息" type="bar" :optionData="optionData" :option="barOption" /></el-col>
     </el-row>
   </div>
 </template>
@@ -16,7 +16,13 @@ import LogCard from '@/components/card/logCard.vue';
 import GithubCard from '@/components/card/githubCard.vue'
 import EchartCard from '@/components/card/echartCard.vue';
 import { ref } from 'vue';
-
+const colSpan =  ref<any>({
+  xs: 24,
+  sm: 24,
+  md: 12,
+  lg: 12,
+  xl: 12
+})
 const optionData = ref<any>({
   xData: ['fock', 'star', 'watcher'],
   yData: [111,222,333]

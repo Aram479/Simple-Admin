@@ -50,8 +50,7 @@ const words = ref<string[]>([]);
 const letters = ref<string[]>([]);
 const order = ref<number>(0);
 const begin = () => {
-  if (Array.isArray(props.str))
-    letters.value = props.str[order.value].split("");
+  if (Array.isArray(props.str)) letters.value = props.str[order.value].split("");
   else letters.value = props.str.split("");
   for (var i = 0; i < letters.value.length; i++) {
     setTimeout(write(i), i * props.duration);
@@ -77,15 +76,16 @@ const write = (i: number) => {
 };
 const wipe = (i: number) => {
   return () => {
-    let l = letters.value.length;
-    words.value.push(letters.value[i]);
-    /*如果输入完毕，在2s后开始删除*/
-    if (i == l - 1 && props.loop) {
+    words.value.pop(letters.value[i]);
+    /*如果删除完毕，在300ms后开始输入*/
+    if (words.value.length == 0) {
+      if (order.value == props.str.length - 1) order.value = -1
+      order.value++;
       setTimeout(function () {
-        back();
-      }, 2000);
+        begin();
+      }, 300);
     }
-  };
+  }
 };
 onMounted(() => {
   setTimeout(() => {

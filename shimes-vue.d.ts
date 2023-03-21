@@ -5,7 +5,7 @@ declare module "vue-router" {
     title?: string;
     name?: string;
     icon?: string;
-    isCustomIcon: boolean, // 是否是自定义图标
+    isCustomIcon?: boolean, // 是否是自定义图标
     noRequest?: boolean; // 页面是否没有接口请求
   }
 }

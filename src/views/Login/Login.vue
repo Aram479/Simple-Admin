@@ -18,7 +18,7 @@ import LoginPanel from './cpns/LoginPanel.vue';
   width: 100%;
   height: 100%;
   background: url('@/assets/img/login-bg.png') no-repeat;
-  background-size: 600px;
+  background-size: 800px;
   background-position: -60px  100%;
 }
 </style>
