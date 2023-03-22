@@ -1,7 +1,7 @@
 <template>
   <div class="Typewrite">
     <Card title="打字机组件">
-      <TypeWriter :str="['怒发冲冠，凭栏处、潇潇雨歇。抬望眼、仰天长啸，壮怀激烈。', '三十功名尘与土，八千里路云和月。', '莫等闲、白了少年头，空悲切。']" isCursor loop />
+      <TypeWriter :str="['傍晚的光线金黄而辽远，四月的清爽如此温情。', '你迟到了许多年，可我依然为你的到来而高兴。', '陪你看日落的人，比日落本身更温柔。']" isCursor loop />
     </Card>
   </div>
 </template>

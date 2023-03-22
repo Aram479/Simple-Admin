@@ -1,8 +1,11 @@
 <template>
   <el-card class="box-card">
-    <template #header>
+    <template v-if="title || linkTile" #header>
       <div class="card-header">
-        <span>{{ title }}</span>
+        <div>
+          <span class="mr-1">{{ title }}</span>
+          <el-link v-if="link" :href="link" target="_blank">{{ linkTile }}</el-link>
+        </div>
       </div>
     </template>
     <div class="item">
@@ -21,6 +24,14 @@ export default defineComponent({
     title: {
       type: String,
       default: 'Title'
+    },
+    link: {
+      type: String,
+      default: ''
+    },
+    linkTile: {
+      type: String,
+      default: ''
     }
   },
 

@@ -1,5 +1,5 @@
 import { type VNode } from "vue";
-// import { isFunction } from "@pureadmin/utils";
+import { isFunction } from "lodash";
 import { type MessageHandler, ElMessage } from "element-plus";
 
 type messageStyle = "el" | "antd";
@@ -72,7 +72,7 @@ const Message = (
       grouping,
       // 全局搜 pure-message 即可知道该类的样式位置
       customClass: customClass === "antd" ? "simple-message" : "",
-      // onClose: () => (isFunction(onClose) ? onClose() : null)
+      onClose: () => (isFunction(onClose) ? onClose() : null)
     });
   }
 };

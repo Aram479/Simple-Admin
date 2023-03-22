@@ -24,5 +24,12 @@ export default {
   ChatGpt: 'ChatGPT',
   Assembly: 'Assembly',
   Map: 'Map',
-  Typewrite: 'Typewrite'
+  Typewrite: 'Typewrite',
+  TimeLine: 'TimeLine',
+  Message: 'Message',
+  Draggable: 'Draggable',
+  WaterMark: 'WaterMark',
+  Print: 'Print',
+  "Debounce & Throttle": 'Debounce & Throttle',
+  Qrcode: 'Qrcode'
 };

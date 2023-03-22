@@ -1,6 +1,6 @@
 <template>
   <div class="LoginQrcode">
-    <div class="bounce-in-up qrcode-box"><qrcode-vue :value="'哈哈哈哈哈'" :size="150" /></div>
+    <div class="bounce-in-up qrcode-box"><VueQrcode :value="'二维码测试'" :size="200" /></div>
     <div class="bounce-in-up divider-box p-3">
       <el-divider content-position="center">
         <div class="text-center text-xs text-gray-500">扫码后点击"确认"，即可完成登录</div>
@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
 import { loginTypeClick } from "@/hooks/loginHook";
-import QrcodeVue from 'qrcode.vue'
+import VueQrcode from "@/baseUI/vueQrcode/vueQrcode.vue";
 </script>
 
 <style lang="scss" scoped>

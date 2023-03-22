@@ -24,5 +24,12 @@ export default {
   ChatGpt: 'ChatGPT',
   Assembly: '组件',
   Map: '地图',
-  Typewrite: '打字机'
+  Typewrite: '打字机',
+  TimeLine: '时间线',
+  Message: '消息提示',
+  Draggable: '拖拽',
+  WaterMark: '水印',
+  Print: '打印',
+  "Debounce & Throttle": '防抖节流',
+  Qrcode: '二维码'
 };
