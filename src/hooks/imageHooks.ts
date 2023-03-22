@@ -1,4 +1,4 @@
-const useImageUrl = (folder: string = '', name: string, type: string = 'png'): string => {
+const useImageUrl = (name: string, type: string = 'png'): string => {
   /**
    * @method vite动态引入图片
    * @params folder 文件夹名称 name 文件名称 type 文件格式 一般为png/jpg/webp/gif等...

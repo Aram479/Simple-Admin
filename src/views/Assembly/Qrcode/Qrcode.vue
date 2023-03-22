@@ -46,7 +46,7 @@
             <VueQrcode
               :value="qrcodeText"
               disabled
-              @disabled-click="disabledClick"
+              @refresh="disabledClick"
             />
           </el-card>
         </el-col>
@@ -55,7 +55,7 @@
             <div class="font-bold">logo配置</div>
             <VueQrcode
               :value="qrcodeText"
-              logo="https://avatars.githubusercontent.com/u/44761321?v=4"
+              :logo="useImageUrl('logo', 'png')"
             />
           </el-card>
         </el-col>
@@ -65,11 +65,11 @@
             <VueQrcode
               :value="qrcodeText"
               :logo="{
-                src: 'https://avatars.githubusercontent.com/u/44761321?v=4',
-                logoSize: 0.2,
-                borderSize: 0.05,
-                borderRadius: 50,
-                bgColor: 'blue',
+                src: useImageUrl('logo', 'png'),
+                width: '40px',
+                border: '5px solid var(--el-color-primary)',
+                borderRadius: '50px',
+                backgroundColor: 'blue',
               }"
             />
           </el-card>
@@ -90,6 +90,8 @@ import Card from "@/baseUI/card/src/card.vue";
 import VueQrcode from "@/baseUI/vueQrcode/vueQrcode.vue";
 import { ref, unref } from "vue";
 import { Message } from "@/utils/message";
+import useImageUrl from '@/hooks/imageHooks';
+
 const qrcodeText = "vue-simple-admin";
 
 const asyncTitle = ref("test");
@@ -104,4 +106,5 @@ const disabledClick = () => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

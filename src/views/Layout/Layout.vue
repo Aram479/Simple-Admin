@@ -2,7 +2,9 @@
   <div class="Layout h-full">
     <el-container class="h-full">
       <el-aside width="220px" v-if="isVertical || isMix">
-        <Aside :menuList="isVertical ? sidebarMenu : menuChildList" mode="vertical" />
+        <el-scrollbar height="100%">
+          <Aside :menuList="isVertical ? sidebarMenu : menuChildList" mode="vertical" />
+        </el-scrollbar>
       </el-aside>
       <el-container>
         <el-header><Header /></el-header>
@@ -27,6 +29,9 @@ const { menuMode, isVertical, isMix } = storeToRefs(themesStore);
 </script>
 
 <style lang="scss" scoped>
+.el-aside {
+  background: var(--el-menu-bg-color);
+}
 .el-main, .el-header {
   min-width: 600px;
 }
