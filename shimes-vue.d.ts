@@ -14,4 +14,5 @@ declare module "element-plus/dist/locale/zh-cn.mjs";
 declare module "@kangc/v-md-editor/lib/theme/vuepress.js";
 declare module '@kangc/v-md-editor';
 declare module 'sortablejs';
+declare module 'vue-virtual-scroller'
 declare module "prismjs";

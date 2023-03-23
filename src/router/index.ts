@@ -12,6 +12,8 @@ import WaterMark from '@/views/Assembly/WaterMark/WaterMark.vue'
 import Print from '@/views/Assembly/Print/Print.vue'
 import Debounce from '@/views/Assembly/Debounce/Debounce.vue'
 import Qrcode from '@/views/Assembly/Qrcode/Qrcode.vue'
+import VirtualList from '@/views/Assembly/VirtualList/VirtualList.vue'
+import PDFPreview from "@/views/Assembly/PDFPreview/PDFPreview.vue";
 import Forbidden from "@/views/ErrorPage/403.vue";
 import NotFound from "@/views/ErrorPage/404.vue";
 const router = createRouter({
@@ -159,6 +161,28 @@ export const DynamicRoutes: RouteRecordRaw[] = [
               noRequest: true,
               zhCN: "二维码",
               en: "Qrcode",
+            },
+          },
+          {
+            path: "/virtualList",
+            name: "virtualList",
+            component: VirtualList,
+            meta: {
+              name: "虚拟列表",
+              noRequest: true,
+              zhCN: "虚拟列表",
+              en: "VirtualList",
+            },
+          },
+          {
+            path: "/pdfPreview",
+            name: "pdfPreview",
+            component: PDFPreview,
+            meta: {
+              name: "PDF预览",
+              noRequest: true,
+              zhCN: "PDF预览",
+              en: "PDF Preview",
             },
           },
         ],

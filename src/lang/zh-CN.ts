@@ -31,5 +31,7 @@ export default {
   WaterMark: '水印',
   Print: '打印',
   "Debounce & Throttle": '防抖节流',
-  Qrcode: '二维码'
+  Qrcode: '二维码',
+  VirtualList: '虚拟列表',
+  "PDF Preview": 'PDF预览'
 };

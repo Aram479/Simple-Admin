@@ -31,5 +31,7 @@ export default {
   WaterMark: 'WaterMark',
   Print: 'Print',
   "Debounce & Throttle": 'Debounce & Throttle',
-  Qrcode: 'Qrcode'
+  Qrcode: 'Qrcode',
+  VirtualList: 'VirtualList',
+  "PDF Preview": 'PDF Preview'
 };
