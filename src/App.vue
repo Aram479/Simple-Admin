@@ -1,7 +1,6 @@
 <template>
   <RouterView />
 </template>
-
 <script setup lang="ts">
 import { ref, reactive, onBeforeMount, nextTick, provide, getCurrentInstance } from 'vue';
 import { useThemesStore } from "@/stores/modules/themes";

@@ -43,7 +43,7 @@ import type { RouteRecordRaw } from "vue-router"
 const props = withDefaults(defineProps<{
   menuList: RouteRecordRaw[],
   mode: string,
-  listType?: string
+  listType?: string,
 }>(), {
   menuList: ()=> ([]),
   mode: '',
@@ -65,7 +65,7 @@ let routeActive = ref<RouteRecordName>();
 /* 一级菜单点击事件 */
 const handleSubMenu = (item: RouteRecordRaw)=> {
   if(item.children?.length || item.name === 'main' || item.name === 'chatgpt') emit('handleSubMenuClick', (item.children || [item]))
-  if(props.mode === 'horizontal' && isMix.value) router.push(item.path);
+  if(props.data === 'horizontal' && isMix.value) router.push(item.path);
 }
 
 watchEffect(() => {

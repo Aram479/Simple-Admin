@@ -33,5 +33,6 @@ export default {
   "Debounce & Throttle": '防抖节流',
   Qrcode: '二维码',
   VirtualList: '虚拟列表',
-  "PDF Preview": 'PDF预览'
+  "PDF Preview": 'PDF预览',
+  "Camera": "摄像头"
 };

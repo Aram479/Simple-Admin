@@ -11,6 +11,7 @@ export function mapMenusToRoutes(userMenus: menuType[], allRoutes: RouteRecordRa
       if (user.name === all?.meta?.name) {
         // 且用户路由有子路由
         if (user.children && all.children && user.children.length > 0) {
+
           // 继续筛选递归子路由
           all.children = mapMenusToRoutes(user.children, all.children);
         }

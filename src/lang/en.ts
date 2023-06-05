@@ -33,5 +33,6 @@ export default {
   "Debounce & Throttle": 'Debounce & Throttle',
   Qrcode: 'Qrcode',
   VirtualList: 'VirtualList',
-  "PDF Preview": 'PDF Preview'
+  "PDF Preview": 'PDF Preview',
+  "Camera": "Camera"
 };

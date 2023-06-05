@@ -1,4 +1,4 @@
-import { RouteMeta } from "vue-router";
+import { RouteMeta, RouteParams } from "vue-router";
 
 declare module "vue-router" {
   interface RouteMeta {

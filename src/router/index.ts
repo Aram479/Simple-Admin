@@ -14,6 +14,7 @@ import Debounce from '@/views/Assembly/Debounce/Debounce.vue'
 import Qrcode from '@/views/Assembly/Qrcode/Qrcode.vue'
 import VirtualList from '@/views/Assembly/VirtualList/VirtualList.vue'
 import PDFPreview from "@/views/Assembly/PDFPreview/PDFPreview.vue";
+import Camera from "@/views/Assembly/Camera/Camera.vue"
 import Forbidden from "@/views/ErrorPage/403.vue";
 import NotFound from "@/views/ErrorPage/404.vue";
 const router = createRouter({
@@ -183,6 +184,17 @@ export const DynamicRoutes: RouteRecordRaw[] = [
               noRequest: true,
               zhCN: "PDF预览",
               en: "PDF Preview",
+            },
+          },
+          {
+            path: "/camera",
+            name: "camera",
+            component: Camera,
+            meta: {
+              name: "摄像头",
+              noRequest: true,
+              zhCN: "摄像头",
+              en: "Camera",
             },
           },
         ],
