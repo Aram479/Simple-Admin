@@ -1,6 +1,6 @@
 <template>
   <div class="Draggable">
-    <Card title="拖拽组件" link="https://github.com/SortableJS/vue.draggable.next" linkTile="使用开源的vuedraggable">
+    <Card title="拖拽组件 使用开源的" link="https://github.com/SortableJS/vue.draggable.next" linkTitle="vuedraggable">
       <el-row :gutter="25">
         <el-col :xs="25" :sm="8" :md="8" :lg="8">
           <!-- grid列表拖拽 -->

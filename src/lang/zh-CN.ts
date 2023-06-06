@@ -34,5 +34,8 @@ export default {
   Qrcode: '二维码',
   VirtualList: '虚拟列表',
   "PDF Preview": 'PDF预览',
-  "Camera": "摄像头"
+  "Camera": "摄像头",
+  Editor: '编辑器',
+  systemType: '系统类',
+  "Sign In": '登录'
 };

@@ -9,7 +9,6 @@
 import darkSetup from '@/components/cmsSetting/cpns/darkSetup.vue'
 import { ref, computed } from 'vue';
 import LoginPanel from './cpns/LoginPanel.vue';
-
 </script>
 
 <style lang="scss" scoped>

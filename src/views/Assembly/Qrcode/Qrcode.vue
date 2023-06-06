@@ -1,6 +1,6 @@
 <template>
   <div class="Qrcode">
-    <Card title="二维码基于" link="https://github.com/fengyuanchen/vue-qrcode" linkTile="vue-qrcode">
+    <Card title="二维码基于" link="https://github.com/fengyuanchen/vue-qrcode" linkTitle="vue-qrcode">
       <el-row :gutter="20" justify="space-between">
         <el-col :xl="6" :lg="6" :md="12" :sm="24" :xs="24">
           <el-card shadow="hover" class="mb-4 text-center">

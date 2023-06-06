@@ -54,6 +54,12 @@ export default defineConfig({
         changeOrigin: true, //开启代理
         ws: true, //启用websockets
         rewrite: (path) => path.replace(/^\/kpi/, '')
+      },
+      "/mpi": {
+        target: 'https://jsonplaceholder.typicode.com/posts/',
+        changeOrigin: true, //开启代理
+        ws: true, //启用websockets
+        rewrite: (path) => path.replace(/^\/mpi/, '')
       }
     }
   },

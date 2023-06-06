@@ -5,7 +5,8 @@ export interface buttonType {
 
 export interface IAccount {
   name: string,
-  password: string
+  password: string,
+  code?: string
 }
 
 export interface IPhone {

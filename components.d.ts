@@ -71,9 +71,11 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SearchForm: typeof import('./src/components/searchForm/searchForm.vue')['default']
     SearchMenuModal: typeof import('./src/components/Modal/searchMenuModal/searchMenuModal.vue')['default']
+    SIdentify: typeof import('./src/components/SIdentify/SIdentify.vue')['default']
     SystemTitle: typeof import('./src/components/Login/systemTitle.vue')['default']
     TableOperate: typeof import('./src/components/pageTable/tableOperate.vue')['default']
     ThemeSetup: typeof import('./src/components/cmsSetting/cpns/themeSetup.vue')['default']
+    TinymceEditor: typeof import('./src/components/TinymceEditor/TinymceEditor.vue')['default']
     TopModel: typeof import('./src/components/cmsSetting/cpns/navbarCpns/topModel.vue')['default']
     TypeWriter: typeof import('./src/components/typeWriter/typeWriter.vue')['default']
   }
