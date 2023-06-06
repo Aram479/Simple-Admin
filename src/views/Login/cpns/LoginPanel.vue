@@ -25,11 +25,4 @@ const { loginType } = storeToRefs(loginStore)
 </script>
 
 <style lang='scss' scoped>
-.LoginPanel {
-  position: absolute;
-  top: 50%;
-  left: 55%;
-  transform: translateY(-50%)
-  // width: 500px;
-}
 </style>

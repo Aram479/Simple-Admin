@@ -129,4 +129,8 @@ defineExpose({
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.s-canvas {
+  cursor: pointer;
+}
+</style>

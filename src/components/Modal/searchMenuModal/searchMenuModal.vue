@@ -1,6 +1,6 @@
 <template>
   <div class="searchMenuModal">
-    <el-dialog v-model="isModal" width="40%"  @closed="handleCloseModal">
+    <el-dialog v-model="isModal" width="40%" style="min-width: 300px;"  @closed="handleCloseModal">
       <div class="font-bold text-lg">菜单搜索</div>
       <div class="modal-content-box">
         <el-input
@@ -61,6 +61,7 @@ defineExpose({
 <style lang="scss" scoped>
 .searchMenuModal {
   .modal-content-box {
+  min-width: 200px;
     display: flex;
     flex-direction: column;
     padding: 20px;

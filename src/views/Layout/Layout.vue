@@ -1,7 +1,7 @@
 <template>
   <div class="Layout h-full">
     <el-container class="h-full">
-      <el-aside width="220px" v-if="isVertical || isMix">
+      <el-aside width="220px" v-if="(isVertical || isMix) && !isPhone">
         <el-scrollbar height="100%">
           <Aside :menuList="isVertical ? sidebarMenu : menuChildList" mode="vertical" />
         </el-scrollbar>
@@ -21,11 +21,13 @@ import Aside from './cpns/Aside.vue';
 import Header from './cpns/Header.vue';
 import { useLoginStore } from "@/stores/modules/loginStore";
 import { useThemesStore } from "@/stores/modules/themes";
+import systemInfo from '@/utils/systemInfo';
 import { storeToRefs } from "pinia";
 const loginStore = useLoginStore();
 const themesStore = useThemesStore();
 const { sidebarMenu, menuChildList } = storeToRefs(loginStore);
-const { menuMode, isVertical, isMix } = storeToRefs(themesStore);
+const { menuMode, isVertical, isMix, isPhone } = storeToRefs(themesStore);
+systemInfo()
 </script>
 
 <style lang="scss" scoped>
@@ -33,7 +35,7 @@ const { menuMode, isVertical, isMix } = storeToRefs(themesStore);
   background: var(--el-menu-bg-color);
 }
 .el-main, .el-header {
-  min-width: 600px;
+  min-width: 380px;
 }
 .el-main {
   background-color: #f0f2f5;

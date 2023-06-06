@@ -13,6 +13,7 @@ export const useThemesStore = defineStore("theme", {
     weakness: localCache.getItem('themeData')?.weakness ?? false,
     showLogo: localCache.getItem('themeData')?.showLogo ?? true,
     unique: localCache.getItem('themeData')?.unique ?? true,
+    isPhone: false,
     ...themes
   }),
   actions: {

@@ -12,4 +12,10 @@ import { useDarkChange } from '@/hooks/darkHook';
 const { isDark, toggleDark } = useDarkChange()
 </script>
 
-<style lang='scss' scoped></style>
+<style lang='scss' scoped>
+.darkSetup {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+</style>

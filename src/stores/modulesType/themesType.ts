@@ -8,6 +8,7 @@ export interface themesState extends themeType{
   weakness: boolean,
   showLogo: boolean,
   unique: boolean,
+  isPhone?: boolean // 是否手机端
 }
 export interface themeType {
   darkBlue?: string,

@@ -1,0 +1,14 @@
+@media screen and (max-width: 1245px) {
+  .LoginPanel {
+    width: 330px;
+  }
+}
+
+@media screen and (max-width: 1120px) {
+  .LoginBackground {
+    display: none;
+  }
+  .el-container {
+    overflow-y: hidden;
+  }
+}

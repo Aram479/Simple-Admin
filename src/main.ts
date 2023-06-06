@@ -21,6 +21,8 @@ import '@/assets/css/tailwindcss/tailwindcss.css'
 import '@/assets/css/index.scss'
 import 'element-plus/dist/index.css'
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
+import '@/assets/css/responsive.scss'
+
 const app = createApp(App)
 // 使用地图插件
 app.use(Vue3BaiduMapGL, {

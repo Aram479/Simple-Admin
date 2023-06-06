@@ -2,6 +2,7 @@
   <div class='Header h-full'>
     <div :class="['header-box h-full pl-5', isHorizontal ? 'headerMenu': '']">
       <div class="header-left h-full float-left">
+        <AsideDrawer v-if="isPhone" />
         <Aside v-if="isHorizontal" :menuList="sidebarMenu" class="headerAside float-left h-full w-full" mode="horizontal" listType="first" :isLogo="isMix ? false : true" />
         <!-- 面包屑 -->
         <el-breadcrumb separator="/" v-else>
@@ -65,6 +66,7 @@ import Aside from './Aside.vue';
 import MyMenu from '@/components/myMenu/myMenu.vue';
 import SearchMenuModal from '@/components/Modal/searchMenuModal/searchMenuModal.vue';
 import CmsSetting from '@/components/cmsSetting/cmsSetting.vue';
+import AsideDrawer from './AsideDrawer.vue';
 import { reactive, ref, computed, onMounted } from 'vue';
 import { useThemesStore } from '@/stores/modules/themes';
 import { useRoute, useRouter } from 'vue-router';
@@ -79,7 +81,7 @@ const router = useRouter()
 const loginStore = useLoginStore();
 const themesStore = useThemesStore()
 const { sidebarMenu } = storeToRefs(loginStore);
-const { menuMode, isHorizontal, isMix } = storeToRefs(themesStore);
+const { menuMode, isHorizontal, isMix, isPhone } = storeToRefs(themesStore);
 const cmsSettingRef = ref<InstanceType<typeof CmsSetting>>()
 const menuModal = ref<InstanceType<typeof SearchMenuModal>>()
 const languages = reactive([{name: '简体中文', value: 'zhCN'},{name: 'English', value: 'en'}])
