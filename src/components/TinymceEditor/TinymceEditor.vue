@@ -14,6 +14,8 @@ import axios from "axios";
 import "tinymce/models/dom"; // 引入dom模块。从 Tinymce6，开始必须有此模块导入
 import "tinymce/themes/silver"; //默认主题
 import "tinymce/icons/default"; //引入编辑器图标icon，不引入则不显示对应图标
+
+// vercel build报错 提交前请注释
 // import "tinymce/langs/zh-Hans"; //引入编辑器语言包
 
 /* 引入编辑器插件

@@ -9,6 +9,7 @@
       <el-container>
         <el-header><Header /></el-header>
         <el-main>
+          <Breadcrumb v-if="isPhone" class="mb-3" />
           <RouterView class="fade-in-left"></RouterView>
         </el-main>
       </el-container>
@@ -19,6 +20,7 @@
 <script lang="ts" setup>
 import Aside from './cpns/Aside.vue';
 import Header from './cpns/Header.vue';
+import Breadcrumb from './cpns/Breadcrumb.vue';
 import { useLoginStore } from "@/stores/modules/loginStore";
 import { useThemesStore } from "@/stores/modules/themes";
 import systemInfo from '@/utils/systemInfo';

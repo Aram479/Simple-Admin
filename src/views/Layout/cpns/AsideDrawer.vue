@@ -1,8 +1,10 @@
 <template>
   <div class="AsideDrawer mr-5">
     <el-icon @click="handleCollapse"><Reading /></el-icon>
-    <el-drawer v-model="drawer" direction="ltr" :with-header="false" size="60%" custom-class="aside-el-drawer" append-to-body>
-      <Aside :menuList="sidebarMenu" mode="vertical"></Aside>
+    <el-drawer v-model="drawer" direction="ltr" :with-header="false" size="230px" custom-class="aside-el-drawer" append-to-body>
+      <el-scrollbar height="100%">
+        <Aside :menuList="sidebarMenu" mode="vertical" />
+      </el-scrollbar>
     </el-drawer>
   </div>
 </template>

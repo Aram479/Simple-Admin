@@ -3,11 +3,12 @@
     <div :class="['header-box h-full pl-5', isHorizontal ? 'headerMenu': '']">
       <div class="header-left h-full float-left">
         <AsideDrawer v-if="isPhone" />
-        <Aside v-if="isHorizontal" :menuList="sidebarMenu" class="headerAside float-left h-full w-full" mode="horizontal" listType="first" :isLogo="isMix ? false : true" />
+        <Aside v-if="isHorizontal && !isPhone" :menuList="sidebarMenu" class="headerAside float-left h-full w-full" mode="horizontal" listType="first" :isLogo="isMix ? false : true" />
         <!-- 面包屑 -->
-        <el-breadcrumb separator="/" v-else>
+        <Breadcrumb v-if="!isHorizontal && !isPhone" />
+        <!-- <el-breadcrumb separator="/" v-if="!isHorizontal && !isPhone">
           <el-breadcrumb-item v-for="breadItem in breadcrumbList" :to="{ path: breadItem.path || breadItem.redirect }">{{$t(<string>breadItem.meta.en)}}</el-breadcrumb-item>
-        </el-breadcrumb>
+        </el-breadcrumb> -->
       </div>
       <div class="header-right float-right h-full ">
         <!-- 搜索 -->
@@ -64,6 +65,7 @@
 <script lang='ts' setup>
 import Aside from './Aside.vue';
 import MyMenu from '@/components/myMenu/myMenu.vue';
+import Breadcrumb from './Breadcrumb.vue';
 import SearchMenuModal from '@/components/Modal/searchMenuModal/searchMenuModal.vue';
 import CmsSetting from '@/components/cmsSetting/cmsSetting.vue';
 import AsideDrawer from './AsideDrawer.vue';

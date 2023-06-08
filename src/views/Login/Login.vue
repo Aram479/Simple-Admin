@@ -4,7 +4,7 @@
       <LoginBackground />
       <LoginPanel />
     </div>
-    <darkSetup class="float-right p-5" />
+    <darkSetup class="p-5 fixed top-0 right-0" />
   </div>
 </template>
 
