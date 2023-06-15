@@ -7,7 +7,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Camera: typeof import('./src/components/camera/camera.vue')['default']
     CmsSetting: typeof import('./src/components/cmsSetting/cmsSetting.vue')['default']
     CountCard: typeof import('./src/components/card/countCard.vue')['default']
     DarkSetup: typeof import('./src/components/cmsSetting/cpns/darkSetup.vue')['default']

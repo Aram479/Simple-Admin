@@ -1,6 +1,5 @@
 <template>
   <div class="Main">
-    
     <el-row class="h-full" :gutter="24">
       <el-col v-bind="colSpan" :span="12"><LogCard class="py-2" height="20rem" /></el-col>
       <el-col v-bind="colSpan" :span="12"><GithubCard class="py-2" height="20rem" /></el-col>
@@ -15,7 +14,12 @@
 import LogCard from '@/components/card/logCard.vue';
 import GithubCard from '@/components/card/githubCard.vue'
 import EchartCard from '@/components/card/echartCard.vue';
+import { useLoginStore } from '@/stores/modules/loginStore';
 import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
+
+const loginStore = useLoginStore()
+const { loginType } = storeToRefs(loginStore)
 const colSpan =  ref<any>({
   xs: 24,
   sm: 24,
